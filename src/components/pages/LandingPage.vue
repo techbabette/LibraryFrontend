@@ -42,22 +42,7 @@
         </div>
         <div class="col-12 col-md-6 container-fluid" style="background-color: blue; padding: 0px;">
           <div class="row w-100 info-holder  mk-clear">
-            <div class="col-12 col-md-6 info-block mk-flex-column-center">
-              <h2 id="memNum">0</h2>
-              <h3>Članova</h3>
-            </div>
-            <div class="col-12 col-md-6 info-block mk-flex-column-center">
-              <h2 id="yrNum">0</h2>
-              <h3>Godine postojanja</h3>
-            </div>
-            <div class="col-12 col-md-6 info-block mk-flex-column-center">
-              <h2 id="titNum">0</h2>
-              <h3>Naslova</h3>
-            </div>
-            <div class="col-12 col-md-6 info-block mk-flex-column-center">
-              <h2 id="leNum">0</h2>
-              <h3>Izdatih knjiga</h3>
-            </div>
+            <InfoBlock v-for="block, key in InfoBlocks" :key="key" :title="block.title" :maxValue="block.maxValue" :timeToLoad="2500"/>
           </div>
         </div>
       </div>
@@ -86,7 +71,34 @@
     </div>
 </template>
 <script>
+import InfoBlock from "../InfoBlock.vue";
+
 export default {
   name: 'LandingPage',
+  components : {
+    InfoBlock
+  },
+  data(){
+    return {
+      InfoBlocks : [
+        {
+          title : "Članova",
+          maxValue : 150
+        },
+        {
+          title : "Godine postojanja",
+          maxValue : new Date().getFullYear() - 1930
+        },
+        {
+          title : "Naslova",
+          maxValue : 50
+        },
+        {
+          title : "Izdatih knjiga",
+          maxValue : 250
+        }
+      ]
+    }
+  }
 }
 </script>
