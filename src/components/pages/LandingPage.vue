@@ -1,39 +1,5 @@
 <template>
     <div>
-        <header class="container-fluid">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-dark mk-background">
-                <div class="container-fluid" id="actual-navbar">
-                    <router-link to="/" class="navbar-brand" id="Gradska_biblioteka" href="index.html"><h1 class="h4">Gradska biblioteka</h1></router-link>
-                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-         <a class="nav-link active" id="Pocetna" href="index.html">
-            Pocetna
-         </a>
-         </li>
-         <li class="nav-item">
-         <a class="nav-link " id="Knjige" href="pages/knjige.html">
-            Knjige
-         </a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link " id="Favoriti" href="pages/favoriti.html">Favoriti: 1</a>
-         </li>
-         <li class="nav-item">
-            <a class="nav-link " id="O_autoru" href="pages/autor.html">
-                O autoru
-            </a>
-        </li>
-                    </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
     <div id="errorModal" class="mk-modal">
       <div class="mk-modal-content">
         <p id="error-content">Generička greška</p>
@@ -116,26 +82,11 @@
         </div>
     </div>
     <!--Footer-->
-    <footer class="container-fluid mk-background">
-      <div class="row w-100" >
-        <div class="mk-logo col-6 flex" id="footer-title">
-        </div>
-        <div class="col-6 flex  flex-md-row">
-          <ul class="row align-items-center list-unstyled p-0">
-            <li class="col-md-3 col-6 icon-holder">
-            </li>
-            <li class="col-md-3 col-6 icon-holder">
-            </li>
-            <li class="col-md-3 col-6 icon-holder">
-            </li>
-            <li class="col-md-3 col-6 icon-holder">
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
     <a href="#" class="invisible" id="goBackUp">&uArr;</a>
     </div>
 </template>
 <script>
+export default {
+  name: 'LandingPage',
+}
 </script>
