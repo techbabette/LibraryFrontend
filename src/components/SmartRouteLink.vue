@@ -1,16 +1,16 @@
 <template>
         <router-link v-if="linkHasRoute" :to="Link.to" class="nav-link" :class="{active : currentlyActiveRoute === Link.to}">
-            <p v-if="linkHasIcon">
+            <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
-            </p>
+            </span>
             <span v-if="linkHasText">
                 {{Link.text}}
             </span>
         </router-link>
         <a v-else-if="linkHasUrl" :href="Link.url">
-            <p v-if="linkHasIcon">
+            <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
-            </p>
+            </span>
             <span v-if="linkHasText">
                 {{Link.text}}
             </span>
