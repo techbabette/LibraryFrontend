@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
-import showToDirective from './components/directives/showToDirective'
+import showToDirective from './directives/showToDirective'
 Vue.config.productionTip = false
 
 Vue.directive("showto", showToDirective);
