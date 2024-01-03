@@ -7,7 +7,7 @@
         <div class="col-6 flex  flex-md-row">
           <ul class="row align-items-center list-unstyled p-0">
             <li v-for="link, key in links" :key="key" class="col-md-3 col-6 icon-holder">
-                <a class="text-light" :href="link.to" ><span class="iconify" :data-icon="link.text"></span></a>
+              <SmartRouteLink :Link="link"/>
             </li>
           </ul>
         </div>
@@ -15,8 +15,12 @@
     </footer>
 </template>
 <script>
+import SmartRouteLink from './SmartRouteLink.vue';
 export default {
   name: 'FooterBar',
+  components : {
+    SmartRouteLink
+  },
   props: {
     links: Array
   },

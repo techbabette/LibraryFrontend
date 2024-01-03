@@ -10,9 +10,7 @@
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" style="">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li v-for="link, key in links" :key="key" class="nav-item">
-                            <router-link :to="link.to" class="nav-link">
-                                {{link.text}}
-                            </router-link>
+                            <SmartRouteLink :Link="link"/>
                         </li>
                     </ul>
                     </div>
@@ -22,8 +20,12 @@
     </header>
 </template>
 <script>
+import SmartRouteLink from './SmartRouteLink.vue';
 export default {
   name: 'NavigationBar',
+  components : {
+    SmartRouteLink
+  },
   props: {
     links: Array
   }

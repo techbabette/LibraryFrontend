@@ -23,23 +23,23 @@ export default{
                 "position" : "navbar"
             },
             {
-                "to" : "https://www.facebook.com/",
-                "text" : "icomoon-free:facebook",
+                "url" : "https://www.facebook.com/",
+                "icon" : "icomoon-free:facebook",
                 "position" : "footer"
             },
             {
-                "to" : "https://www.twitter.com/",
-                "text" : "la:twitter",
+                "url" : "https://www.twitter.com/",
+                "icon" : "la:twitter",
                 "position" : "footer"
             },
             {
-                "to" : "documentation.pdf",
-                "text" : "fa-file",
+                "url" : "./documentation.pdf",
+                "icon" : "fa-file",
                 "position" : "footer"
             },
             {
-                "to" : "sitemap.xml",
-                "text" : "bx:sitemap",
+                "url" : "./sitemap.xml",
+                "icon" : "bx:sitemap",
                 "position" : "footer"
             }
         ]
