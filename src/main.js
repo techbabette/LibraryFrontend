@@ -2,9 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
+import showToDirective from './components/directives/showToDirective'
 Vue.config.productionTip = false
 
-require('@/assets/styles/style.css')
+Vue.directive("showto", showToDirective);
+
+require('@/assets/styles/style.css');
 
 router.beforeEach(function (to, from, next){
   let requestedPage = to.name;

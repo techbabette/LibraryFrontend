@@ -1,4 +1,5 @@
 <template>
+    <div v-showto="Link.showTo">
         <router-link v-if="linkHasRoute" :to="Link.to" class="nav-link" :class="{active : currentlyActiveRoute === Link.name}">
             <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
@@ -15,6 +16,7 @@
                 {{Link.text}}
             </span>
         </a>
+    </div>
 </template>
 <script>
 export default{

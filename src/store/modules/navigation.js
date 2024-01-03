@@ -6,45 +6,67 @@ export default{
                 "text" : "Početna",
                 "to" : "/",
                 "name" : "Početna",
-                "position" : "navbar"
+                "position" : "navbar",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "text" : "Knjige",
                 "to" : "/knjige",
                 "name" : "Knjige",
-                "position" : "navbar"
+                "position" : "navbar",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "text" : "Favoriti",
                 "to" : "/favoriti",
                 "name" : "Favoriti",
-                "position" : "navbar"
+                "position" : "navbar",
+                "showTo" : ["standard", "admin"]
+            },
+            {
+                "text" : "Logovanje",
+                "to" : "/login",
+                "name" : "Login",
+                "position" : "navbar",
+                "showTo" : ["logged out"]
+            },
+            {
+                "text" : "Registracija",
+                "to" : "/register",
+                "name" : "Register",
+                "position" : "navbar",
+                "showTo" : ["logged out"]
             },
             {
                 "text" : "O autoru",
                 "to" : "/autor",
                 "name" : "Autor",
-                "position" : "navbar"
+                "position" : "navbar",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "url" : "https://www.facebook.com/",
                 "icon" : "icomoon-free:facebook",
-                "position" : "footer"
+                "position" : "footer",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "url" : "https://www.twitter.com/",
                 "icon" : "la:twitter",
-                "position" : "footer"
+                "position" : "footer",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "url" : "./documentation.pdf",
                 "icon" : "fa-file",
-                "position" : "footer"
+                "position" : "footer",
+                "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "url" : "./sitemap.xml",
                 "icon" : "bx:sitemap",
-                "position" : "footer"
+                "position" : "footer",
+                "showTo" : ["logged out", "standard", "admin"]
             }
         ]
     },
