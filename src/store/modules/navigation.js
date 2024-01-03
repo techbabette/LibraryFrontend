@@ -84,6 +84,11 @@ export default{
         },
         getCurrentlyActiveRoute(state){
             return state.currentlyActiveRoute
+        },
+        getLinksUserIsAllowed(state, getters, rootState, rootGetters){
+            let userRole = rootGetters.activeUserRole;
+
+            return state.navigationLinks.filter(link => link.showTo.includes(userRole));
         }
     }
 }

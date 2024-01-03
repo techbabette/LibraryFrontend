@@ -11,14 +11,14 @@ require('@/assets/styles/style.css');
 
 router.beforeEach(function (to, from, next){
   let requestedPage = to.name;
-  let userAllowedAccess = true;
+  let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.name === requestedPage);
   if(userAllowedAccess){
     document.title = to.name;
     store.commit("changeActiveRouteName", requestedPage);
     next();
     return;
   }
-  router.push("/");
+  router.push("/").catch(()=>{});
   console.warn("You're not allowed to see the requested page");
 })
 
