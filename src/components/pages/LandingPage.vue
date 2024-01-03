@@ -67,7 +67,6 @@
         </div>
     </div>
     <!--Footer-->
-    <a href="#" class="invisible" id="goBackUp">&uArr;</a>
     </div>
 </template>
 <script>
