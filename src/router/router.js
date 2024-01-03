@@ -5,7 +5,7 @@ import LandingPage from "../components/pages/LandingPage.vue";
 
 const routes = [
     {
-      path : "/", component: LandingPage, name : "Home page"
+      path : "/", component: LandingPage, name : "Početna"
     },
   ]
 

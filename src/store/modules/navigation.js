@@ -5,21 +5,25 @@ export default{
             {
                 "text" : "Početna",
                 "to" : "/",
+                "name" : "Početna",
                 "position" : "navbar"
             },
             {
                 "text" : "Knjige",
                 "to" : "/knjige",
+                "name" : "Knjige",
                 "position" : "navbar"
             },
             {
                 "text" : "Favoriti",
                 "to" : "/favoriti",
+                "name" : "Favoriti",
                 "position" : "navbar"
             },
             {
                 "text" : "O autoru",
                 "to" : "/autor",
+                "name" : "Autor",
                 "position" : "navbar"
             },
             {

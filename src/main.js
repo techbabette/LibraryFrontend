@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 require('@/assets/styles/style.css')
 
 router.beforeEach(function (to, from, next){
-  let requestedPage = to.path;
+  let requestedPage = to.name;
   let userAllowedAccess = true;
   if(userAllowedAccess){
     document.title = to.name;

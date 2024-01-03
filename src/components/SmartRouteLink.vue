@@ -1,5 +1,5 @@
 <template>
-        <router-link v-if="linkHasRoute" :to="Link.to" class="nav-link" :class="{active : currentlyActiveRoute === Link.to}">
+        <router-link v-if="linkHasRoute" :to="Link.to" class="nav-link" :class="{active : currentlyActiveRoute === Link.name}">
             <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
             </span>
