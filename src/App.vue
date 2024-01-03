@@ -17,42 +17,14 @@ export default {
   },
   data(){
     return {
-      navbarLinks : [
-        {
-          text : "Pocetna",
-          to : "/"
-        },
-        {
-          text : "Knjige",
-          to : "/knjige"
-        },
-        {
-          text : "Favoriti",
-          to : "/favoriti"
-        },
-        {
-          text : "O autoru",
-          to : "autor"
-        }
-      ],
-      footerLinks : [
-        {
-            "to" : "https://www.facebook.com/",
-            "text" : "icomoon-free:facebook",
-        },
-        {
-            "to" : "https://www.twitter.com/",
-            "text" : "la:twitter",
-        },
-        {
-            "to" : "documentation.pdf",
-            "text" : "fa-file",
-        },
-        {
-            "to" : "sitemap.xml",
-            "text" : "bx:sitemap",
-        }
-    ]
+    }
+  },
+  computed : {
+    navbarLinks : function(){
+      return this.$store.getters.getNavbarLinks;
+    },
+    footerLinks : function(){
+      return this.$store.getters.getFooterLinks;
     }
   }
 }

@@ -19,7 +19,7 @@ export default{
             },
             {
                 "text" : "O autoru",
-                "to" : "autor",
+                "to" : "/autor",
                 "position" : "navbar"
             },
             {
