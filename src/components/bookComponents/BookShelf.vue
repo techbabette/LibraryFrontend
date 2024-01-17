@@ -14,12 +14,17 @@ export default {
     },
     props : {
         Source : String,
-        onLoad : Function
+        mountAction : String
     },
     computed : {
         Books : function(){
             return this.$store.getters["get" + this.Source];
-        } 
+        }
+    },
+    mounted(){
+        if(this.mountAction){
+            this.$store.dispatch(this.mountAction);
+        }
     }
 }
 </script>
