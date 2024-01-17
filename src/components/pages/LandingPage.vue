@@ -27,6 +27,7 @@
                   </div>
                   <div id="newestBooks" class="container-fluid col-12">
                     <div class="row" id="rec">
+                      <BookShelf Source="NewestBooks"/>
                     </div>
                   </div>
               </div>
@@ -71,11 +72,12 @@
 </template>
 <script>
 import InfoBlock from "../InfoBlock.vue";
-
+import BookShelf from "../bookComponents/BookShelf";
 export default {
   name: 'LandingPage',
   components : {
-    InfoBlock
+    InfoBlock,
+    BookShelf
   },
   data(){
     return {
@@ -97,6 +99,11 @@ export default {
           maxValue : 250
         }
       ]
+    }
+  },
+  computed : {
+    NewestBooks : function(){
+      return this.$store.getters.getNewestBooks
     }
   }
 }
