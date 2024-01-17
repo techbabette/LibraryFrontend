@@ -38,7 +38,7 @@ export default{
                 },
                 {
                     "id" : 3,
-                    "name":"Prosvećeni_svet",
+                    "name":"Prosvećeni svet",
                     "category":{
                         "id" : 3,
                         "name": "Popularna nauka"
@@ -58,11 +58,11 @@ export default{
                     "name":"Homo_Deus",
                     "category":{
                         "id" : 3,
-                        "name": "Popularna_nauka"
+                        "name": "Popularna nauka"
                     },
                     "author":{
                         "id" : 5,
-                        "name" : "Juval_Noa_Harari"
+                        "name" : "Juval Noa Harari"
                     },
                     "img":"https://i.imgur.com/02xRac2.jpg",
                     "description":"Šta će sada biti prioritetni problemi čovečanstva umesto gladi, bolesti i rata? Kakvu ćemo sudbinu nameniti ljudskom rodu, kao samoproklamovani bogovi planete Zemlje, koje korake ćemo preduzimati da to ostvarimo? Homo Deus istražuje projekte, snove i noćne more koji će oblikovati dvadeset prvi vek – od prevazilaženja smrti do stvaranja veštačkog života. Pred nama su osnovna pitanja na koja moramo da damo odgovore: u kom pravcu ćemo se dalje kretati? I kako ćemo zaštititi ovaj krhki svet od sopstvenih destruktivnih moći? Pred nama je sledeća faza evolucije: Homo Deus.",
@@ -70,7 +70,7 @@ export default{
                     "releaseDate":2022,
                     "timeLoaned" : 8
                 }
-            ]
+            ],
         }
     },
     mutations : {

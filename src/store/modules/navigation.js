@@ -3,9 +3,9 @@ export default{
         currentlyActiveRoute : "Home page",
         navigationLinks : [
             {
-                "text" : "Početna",
+                "text" : "Home",
                 "to" : "/",
-                "name" : "Početna",
+                "name" : "Home",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },
@@ -17,30 +17,30 @@ export default{
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "text" : "Favoriti",
-                "to" : "/favoriti",
-                "name" : "Favoriti",
+                "text" : "Favorites",
+                "to" : "/favorites",
+                "name" : "Favorites",
                 "position" : "navbar",
                 "showTo" : ["standard", "admin"]
             },
             {
-                "text" : "Logovanje",
+                "text" : "Login",
                 "to" : "/login",
                 "name" : "Login",
                 "position" : "navbar",
                 "showTo" : ["logged out"]
             },
             {
-                "text" : "Registracija",
+                "text" : "Register",
                 "to" : "/register",
                 "name" : "Register",
                 "position" : "navbar",
                 "showTo" : ["logged out"]
             },
             {
-                "text" : "O autoru",
-                "to" : "/autor",
-                "name" : "Autor",
+                "text" : "Author",
+                "to" : "/author",
+                "name" : "Author",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },

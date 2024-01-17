@@ -6,7 +6,7 @@ import BooksPage from "../components/pages/BooksPage.vue";
 
 const routes = [
     {
-      path : "/", component: LandingPage, name : "Početna"
+      path : "/", component: LandingPage, name : "Home"
     },
     {
       path : "/books", component: BooksPage, name : "Books"

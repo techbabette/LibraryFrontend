@@ -10,8 +10,8 @@
         <div class="row mk-clear">
             <div class="col-12">
               <div class="mk-introduction d-flex flex-column justify-content-center">
-                <h2>Dobrodošli u gradsku biblioteku</h2>
-                <p class="w-100 mk-quote">Dom znanja</p>
+                <h2>Welcome to the City Library</h2>
+                <p class="w-100 mk-quote">Home of knowledge</p>
               </div>
             </div>
           </div>
@@ -22,7 +22,7 @@
         <div class="col-12 container-fluid">
                 <div class="row mk-sorted-book-holder mk-clear">
                   <div class="row">
-                    <h2 id="mk-book-category">Najnovije knjige</h2>
+                    <h2 id="mk-book-category">Recent additions</h2>
                     <hr/>
                   </div>
                   <BookShelf Source="NewestBooks"/>
@@ -34,8 +34,8 @@
     <div class="mk-part-page page p-0 container-fluid">
       <div class="row w-100 h-100">
         <div class="col-12 col-md-6 container-fluid" id="lib-desc">
-          <h2>Kratka istorija</h2>
-          <p id="libHist">Odluka da se, za potrebe grada, osnuju opštinska biblioteka i muzej doneta je 24. oktobra 1930. godine. Na mesto bibliotekara je postavljena dr Marija Ilić Agapova, koja je dve godine kasnije, 30. septembra 1932. godine, postavljena za bibliotekara-upravnika.</p>
+          <h2>Short history</h2>
+          <p id="libHist">The decision to found the library was made on the 24th of october, 1930. Two years later Marija Ilić Agapova became head librarian.</p>
         </div>
         <div class="col-12 col-md-6 container-fluid" style="background-color: blue; padding: 0px;">
           <div class="row w-100 info-holder  mk-clear">
@@ -52,7 +52,7 @@
                   <div class="col-1 mk-flex-column-center"><a href="#" class="moveButton" id="moveLeftButton">&lArr;</a></div>
                   <div class="container-fluid  col-12 col-md-10">
                     <div class="row">
-                      <h2 id="mk-book-category">Najpopularnije knjige</h2>
+                      <h2 id="mk-book-category">Most popular books</h2>
                       <hr/>
                     </div>
                     <div class="row" id="pop">
@@ -79,19 +79,19 @@ export default {
     return {
       InfoBlocks : [
         {
-          title : "Članova",
+          title : "Members",
           maxValue : 150
         },
         {
-          title : "Godine postojanja",
+          title : "Years since founding",
           maxValue : new Date().getFullYear() - 1930
         },
         {
-          title : "Naslova",
+          title : "Titles",
           maxValue : 50
         },
         {
-          title : "Izdatih knjiga",
+          title : "Lent books",
           maxValue : 250
         }
       ]

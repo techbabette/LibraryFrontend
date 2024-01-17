@@ -2,7 +2,7 @@
         <footer class="container-fluid mk-background">
       <div class="row w-100" >
         <div class="mk-logo col-6 flex" id="footer-title">
-            <router-link to="/">©{{ currentYear }} <h2>Gradska biblioteka</h2></router-link>
+            <router-link to="/">©{{ currentYear }} <h2>City Library</h2></router-link>
         </div>
         <div class="col-6 flex  flex-md-row">
           <ul class="row align-items-center list-unstyled p-0">
