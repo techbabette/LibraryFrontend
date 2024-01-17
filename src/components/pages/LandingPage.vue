@@ -25,11 +25,7 @@
                     <h2 id="mk-book-category">Najnovije knjige</h2>
                     <hr/>
                   </div>
-                  <div id="newestBooks" class="container-fluid col-12">
-                    <div class="row" id="rec">
-                      <BookShelf Source="NewestBooks"/>
-                    </div>
-                  </div>
+                  <BookShelf Source="NewestBooks"/>
               </div>
             </div>
       </div>
