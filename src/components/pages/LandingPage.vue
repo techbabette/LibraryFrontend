@@ -100,11 +100,6 @@ export default {
         }
       ]
     }
-  },
-  computed : {
-    NewestBooks : function(){
-      return this.$store.getters.getNewestBooks
-    }
   }
 }
 </script>
