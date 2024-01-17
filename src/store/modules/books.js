@@ -71,14 +71,47 @@ export default{
                     "timeLoaned" : 8
                 }
             ],
+        },
+        searchOptions : {
+            sorts : [
+
+            ],
+            categories : [
+                {
+                    name : "Sci-Fi",
+                    id : 1
+                },
+                {
+                    name : "Historical",
+                    id : 2
+                }
+            ],
+            authors : [
+
+            ],
+            years : [
+
+            ]
+        },
+        searchData : {
+            sortId : 1,
+            categories : [1],
+            authors : [],
+            years : []
         }
     },
     mutations : {
-        changeActiveRouteName(state, newRouteName){
-            state.currentlyActiveRoute = newRouteName
+        setSelectedCategories(state, categories){
+            state.searchData.categories = categories;
         }
     },
     getters : {
+        getCategoryOptions(state){
+            return state.searchOptions.categories;
+        },
+        getSelectedCategories(state){
+            return state.searchData.categories;
+        },
         getNewestBooks(state){
             return state.books.newestBooks;
         }

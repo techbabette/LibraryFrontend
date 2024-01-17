@@ -18,6 +18,12 @@
                 Category
               </button>
               <ul class="dropdown-menu" id="categoryHolder" aria-labelledby="dropdownMenuButton1">
+                <li v-for="cat, key in Categories" :key="key">
+                    <div  class="d-flex flex-row justify-content-between dropdown-item">
+                    <label class="form-check-label text-wrap" :for="cat.name">{{ cat.name }}</label>
+                    <input class="form-check-input float-right" v-model="SelectedCategories" type="checkbox" :id="cat.name" :value="cat.id"/>
+                    </div>
+                </li>
               </ul>
             </div>
             <div class="dropdown">
@@ -56,7 +62,21 @@ import BookShelf from "../bookComponents/BookShelf";
 export default{
     name : "BooksPage",
     components : {
-    BookShelf
-  },
+        BookShelf
+    },
+    computed : {
+        Categories : function(){
+            return this.$store.getters.getCategoryOptions
+        },
+        SelectedCategories : {
+            get () {
+                return this.$store.getters.getSelectedCategories
+            },
+            set (categories) {
+                console.log(categories);
+                this.$store.commit("setSelectedCategories", categories)
+            }
+        }
+    }
 }
 </script>
