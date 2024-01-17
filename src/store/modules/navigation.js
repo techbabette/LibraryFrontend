@@ -10,9 +10,9 @@ export default{
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "text" : "Knjige",
-                "to" : "/knjige",
-                "name" : "Knjige",
+                "text" : "Books",
+                "to" : "/books",
+                "name" : "Books",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },
