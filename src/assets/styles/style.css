@@ -66,6 +66,25 @@ body{
   #landing-page .row{
     width: 100%;
   }
+  #pageButtonsHolder{
+    display: flex;
+    border-radius: 5%;
+    margin: 10px auto;
+    margin-bottom: 10px;
+    color: white !important;
+    padding: 5px;
+    width: 100%;
+    gap: 15px;
+    justify-content: center;
+  }
+  #pageButtonsHolder a{
+    padding: 20px;
+    border-radius: 20%;
+    background-color: #222222;
+  }
+  #pageButtonsHolder a:hover{
+    color:#f5af05;
+  }
   .mk-introduction{
     width: 100vw;
     height: 25vh;
@@ -223,7 +242,7 @@ body{
     padding: 0px;
     margin-bottom: 10px;
   }
-  #loadMore{
+  #pageButtonsHolder{
     display: flex;
     border-radius: 5%;
     margin: 10px auto;
@@ -234,12 +253,16 @@ body{
     gap: 15px;
     justify-content: center;
   }
-  #loadMore a{
+  #pageButtonsHolder button{
     padding: 20px;
     border-radius: 20%;
+    color: white;
     background-color: #222222;
   }
-  #loadMore a:hover{
+  #pageButtonsHolder button:hover{
+    color:#f5af05;
+  }
+  #pageButtonsHolder button.active{
     color:#f5af05;
   }
   #bookPage{
@@ -510,7 +533,7 @@ body{
     .dropdown-menu{
       padding: 0px;
     }
-    #loadMore{
+    #pageButtonsHolder{
       gap: 40px;
     }
   }
@@ -559,7 +582,7 @@ body{
     input{
       text-align: left;
     }
-    #loadMore{
+    #pageButtonsHolder{
       width: 30%;
     }
     #goBackUp{

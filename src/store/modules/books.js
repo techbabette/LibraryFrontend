@@ -97,12 +97,17 @@ export default{
             sortId : 1,
             categories : [1],
             authors : [],
-            years : []
-        }
+            years : [],
+            currentPage : 1
+        },
+        searchResultPages : 3
     },
     mutations : {
         setSelectedCategories(state, categories){
             state.searchData.categories = categories;
+        },
+        setSearchPage(state, newPage){
+            state.searchData.currentPage = newPage;
         }
     },
     getters : {
@@ -114,6 +119,12 @@ export default{
         },
         getNewestBooks(state){
             return state.books.newestBooks;
+        },
+        getCurrentSearchPage(state){
+            return state.searchData.currentPage;
+        },
+        getAvailableSearchPages(state){
+            return state.searchResultPages;
         }
     }
 }

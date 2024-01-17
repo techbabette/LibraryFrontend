@@ -40,7 +40,7 @@
                       <BookShelf Source="NewestBooks"/>
                     </div>
                   </div>
-                  <p id="loadMore"></p>
+                  <pageButtons v-model="CurrentPage" :MaximumPage="MaximumPage"/>
             </div>
         </div>
     </div>
@@ -48,11 +48,26 @@
 <script>
 import BookShelf from "../bookComponents/BookShelf";
 import SearchSelectionDropdown from "../inputs/SearchSelectionDropdown";
+import pageButtons from "../inputs/pageButtons";
 export default{
     name : "BooksPage",
     components : {
         BookShelf,
-        SearchSelectionDropdown
+        SearchSelectionDropdown,
+        pageButtons
+    },
+    computed : {
+        CurrentPage : {
+            get(){
+                return this.$store.getters.getCurrentSearchPage
+            },
+            set(value){
+                this.$store.commit("setSearchPage", value);
+            }
+        },
+        MaximumPage : function(){
+            return this.$store.getters.getAvailableSearchPages
+        },
     }
 }
 </script>
