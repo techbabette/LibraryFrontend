@@ -45,25 +45,25 @@ export default{
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "url" : "https://www.facebook.com/",
+                "to" : "https://www.facebook.com/",
                 "icon" : "icomoon-free:facebook",
                 "position" : "footer",
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "url" : "https://www.twitter.com/",
+                "to" : "https://www.twitter.com/",
                 "icon" : "la:twitter",
                 "position" : "footer",
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "url" : "./documentation.pdf",
+                "to" : "./documentation.pdf",
                 "icon" : "fa-file",
                 "position" : "footer",
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
-                "url" : "./sitemap.xml",
+                "to" : "./sitemap.xml",
                 "icon" : "bx:sitemap",
                 "position" : "footer",
                 "showTo" : ["logged out", "standard", "admin"]

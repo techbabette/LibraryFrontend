@@ -8,7 +8,7 @@
                 {{Link.text}}
             </span>
         </router-link>
-        <a v-else-if="linkHasUrl" :href="Link.url">
+        <a v-else-if="linkHasUrl" :href="Link.to">
             <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
             </span>
@@ -31,11 +31,14 @@ export default{
         linkHasText : function(){
             return Object.hasOwn(this.Link, "text"); 
         },
-        linkHasRoute : function(){
-            return Object.hasOwn(this.Link, "to");
-        },
         linkHasUrl : function(){
-            return Object.hasOwn(this.Link, "url");
+            let extensions = [".xml", ".pdf", ".txt"];
+            let that = this;
+            let linkHasExtension = extensions.some((ext) => that.Link.to.endsWith(ext));
+            return this.Link.to.startsWith("http") || linkHasExtension
+        },
+        linkHasRoute : function(){
+            return !this.linkHasUrl;
         },
         currentlyActiveRoute : function(){
             return this.$store.getters.getCurrentlyActiveRoute
