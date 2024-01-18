@@ -3,7 +3,7 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-dark mk-background">
                 <div class="container-fluid" id="actual-navbar">
-                    <router-link to="/" class="navbar-brand" id="Gradska_biblioteka"><h1 class="h4">City Library</h1></router-link>
+                    <SmartRouteLink :Link="HeaderLink" class="h4"/>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        <span class="navbar-toggler-icon"></span>
                    </button>
@@ -28,6 +28,11 @@ export default {
   },
   props: {
     links: Array
+  },
+  computed : {
+    HeaderLink : function(){
+        return this.$store.getters.getHeaderLink;
+    }
   }
 }
 </script>

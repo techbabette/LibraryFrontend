@@ -3,44 +3,44 @@ export default{
         currentlyActiveRoute : "Home page",
         navigationLinks : [
             {
+                "text" : "City Library",
+                "to" : "Home",
+                "position" : "header",
+                "showTo" : ["logged out", "standard", "admin"]
+            },
+            {
                 "text" : "Home",
-                "to" : "/",
-                "name" : "Home",
+                "to" : "Home",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "text" : "Books",
-                "to" : "/books",
-                "name" : "Books",
+                "to" : "Books",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },
             {
                 "text" : "Favorites",
-                "to" : "/favorites",
-                "name" : "Favorites",
+                "to" : "Favorites",
                 "position" : "navbar",
                 "showTo" : ["standard", "admin"]
             },
             {
                 "text" : "Login",
-                "to" : "/login",
-                "name" : "Login",
+                "to" : "Login",
                 "position" : "navbar",
                 "showTo" : ["logged out"]
             },
             {
                 "text" : "Register",
-                "to" : "/register",
-                "name" : "Register",
+                "to" : "Register",
                 "position" : "navbar",
                 "showTo" : ["logged out"]
             },
             {
                 "text" : "Author",
-                "to" : "/author",
-                "name" : "Author",
+                "to" : "Author",
                 "position" : "navbar",
                 "showTo" : ["logged out", "standard", "admin"]
             },
@@ -76,6 +76,9 @@ export default{
         }
     },
     getters : {
+        getHeaderLink(state){
+            return state.navigationLinks.filter(link => link.position === "header")[0];
+        },
         getNavbarLinks(state){
             return state.navigationLinks.filter(link => link.position === "navbar");
         },

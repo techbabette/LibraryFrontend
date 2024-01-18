@@ -1,6 +1,6 @@
 <template>
     <div v-showto="Link.showTo">
-        <router-link v-if="linkHasRoute" :to="Link.to" class="nav-link" :class="{active : currentlyActiveRoute === Link.name}">
+        <router-link v-if="linkHasRoute" :to="{ 'name' : Link.to  }" class="nav-link" :class="{active : currentlyActiveRoute === Link.to}">
             <span v-if="linkHasIcon">
                 <span class="iconify" :data-icon="Link.icon"></span>
             </span>
@@ -22,7 +22,8 @@
 export default{
     name : "SmartRouteLink",
     props : {
-        Link : Object
+        Link : Object,
+        ExtraClasses : String
     },
     computed : {
         linkHasIcon : function(){

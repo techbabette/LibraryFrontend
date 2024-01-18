@@ -11,7 +11,7 @@ require('@/assets/styles/style.css');
 
 router.beforeEach(function (to, from, next){
   let requestedPage = to.name;
-  let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.name === requestedPage);
+  let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.to === requestedPage);
   if(userAllowedAccess){
     document.title = to.name;
     store.commit("changeActiveRouteName", requestedPage);
