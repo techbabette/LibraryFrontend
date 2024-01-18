@@ -100,7 +100,21 @@ export default{
             years : [],
             currentPage : 1
         },
-        searchResultPages : 3
+        searchResultPages : 3,
+        currentlyViewedBookInfo : {
+            currentBookId : "0",
+            data : {
+                id : 0,
+                name : "",
+                author : {},
+                category : {},
+                img : "",
+                description:"",
+                copies:5,
+                releaseDate:2022,
+                timeLoaned : 5
+            }
+        },
     },
     mutations : {
         setSelectedCategories(state, categories){
@@ -108,6 +122,12 @@ export default{
         },
         setSearchPage(state, newPage){
             state.searchData.currentPage = newPage;
+        },
+        setCurrentBookId(state, newId){
+            state.currentlyViewedBookInfo.currentBookId = newId;
+        },
+        setCurrentlyViewedBookInfo(state, currentlyViewedBookData){
+            state.currentlyViewedBookInfo.data = currentlyViewedBookData
         }
     },
     getters : {
@@ -125,6 +145,16 @@ export default{
         },
         getAvailableSearchPages(state){
             return state.searchResultPages;
+        },
+        getViewedBookInfo(state){
+            return state.currentlyViewedBookInfo.data;
+        }
+    },
+    actions : {
+        async getBookInformationById({state, commit}, bookId){
+            commit("setCurrentBookId", bookId);
+            let bookInfo = state.books.newestBooks.find((el) => el.id === parseInt(bookId));
+            commit("setCurrentlyViewedBookInfo", bookInfo)
         }
     }
 }

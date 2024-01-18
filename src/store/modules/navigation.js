@@ -78,6 +78,13 @@ export default{
                 "position" : "footer",
                 "weight" : 70,
                 "showTo" : ["logged out", "standard", "admin"]
+            },
+            {
+                "text" : "Individual book",
+                "to" : "Book preview",
+                "position" : "hidden",
+                "weight" : 0,
+                "showTo" : ["logged out", "standard", "admin"]
             }
         ]
     },
