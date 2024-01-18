@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import LandingPage from "../components/pages/LandingPage.vue";
 import BooksPage from "../components/pages/BooksPage.vue";
+import BookPage from "../components/pages/BookPage.vue";
 
 const routes = [
     {
@@ -10,6 +11,9 @@ const routes = [
     },
     {
       path : "/books", component: BooksPage, name : "Books"
+    },
+    {
+      path : "/book/:id", component: BookPage, name : "Book preview"
     }
   ]
 

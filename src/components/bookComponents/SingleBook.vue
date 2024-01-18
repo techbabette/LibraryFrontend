@@ -3,7 +3,7 @@
         <div class="card book mk-card-limit">
         <a href=""><img :src="Book.img" :alt="Book.name" class="card-img-top book-prev img-fluid"></a>
             <div class="card-body book-body">
-            <a href=""> <h5 class="card-title book-title">{{ Book.name }}</h5> </a>
+            <router-link :to="{name : 'Book preview', params: { id: Book.id }}"> <h5 class="card-title book-title">{{ Book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(Book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
             <a href="">{{ Book.category.name }}</a>
