@@ -88,13 +88,13 @@ export default{
     },
     getters : {
         getHeaderLink(state){
-            return state.navigationLinks.filter(link => link.position === "header").sort((a,b) => a.weight - b.weight)[0];
+            return state.navigationLinks.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
         },
         getNavbarLinks(state){
-            return state.navigationLinks.filter(link => link.position === "navbar").sort((a,b) => a.weight - b.weight);
+            return state.navigationLinks.filter(link => link.position === "navbar").sort((a,b) => b.weight - a.weight);
         },
         getFooterLinks(state){
-            return state.navigationLinks.filter(link => link.position === "footer").sort((a,b) => a.weight - b.weight);
+            return state.navigationLinks.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
         },
         getCurrentlyActiveRoute(state){
             return state.currentlyActiveRoute
