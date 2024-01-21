@@ -1,24 +1,8 @@
 # libraryfrontend
 
-## Project setup
-```
-npm install
-```
+## CI/CD
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+Every push to main is followed by a deployment to S3
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
