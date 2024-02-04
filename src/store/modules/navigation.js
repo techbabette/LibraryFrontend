@@ -36,8 +36,8 @@ export default{
                     "showTo" : ["logged out", "standard", "admin"]
                 },
                 {
-                    "text" : "Favorites",
-                    "to" : "Favorites",
+                    "text" : "Your books",
+                    "to" : "Your books",
                     "position" : "navbar",
                     "weight" : 89,
                     "showTo" : ["standard", "admin"]

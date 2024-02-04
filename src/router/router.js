@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import LandingPage from "../components/pages/LandingPage.vue";
 import BooksPage from "../components/pages/BooksPage.vue";
 import BookPage from "../components/pages/BookPage.vue";
+import YourBooks from "../components/pages/YourBooks.vue";
 
 const routes = [
     {
@@ -14,6 +15,9 @@ const routes = [
     },
     {
       path : "/book/:id", component: BookPage, name : "Book preview"
+    },
+    {
+      path : "/yourbooks", component : YourBooks, name : "Your books"
     }
   ]
 

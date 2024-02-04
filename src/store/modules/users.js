@@ -1,7 +1,7 @@
 export default {
     state : {
         token : "",
-        userRole : "logged out"
+        userRole : "standard"
     },
     getters : {
         activeUserRole(state){
