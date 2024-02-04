@@ -1,21 +1,24 @@
 <template>
     <div class="mk-page">
         <div>
-            <p class="h2">Welcome to Your Books</p>
+            <p class="h2">These are your books</p>
             <TableTab v-for="tab, index in Tabs" :key="index" :Title="tab.Title"
                 :isCurrentlyActive="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
             <GenericTable :Items="ItemsForCurrentlyActiveTab" :Headers="CurrentHeaders" :Options="CurrentActiveTab.ItemOptions"/>
+            <PageButtons v-model="CurrentTabPage" :MaximumPage="CurrentTabMaximumPage"/>
         </div>
     </div>
 </template>
 <script>
 import GenericTable from "../tableComponents/GenericTable"
 import TableTab from "../tableComponents/TableTab"
+import PageButtons from "../inputs/pageButtons.vue"
 export default {
     name: "YourBooksPage",
     components: {
         GenericTable,
-        TableTab
+        TableTab,
+        PageButtons
     },
     data() {
         return {
@@ -34,6 +37,15 @@ export default {
                             "Text": "Id",
                             "Field": "id"
                         }
+                    ],
+                    "ItemOptions": [
+                        {
+                            "Name" : "Return",
+                            "Class" : "btn btn-dark",
+                            "onClick" : () => {
+                                console.log("Hello I was clicked")
+                            }
+                        }
                     ]
                 },
                 {
@@ -47,15 +59,6 @@ export default {
                             "Field": "name",
                         }
                     ],
-                    "ItemOptions": [
-                        {
-                            "Name" : "Return",
-                            "Class" : "btn btn-dark",
-                            "onClick" : () => {
-                                console.log("Hello I was clicked")
-                            }
-                        }
-                    ]
                 }
             ]
         }
@@ -73,6 +76,18 @@ export default {
         CurrentHeaders : function(){
             return this.CurrentActiveTab.TableHeaders
         },
+        CurrentTabPage : {
+            get(){
+                return this.$store.getters.getYourBooksTabPage;
+            },
+            async set(value){
+                let valueAndTab = {value, tab : this.CurrentActiveTab};
+                await this.$store.dispatch("changeYourBooksTabPage", valueAndTab);
+            }
+        },
+        CurrentTabMaximumPage : function(){
+            return this.$store.getters.getYourBooksTabMaximumPage;
+        }
     },
     methods: {
         changeYourBooksTab: function (newTab) {
