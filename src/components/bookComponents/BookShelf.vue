@@ -14,16 +14,17 @@ export default {
     },
     props : {
         Source : String,
-        mountAction : String
+        mountAction : String,
+        queryParams : Array 
     },
     computed : {
         Books : function(){
-            return this.$store.getters["get" + this.Source];
+            return this.$store.getters.getBooks(this.Source);
         }
     },
     mounted(){
         if(this.mountAction){
-            this.$store.dispatch(this.mountAction);
+            this.$store.dispatch(this.mountAction, {name : this.Source, params : this.queryParams});
         }
     }
 }

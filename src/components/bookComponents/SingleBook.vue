@@ -1,7 +1,7 @@
 <template>
     <div class="flex col-12 col-md-6 col-lg-3 justify-content-center">
         <div class="card book mk-card-limit">
-        <a href=""><img :src="Book.img" :alt="Book.name" class="card-img-top book-prev img-fluid"></a>
+        <a href=""><img :src="imgSource(Book.img)" :alt="Book.name" class="card-img-top book-prev img-fluid"></a>
             <div class="card-body book-body">
             <router-link :to="{name : 'Book preview', params: { id: Book.id }}"> <h5 class="card-title book-title">{{ Book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(Book.description,30) }}</em></p>
@@ -33,7 +33,10 @@ export default {
                 }
             }
             return returnText;
-        }
-    }
+        },
+        imgSource : function (img){
+            return require('../../assets/imgs/'+img)
+        } 
+    },
 }
 </script>

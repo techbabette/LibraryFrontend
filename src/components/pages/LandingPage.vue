@@ -25,7 +25,7 @@
                     <h2 id="mk-book-category">Recent additions</h2>
                     <hr/>
                   </div>
-                  <BookShelf Source="NewestBooks"/>
+                  <BookShelf Source="NewestBooks" mountAction="fetchBooks"/>
               </div>
             </div>
       </div>
@@ -94,7 +94,7 @@ export default {
           title : "Lent books",
           maxValue : 250
         }
-      ]
+      ],
     }
   }
 }
