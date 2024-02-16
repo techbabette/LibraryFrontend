@@ -25,7 +25,7 @@
                     <h2 id="mk-book-category">Recent additions</h2>
                     <hr/>
                   </div>
-                  <BookShelf Source="NewestBooks" mountAction="fetchBooks"/>
+                  <BookShelf Source="NewestBooks" mountAction="fetchBooks" :queryParams="{perPage : 4}"/>
               </div>
             </div>
       </div>

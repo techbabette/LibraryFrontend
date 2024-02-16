@@ -15,7 +15,7 @@ export default {
     props : {
         Source : String,
         mountAction : String,
-        queryParams : Array 
+        queryParams : Object 
     },
     computed : {
         Books : function(){

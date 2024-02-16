@@ -6,10 +6,10 @@
             <router-link :to="{name : 'Book preview', params: { id: Book.id }}"> <h5 class="card-title book-title">{{ Book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(Book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
-            <a href="">{{ Book.category.name }}</a>
+            <a href="">{{ Book.category.text }}</a>
             </p>
                 <p class="card-text">
-                <a href>{{ Book.author.name }}</a>
+                <a href>{{ Book.author.name + " " + Book.author.last_name}}</a>
             </p>
         </div>
         </div>
