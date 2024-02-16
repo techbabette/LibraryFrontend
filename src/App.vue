@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavigationBar :links="navbarLinks"/>
+    <NavigationBar :links="navbarLinks" :header-link="HeaderLink"/>
     <router-view></router-view>
     <FooterBar :links="footerLinks"/>
     <BackToTopButton/>
@@ -28,6 +28,9 @@ export default {
     },
     footerLinks : function(){
       return this.$store.getters.getFooterLinks;
+    },
+    HeaderLink : function(){
+        return this.$store.getters.getHeaderLink;
     }
   }
 }

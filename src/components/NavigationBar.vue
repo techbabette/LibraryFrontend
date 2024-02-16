@@ -3,7 +3,7 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-dark mk-background">
                 <div class="container-fluid" id="actual-navbar">
-                    <SmartRouteLink :Link="HeaderLink" class="h4"/>
+                    <SmartRouteLink v-if="headerLink" :Link="headerLink" class="h4"/>
                     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                        <span class="navbar-toggler-icon"></span>
                    </button>
@@ -27,12 +27,8 @@ export default {
     SmartRouteLink
   },
   props: {
-    links: Array
-  },
-  computed : {
-    HeaderLink : function(){
-        return this.$store.getters.getHeaderLink;
-    }
+    links: Array,
+    headerLink: Object
   }
 }
 </script>

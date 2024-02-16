@@ -9,10 +9,10 @@ Vue.directive("showto", showToDirective);
 
 require('@/assets/styles/style.css');
 
+await store.dispatch("fetchNavigationLinks");
+
 router.beforeEach(async function (to, from, next){
   let requestedPage = to.name;
-  //Get links through store action on every page change
-  await store.dispatch("getNavigationLinks");
   let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.to === requestedPage);
   if(userAllowedAccess){
     document.title = to.name;
