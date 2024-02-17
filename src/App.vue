@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-    <NavigationBar :links="navbarLinks" :header-link="HeaderLink"/>
+    <TheUserNavigationBar :links="navbarLinks" :header-link="HeaderLink"/>
     <router-view></router-view>
-    <FooterBar :links="footerLinks"/>
-    <BackToTopButton/>
+    <TheUserFooterBar :links="footerLinks"/>
+    <ButtonBackToTop/>
     <MessageDisplay/>
   </div>
 </template>
 
 <script>
-import NavigationBar from "./components/NavigationBar.vue";
-import FooterBar from "./components/FooterBar.vue";
-import BackToTopButton from "./components/BackToTopButton.vue";
+import TheUserNavigationBar from "./components/TheUserNavigationBar.vue";
+import TheUserFooterBar from "./components/TheUserFooterBar.vue";
+import ButtonBackToTop from "./components/ButtonBackToTop.vue";
 import MessageDisplay from "./components/MessageDisplay.vue";
 export default {
   name: 'App',
   components : {
-    NavigationBar,
-    FooterBar,
-    BackToTopButton,
+    TheUserNavigationBar,
+    TheUserFooterBar,
+    ButtonBackToTop,
     MessageDisplay
   },
   data(){

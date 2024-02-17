@@ -68,7 +68,7 @@
 </template>
 <script>
 import InfoBlock from "../InfoBlock.vue";
-import BookShelf from "../bookComponents/BookShelf";
+import BookShelf from "../BookShelf.vue";
 export default {
   name: 'LandingPage',
   components : {
@@ -99,8 +99,6 @@ export default {
   },
   async mounted(){
     let blockWithTitle = (title) => this.InfoBlocks.filter((block) => block.title === title)[0];
-
-    console.log(blockWithTitle);
 
     blockWithTitle("Titles").maxValue = (await this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}})).data.body; 
   }

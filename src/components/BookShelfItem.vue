@@ -35,7 +35,7 @@ export default {
             return returnText;
         },
         imgSource : function (img){
-            return require('../../assets/imgs/'+img)
+            return require('@/assets/imgs/'+img)
         } 
     },
 }

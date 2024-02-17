@@ -30,6 +30,7 @@ export default{
             sortId : 1,
             categories : [],
             authors : [],
+            maximumPage : 1,
             years : [],
         },
         currentlyViewedBookInfo : {

@@ -7,12 +7,12 @@
 </template>
 <script>
 export default{
-    name : "pageButtons",
+    name : "PageButtons",
     props : {
         value : {
             Type : Number,
         },
-        MaximumPage : Number
+        maximum_page : Number
     },
     data(){
         return {
@@ -21,14 +21,14 @@ export default{
     },
     computed : {
         ShowPageButtons : function(){
-            return this.MaximumPage > 1;
+            return this.maximum_page > 1;
         },
         pageButtons : function(){
             let buttonValues = [];
             if(this.CurrentPage === 1)
             {
                 buttonValues = [this.CurrentPage, this.CurrentPage + 1];
-                if(this.CurrentPage + 2 <= this.MaximumPage){
+                if(this.CurrentPage + 2 <= this.maximum_page){
                     buttonValues.push(this.CurrentPage + 2);
                 }
 
@@ -38,7 +38,7 @@ export default{
             
             buttonValues = [this.CurrentPage - 1, this.CurrentPage];
 
-            if(this.CurrentPage + 1 <= this.MaximumPage){
+            if(this.CurrentPage + 1 <= this.maximum_page){
                     buttonValues.push(this.CurrentPage + 1);
             }
 

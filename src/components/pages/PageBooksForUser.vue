@@ -5,14 +5,14 @@
             <TableTab v-for="tab, index in Tabs" :key="index" :Title="tab.Title"
                 :isCurrentlyActive="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
             <GenericTable :Items="ItemsForCurrentlyActiveTab" :Headers="CurrentHeaders" :Options="CurrentActiveTab.ItemOptions"/>
-            <PageButtons v-model="CurrentTabPage" :MaximumPage="CurrentTabMaximumPage"/>
+            <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
         </div>
     </div>
 </template>
 <script>
-import GenericTable from "../tableComponents/GenericTable"
-import TableTab from "../tableComponents/TableTab"
-import PageButtons from "../inputs/pageButtons.vue"
+import GenericTable from "../GenericTable"
+import TableTab from "../GenericTableTab"
+import PageButtons from "../ButtonsPagination.vue"
 export default {
     name: "YourBooksPage",
     components: {

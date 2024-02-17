@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-import AdaptableInput from "@/components/inputs/AdaptableInput.vue";
+import AdaptableInput from "@/components/InputAdaptable.vue";
 export default {
     name : "LoginPage",
     components : {

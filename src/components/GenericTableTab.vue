@@ -1,17 +1,17 @@
 <template>
-    <button class="btn admin-tab" :class="{ 'PrimaryButton': !isCurrentlyActive, 'PrimaryButtonActive': isCurrentlyActive }">
+    <button class="btn admin-tab" :class="{ 'PrimaryButton': !is_currenctly_active, 'PrimaryButtonActive': is_currenctly_active }">
         {{ Title }}
     </button>
 </template>
 <script>
 export default {
-    name: "AdminTableTab",
+    name: "GenericTableTab",
     props: {
-        Title: {
+        title: {
             Type: String,
             require: true
         },
-        isCurrentlyActive: {
+        is_currenctly_active: {
             Type : Boolean,
             require : true
         }

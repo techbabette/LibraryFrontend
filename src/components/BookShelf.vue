@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import SingleBook from "./SingleBook.vue";
+import SingleBook from "./BookShelfItem.vue";
 export default {
     name : "BookShelf",
     components : {
