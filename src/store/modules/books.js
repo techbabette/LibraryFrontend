@@ -27,7 +27,7 @@ export default{
             ]
         },
         searchData : {
-            sortId : 1,
+            sort : 0,
             categories : [],
             authors : [],
             maximumPage : 1,

@@ -17,7 +17,6 @@ export default {
     return {
       params: {
         perPage: 4,
-        sort: 0,
       },
       paramOptions: {
         sort: [],
@@ -44,6 +43,14 @@ export default {
         this.$store.commit("setSearchParam", { value, name: 'authors' });
       }
     },
+    selectedSort : {
+      get() {
+        return this.$store.getters.getSearchParam('sort');
+      },
+      set(value) {
+        this.$store.commit("setSearchParam", { value, name: 'sort' });
+      }
+    },
     page: {
       get() {
         return this.$store.getters.getSearchParam('page');
@@ -56,7 +63,7 @@ export default {
       return this.$store.getters.getSearchParam("maximumPage");
     },
     Params: function () {
-      let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, page: this.page ?? 0, sortSelected: this.params.sort };
+      let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, page: this.page ?? 0, sortSelected: this.selectedSort };
       return paramObject;
     }
   },
@@ -106,7 +113,7 @@ export default {
           <label for="textSearch">Search by title</label>
           <input type="text" name="textSearch" class="form-text" id="textSearch">
         </div>
-        <DropdownSelect optionsTextField="text" label="Sort options" :options="paramOptions.sort" v-model="params.sort" />
+        <DropdownSelect optionsTextField="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
         <InputDropdownSelectMultiple Name="Category" :options="paramOptions.categories" textField="text"
           v-model="selectedCategories" />
         <InputDropdownSelectMultiple Name="Author" :options="paramOptions.authors" textField="full_name"

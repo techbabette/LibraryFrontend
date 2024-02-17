@@ -1,25 +1,7 @@
-<template>
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" :id="id" data-bs-toggle="dropdown" aria-expanded="false">
-          {{ label }}
-        </button>
-        <ul class="dropdown-menu" :aria-labelledby="id">
-            <div v-for="option, key of options" :key="key" class="d-flex flex-row justify-content-between dropdown-item">
-                <a :id="option[optionsValueField]" class="w-100" :class="{active : localValue === option[optionsValueField]}"
-                 href="#" @click.prevent="setValueToSelf(option[optionsValueField])"> {{ option[optionsTextField] }}</a>
-            </div>
-        </ul>
-    </div>
-</template>
 <script>
 export default {
     name : "DropdownSelect",
-    data(){
-        return {
-            localValue : 0,
-            id : Math.floor(Math.random() * 1000) + this.name
-        }
-    },
+
     props: {
         value : {
             type: [String, Number]
@@ -55,6 +37,14 @@ export default {
             default : true
         }
     },
+
+    data(){
+        return {
+            localValue : this.value,
+            id : Math.floor(Math.random() * 1000) + this.name
+        }
+    },
+
     watch: {
        localValue: function() {
            this.$emit("input", this.localValue)
@@ -63,6 +53,7 @@ export default {
            this.localValue = this.value
        }
    },
+
    methods : {
         setValueToSelf(newValue){
             this.localValue = newValue;
@@ -70,3 +61,16 @@ export default {
    }
 }
 </script>
+<template>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" :id="id" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ label }}
+        </button>
+        <ul class="dropdown-menu" :aria-labelledby="id">
+            <div v-for="option, key of options" :key="key" class="d-flex flex-row justify-content-between dropdown-item">
+                <a :id="option[optionsValueField]" class="w-100" :class="{active : localValue === option[optionsValueField]}"
+                 href="#" @click.prevent="setValueToSelf(option[optionsValueField])"> {{ option[optionsTextField] }}</a>
+            </div>
+        </ul>
+    </div>
+</template>
