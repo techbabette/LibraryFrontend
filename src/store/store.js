@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from "@/axios/axios";
+
 import navigation from "./modules/navigation"
 import users from './modules/users';
 import books from './modules/books'
@@ -16,4 +18,13 @@ export default new Vuex.Store({
         yourbooks,
         messages
     },
+    actions : {
+        async fetch(context, options){
+            let {url, params} = options;
+
+            let result = await axios.get(url, {params});
+
+            return result;
+        }
+    }
 })

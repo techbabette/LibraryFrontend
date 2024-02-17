@@ -28,12 +28,10 @@ export default{
         },
         searchData : {
             sortId : 1,
-            categories : [1],
+            categories : [],
             authors : [],
             years : [],
-            currentPage : 1
         },
-        searchResultPages : 3,
         currentlyViewedBookInfo : {
             currentBookId : "0",
             data : {
@@ -50,8 +48,9 @@ export default{
         },
     },
     mutations : {
-        setSelectedCategories(state, categories){
-            state.searchData.categories = categories;
+        setSearchParam(state, info){
+            let {name, value} = info;
+            state.searchData[name] = value;
         },
         setSearchPage(state, newPage){
             state.searchData.currentPage = newPage;
@@ -64,20 +63,8 @@ export default{
         }
     },
     getters : {
-        getCategoryOptions(state){
-            return state.searchOptions.categories;
-        },
-        getSelectedCategories(state){
-            return state.searchData.categories;
-        },
-        getNewestBooks(state){
-            return state.books.newestBooks;
-        },
-        getCurrentSearchPage(state){
-            return state.searchData.currentPage;
-        },
-        getAvailableSearchPages(state){
-            return state.searchResultPages;
+        getSearchParam : (state) => (param) => {
+            return state.searchData[param];
         },
         getViewedBookInfo(state){
             return state.currentlyViewedBookInfo.data;
@@ -95,11 +82,14 @@ export default{
         async fetchBooks({state}, additionalOptions){
             let params = additionalOptions.params;
 
-            // params.categories = [1, 3];
+            let result = (await axios.get("/book", {params}));
+            if(!result.success){
+                return result;
+            }
 
-            let books = (await axios.get("/book", {params})).data.body.data;
-
+            let books = result.data.body.data;
             Vue.set(state.books, additionalOptions.name, books);
-        }
+            return result;
+        },
     }
 }
