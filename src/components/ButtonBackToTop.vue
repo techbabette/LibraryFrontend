@@ -1,14 +1,20 @@
-<template>
-    <a href="#" :class="{invisible : showSelf === false}" id="goBackUp">&uArr;</a>
-</template>
 <script>
 export default {
     name : "BackToTopButton",
+    
     data(){
         return {
             showSelf : false
         }
     },
+
+    mounted() {
+        window.addEventListener("scroll", this.handleScroll);
+    },
+    beforeUnmount() {
+        window.removeEventListener("scroll", this.handleScroll);
+    },
+
     methods : {
       handleScroll() {
         if(window.scrollY > 0){
@@ -18,11 +24,8 @@ export default {
         this.showSelf = false;
       }  
     },
-    mounted() {
-        window.addEventListener("scroll", this.handleScroll);
-    },
-    beforeUnmount() {
-        window.removeEventListener("scroll", this.handleScroll);
-    }
 }
 </script>
+<template>
+    <a href="#" :class="{invisible : showSelf === false}" id="goBackUp">&uArr;</a>
+</template>

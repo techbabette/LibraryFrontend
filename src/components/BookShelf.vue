@@ -17,7 +17,7 @@ export default {
     },
     mounted(){
         if(this.mount_action){
-            this.$store.dispatch(this.mount_action, {name : this.Source, params : this.query_params});
+            this.$store.dispatch(this.mount_action, {name : this.source, params : this.query_params});
         }
     }
 }

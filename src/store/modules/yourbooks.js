@@ -13,7 +13,6 @@ export default {
         },
         getYourBooksTabPage : function(state, getters) {
             if(typeof state.dataForTabTable[getters.getYourBooksActiveTab] === 'undefined'){
-                console.log("Heyy")
                 return 1;
             }
             return state.dataForTabTable[getters.getYourBooksActiveTab].page

@@ -1,6 +1,6 @@
 <template>
     <button class="btn admin-tab" :class="{ 'PrimaryButton': !is_currenctly_active, 'PrimaryButtonActive': is_currenctly_active }">
-        {{ Title }}
+        {{ title }}
     </button>
 </template>
 <script>

@@ -2,8 +2,8 @@
     <div class="mk-page">
         <div>
             <p class="h2">These are your books</p>
-            <TableTab v-for="tab, index in Tabs" :key="index" :Title="tab.Title"
-                :isCurrentlyActive="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
+            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
+                :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
             <GenericTable :Items="ItemsForCurrentlyActiveTab" :Headers="CurrentHeaders" :Options="CurrentActiveTab.ItemOptions"/>
             <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
         </div>
@@ -64,6 +64,15 @@ export default {
         }
     },
     computed: {
+        CurrentTabPage : {
+            get(){
+                return this.$store.getters.getYourBooksTabPage;
+            },
+            async set(value){
+                let valueAndTab = {value, tab : this.CurrentActiveTab};
+                await this.$store.dispatch("changeYourBooksTabPage", valueAndTab);
+            }
+        },
         CurrentlyActiveTabTitle: function () {
             return this.$store.getters.getYourBooksActiveTab;
         },
@@ -75,15 +84,6 @@ export default {
         },
         CurrentHeaders : function(){
             return this.CurrentActiveTab.TableHeaders
-        },
-        CurrentTabPage : {
-            get(){
-                return this.$store.getters.getYourBooksTabPage;
-            },
-            async set(value){
-                let valueAndTab = {value, tab : this.CurrentActiveTab};
-                await this.$store.dispatch("changeYourBooksTabPage", valueAndTab);
-            }
         },
         CurrentTabMaximumPage : function(){
             return this.$store.getters.getYourBooksTabMaximumPage;
