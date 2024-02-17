@@ -6,15 +6,7 @@
               <label for="textSearch">Search by title</label>
               <input type="text" name="textSearch" class="form-text" id="textSearch">
             </div>
-            <div class="dropdown">
-
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Sort options
-              </button>
-              <ul class="dropdown-menu" id="sortHolder" aria-labelledby="dropdownMenuButton1">
-              </ul>
-              <AdaptableInput fieldType="select" optionsTextField="text" :options="paramOptions.sort"/>
-            </div>
+            <DropdownSelect optionsTextField="text" label="Sort options" :options="paramOptions.sort" v-model="params.sort"/>
             <SearchSelectionDropdown Name="Category" :options="paramOptions.categories" textField="text" v-model="SelectedCategories"/>
             <SearchSelectionDropdown Name="Author" :options="paramOptions.authors" textField="full_name" v-model="SelectedAuthors"/>
             <a class="btn btn-dark w-100" id="resetFilterButton" href="#">Remove filters</a>
@@ -37,7 +29,7 @@
 <script>
 import BookShelf from "../bookComponents/BookShelf";
 import SearchSelectionDropdown from "../inputs/SearchSelectionDropdown";
-import AdaptableInput from "../inputs/AdaptableInput.vue";
+import DropdownSelect from "../inputs/DropdownSelect.vue";
 import pageButtons from "../inputs/pageButtons";
 export default{
     name : "BooksPage",
@@ -45,14 +37,12 @@ export default{
         BookShelf,
         SearchSelectionDropdown,
         pageButtons,
-        AdaptableInput
+        DropdownSelect
     },
     data(){
       return {
         params : {
           perPage : 4,
-          categories : [],
-          authors : [],
           sort : 0,
           page : 1
         },
@@ -82,7 +72,7 @@ export default{
           }
       },
       Params : function(){
-        let paramObject = {perPage : this.params.perPage, categories : this.SelectedCategories, authors : this.SelectedAuthors, page : this.params.page};
+        let paramObject = {perPage : this.params.perPage, categories : this.SelectedCategories, authors : this.SelectedAuthors, page : this.params.page, sortSelected : this.params.sort};
         return paramObject;
       }
     },
