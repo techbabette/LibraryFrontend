@@ -4,7 +4,7 @@ import { setTimeout } from "core-js";
 
 export default {
     state : {
-        token : ""
+        token : "",
     },
     actions : {
         async attemptLogin(context, credentials){
@@ -17,19 +17,33 @@ export default {
             context.commit("addMessageToList", {text : "Successfully logged in", success : true})
             context.commit("changeToken", token);
             return response;
+        },
+        async attemptLogout(context){
+            let response = (await axios.get("/auth/logout"))
+            if(!response.success){
+                return response;
+            }
+
+            context.commit("addMessageToList", {text : "Successfully logged out", success : true})
+            context.commit("changeToken", "");
+            return response;
         }
     },
     mutations : {
         changeToken(state, newToken){
             state.token = newToken;
+            if(!newToken) return;
 
             let {exp} = parseJwt(newToken);
             let timeTillExpiration = exp * 1000 - Date.now();
             let that = this;
 
             setTimeout(function(){
-                state.token = ""
-                that.commit("addMessageToList", {text : "Session expired", success : false})
+                let expired = (parseJwt(state.token).exp ?? 0) < 1000 - Date.now();
+                if(expired){
+                    state.token = ""
+                    that.commit("addMessageToList", {text : "Session expired", success : false})
+                }
             }, timeTillExpiration);
         }
     },
@@ -42,8 +56,8 @@ export default {
 
             return JWTClaims;
         },
-        activeUserRole(state){
-            return state.userRole;
+        acitveUserAccessLevel(state, getters){
+            return getters.claims.access_level ?? -1;
         }
     }
 }

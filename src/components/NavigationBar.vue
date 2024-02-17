@@ -12,6 +12,9 @@
                         <li v-for="link, key in links" :key="key" class="nav-item">
                             <SmartRouteLink :Link="link"/>
                         </li>
+                        <li>
+                            <a href="" @click.prevent="attemptLogout" class="nav-link" v-showto="1"><span>Log out</span></a>
+                        </li>
                     </ul>
                     </div>
                 </div>
@@ -29,6 +32,15 @@ export default {
   props: {
     links: Array,
     headerLink: Object
+  },
+  methods : {
+    async attemptLogout(){
+            let response = await this.$store.dispatch("attemptLogout");
+
+            if(response.success){
+                this.$router.push("/").catch(() => {});
+            }
+        }
   }
 }
 </script>
