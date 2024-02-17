@@ -39,7 +39,7 @@
         </div>
         <div class="col-12 col-md-6 container-fluid" style="background-color: blue; padding: 0px;">
           <div class="row w-100 info-holder  mk-clear">
-            <InfoBlock v-for="block, key in InfoBlocks" :key="key" :title="block.title" :maxValue="block.maxValue" :timeToLoad="2500"/>
+            <InfoBlock v-for="block, key in InfoBlocks" :key="key" :title="block.title" :max_value="block.maxValue" :time_to_load="2500"/>
           </div>
         </div>
       </div>

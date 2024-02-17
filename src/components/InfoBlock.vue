@@ -1,51 +1,49 @@
-<template>
-    <div class="col-12 col-md-6 info-block mk-flex-column-center">
-        <h2 id="memNum">{{ shownValue }}</h2>
-        <h3>{{ title }}</h3>
-    </div>
-</template>
 <script>
-
 export default {
-    name : "InfoBlock",
-    props : {
-        title : String,
-        maxValue : Number,
-        startValue : {
-            Type : Number,
-            default : 0
+    name: "InfoBlock",
+    
+    props: {
+        title: String,
+        max_value: Number,
+        start_value: {
+            Type: Number,
+            default: 0
         },
-        step : {
-            Type : Number,
-            default : 1
+        step: {
+            Type: Number,
+            default: 1
         },
-        timeToLoad : {
-            Type : Number
+        time_to_load: {
+            Type: Number
         }
     },
-    data(){
+
+    data() {
         return {
-            shownValue : this.startValue
+            shownValue: this.start_value
         }
     },
-    mounted(){
-        this.countToValue();
-    },
+
     watch: {
-        maxValue : function(){
+        max_value: function () {
             this.countToValue();
         }
     },
-    methods : {
-        countToValue(){
+
+    mounted() {
+        this.countToValue();
+    },
+
+    methods: {
+        countToValue() {
             let that = this;
-            let interval = this.timeToLoad/Math.abs(this.startValue - this.maxValue);
-            let counter = setInterval(function(){
-                if(that.maxValue === that.shownValue){
+            let interval = this.time_to_load / Math.abs(this.start_value - this.max_value);
+            let counter = setInterval(function () {
+                if (that.max_value === that.shownValue) {
                     clearInterval(counter);
                     return;
                 }
-                if(that.shownValue > that.maxValue){
+                if (that.shownValue > that.max_value) {
                     that.shownValue -= that.step;
                     return;
                 }
@@ -55,3 +53,9 @@ export default {
     }
 }
 </script>
+<template>
+    <div class="col-12 col-md-6 info-block mk-flex-column-center">
+        <h2 id="memNum">{{ shownValue }}</h2>
+        <h3>{{ title }}</h3>
+    </div>
+</template>
