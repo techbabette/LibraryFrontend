@@ -27,9 +27,6 @@ export default {
         ShowPageButtons: function () {
             return this.maximum_page > 1;
         },
-        showNextPageButton: function () {
-            return this.currentPage + 1 <= this.maximum_page;
-        },
         pageButtons: function () {
             let pageButtonsToShow = [];
             if (this.currentPage === 1) {
