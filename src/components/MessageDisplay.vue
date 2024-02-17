@@ -1,16 +1,6 @@
-<template>
-    <div id="message-holder" class="d-flex flex-column">
-        <span v-for="message, index in messages" :key="index" class="alert disappearing" :class="{'alert-danger' : !message.success, 'alert-success' : message.success}">{{message.text}}</span>
-    </div>
-</template>
 <script>
 export default{
     name: "MessageDisplay",
-    data(){
-        return{
-            oldMessageListLength: 0
-        }
-    },
     computed:{
         messages(){
             return this.$store.getters.getAllMessages; 
@@ -38,3 +28,8 @@ export default{
     100% {opacity: 0;}
 }
 </style>
+<template>
+    <div id="message-holder" class="d-flex flex-column">
+        <span v-for="message, index in messages" :key="index" class="alert disappearing" :class="{'alert-danger' : !message.success, 'alert-success' : message.success}">{{message.text}}</span>
+    </div>
+</template>
