@@ -4,6 +4,7 @@
     <router-view></router-view>
     <FooterBar :links="footerLinks"/>
     <BackToTopButton/>
+    <MessageDisplay/>
   </div>
 </template>
 
@@ -11,12 +12,14 @@
 import NavigationBar from "./components/NavigationBar.vue";
 import FooterBar from "./components/FooterBar.vue";
 import BackToTopButton from "./components/BackToTopButton.vue";
+import MessageDisplay from "./components/MessageDisplay.vue";
 export default {
   name: 'App',
   components : {
     NavigationBar,
     FooterBar,
-    BackToTopButton
+    BackToTopButton,
+    MessageDisplay
   },
   data(){
     return {

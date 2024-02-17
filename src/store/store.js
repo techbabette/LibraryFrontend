@@ -4,6 +4,7 @@ import navigation from "./modules/navigation"
 import users from './modules/users';
 import books from './modules/books'
 import yourbooks from './modules/yourbooks'
+import messages from './modules/messages'
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         navigation,
         users,
         books,
-        yourbooks
+        yourbooks,
+        messages
     },
 })
