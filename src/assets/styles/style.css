@@ -420,6 +420,21 @@ body{
   a:link {
     text-decoration: none;
   }
+  .bigButton {
+    background-color: #f7bd2f;
+    color: #333333 !important;
+    border: 1px solid #333333;
+  }
+  .bigButton:hover {
+    background-color: #f5af05;
+    color: #333333 !important;
+    border: 1px solid #333333;
+  }
+  .bigButton:focus {
+    background-color: #f5af05;
+    color: #333333 !important;
+    border: 1px solid #333333;
+  }
   a:hover{
     color: #f5af05 !important;
   }

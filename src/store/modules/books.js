@@ -93,7 +93,11 @@ export default{
             commit("setCurrentlyViewedBookInfo", bookInfo)
         },
         async fetchBooks({state}, additionalOptions){
-            let books = (await axios.get("/book", {params :additionalOptions.params})).data.body.data;
+            let params = additionalOptions.params;
+
+            // params.categories = [1, 3];
+
+            let books = (await axios.get("/book", {params})).data.body.data;
 
             Vue.set(state.books, additionalOptions.name, books);
         }

@@ -13,5 +13,5 @@ export default new Vuex.Store({
         users,
         books,
         yourbooks
-    }
+    },
 })
