@@ -1,14 +1,6 @@
-<template>
-    <p v-if="ShowPageButtons" id="pageButtonsHolder">
-        <button @click="changePage(button)" :key="key" v-for="button, key in pageButtons"
-            :class="{ active: button === currentPage }">
-            {{ button }}
-        </button>
-    </p>
-</template>
 <script>
 export default {
-    name: "PageButtons",
+    name: "ButtonsPagination",
 
     props: {
         value: {
@@ -75,3 +67,11 @@ export default {
     }
 }
 </script>
+<template>
+    <p v-if="ShowPageButtons" id="pageButtonsHolder">
+        <button @click="changePage(button)" :key="key" v-for="button, key in pageButtons"
+            :class="{ active: button === currentPage }">
+            {{ button }}
+        </button>
+    </p>
+</template>
