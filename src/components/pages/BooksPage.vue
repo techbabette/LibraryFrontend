@@ -18,7 +18,7 @@
                     <hr>
                   </div>
                     <div id="event-div" class="row mk-clear w-100">
-                      <BookShelf Source="SearchBooks" :queryParams="Params"/>
+                      <BookShelf Source="SearchBooks"/>
                     </div>
                   </div>
                   <pageButtons v-model="params.page" :MaximumPage="maximumPage"/>
@@ -77,16 +77,25 @@ export default{
       }
     },
     async mounted(){
-      this.paramOptions.categories = (await this.$store.dispatch("fetch", {url : 'category'})).data;
-      this.paramOptions.authors = (await this.$store.dispatch("fetch", {url : 'author'})).data;
-      this.paramOptions.sort = (await this.$store.dispatch("fetch", {url : 'book', params : {sortOptions : true}})).data.body;
+      let [categoryResult, authorResult, sortResult, bookResult] = await Promise.all([
+        this.$store.dispatch("fetch", {url : 'category'}),
+        this.$store.dispatch("fetch", {url : 'author'}),
+        this.$store.dispatch("fetch", {url : 'book', params : {sortOptions : true}}),
+        this.getItems(this.Params)
+      ])
+      this.paramOptions.categories = categoryResult.data;
+      this.paramOptions.authors = authorResult.data;
+      this.paramOptions.sort = sortResult.data.body;
 
-      this.items = this.getItems(this.Params);
+      this.items = bookResult;
     },
     watch : {
       Params : {
-        handler : async function(newValue){
-          this.getItems(newValue);
+        handler : async function(newValue, oldValue){
+          if(newValue.page == oldValue.page){
+            this.params.page = 1;
+          }
+          await this.getItems(newValue);
         },
         deep : true
       }

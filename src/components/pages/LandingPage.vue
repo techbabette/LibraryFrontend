@@ -88,7 +88,7 @@ export default {
         },
         {
           title : "Titles",
-          maxValue : 50
+          maxValue : 0
         },
         {
           title : "Lent books",
@@ -96,6 +96,13 @@ export default {
         }
       ],
     }
+  },
+  async mounted(){
+    let blockWithTitle = (title) => this.InfoBlocks.filter((block) => block.title === title)[0];
+
+    console.log(blockWithTitle);
+
+    blockWithTitle("Titles").maxValue = (await this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}})).data.body; 
   }
 }
 </script>

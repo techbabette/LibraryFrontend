@@ -16,7 +16,7 @@ export default {
     name : "DropdownSelect",
     data(){
         return {
-            localValue : undefined,
+            localValue : 0,
             id : Math.floor(Math.random() * 1000) + this.name
         }
     },
