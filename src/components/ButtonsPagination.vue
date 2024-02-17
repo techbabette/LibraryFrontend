@@ -1,64 +1,79 @@
 <template>
     <p v-if="ShowPageButtons" id="pageButtonsHolder">
-    <button @click="changePage(button)" :key="key" v-for="button,key in pageButtons" :class="{active : button === CurrentPage}">
-        {{ button }}
-    </button>
+        <button @click="changePage(button)" :key="key" v-for="button, key in pageButtons"
+            :class="{ active: button === currentPage }">
+            {{ button }}
+        </button>
     </p>
 </template>
 <script>
-export default{
-    name : "PageButtons",
-    props : {
-        value : {
-            Type : Number,
+export default {
+    name: "PageButtons",
+
+    props: {
+        value: {
+            Type: Number,
         },
-        maximum_page : Number
+        maximum_page: Number
     },
-    data(){
+
+    data() {
         return {
-            CurrentPage : 1
+            currentPage: 1
         }
     },
-    computed : {
-        ShowPageButtons : function(){
+
+    computed: {
+        ShowPageButtons: function () {
             return this.maximum_page > 1;
         },
-        pageButtons : function(){
-            let buttonValues = [];
-            if(this.CurrentPage === 1)
-            {
-                buttonValues = [this.CurrentPage, this.CurrentPage + 1];
-                if(this.CurrentPage + 2 <= this.maximum_page){
-                    buttonValues.push(this.CurrentPage + 2);
+        showNextPageButton: function () {
+            return this.currentPage + 1 <= this.maximum_page;
+        },
+        pageButtons: function () {
+            let pageButtonsToShow = [];
+            if (this.currentPage === 1) {
+                let seoondPage = this.currentPage + 1;
+                pageButtonsToShow = [this.currentPage, seoondPage];
+
+                let thirdPageExists = nextPageExists(seoondPage);
+                if (thirdPageExists) {
+                    pageButtonsToShow.push(seoondPage + 1);
                 }
 
-                return buttonValues;
-
-            }
-            
-            buttonValues = [this.CurrentPage - 1, this.CurrentPage];
-
-            if(this.CurrentPage + 1 <= this.maximum_page){
-                    buttonValues.push(this.CurrentPage + 1);
+                return pageButtonsToShow;
             }
 
-            return buttonValues;
+            let previousPage = this.currentPage - 1;
+            pageButtonsToShow = [previousPage, this.currentPage];
+
+            if (nextPageExists(this.currentPage)) {
+                pageButtonsToShow.push(this.currentPage + 1);
+            }
+
+            return pageButtonsToShow;
         }
     },
-    methods : {
-        changePage : function(newPage){
-            this.CurrentPage = newPage;
-        }
-    },
-    mounted(){
-        this.CurrentPage = this.value;
-    },
+
     watch: {
-        CurrentPage : function() {
-            this.$emit("input", this.CurrentPage)
+        currentPage: function () {
+            this.$emit("input", this.currentPage)
         },
-        value : function(){
-            this.CurrentPage = this.value;
+        value: function () {
+            this.currentPage = this.value;
+        }
+    },
+
+    mounted() {
+        this.currentPage = this.value;
+    },
+
+    methods: {
+        changePage: function (newPage) {
+            this.currentPage = newPage;
+        },
+        nextPageExists: function(fromPage){
+            return fromPage + 1 <= this.maximum_page;
         }
     }
 }
