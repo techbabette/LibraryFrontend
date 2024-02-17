@@ -18,15 +18,12 @@ export default {
         changeToken(state, newToken){
             state.token = newToken;
 
-            // let {exp} = parseJwt(newToken);
-            // let now = Date.now();
-            // let timeTillExpiration = exp * 1000 - now;
-
-            // console.log(timeTillExpiration);
+            let {exp} = parseJwt(newToken);
+            let timeTillExpiration = exp * 1000 - Date.now();
 
             setTimeout(function(){
                 state.token = ""
-            }, 10000);
+            }, timeTillExpiration);
         }
     },
     getters : {
