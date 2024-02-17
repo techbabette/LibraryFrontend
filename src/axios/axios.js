@@ -12,4 +12,14 @@ axiosInstance.interceptors.request.use(
     }
 )
 
+axiosInstance.interceptors.response.use(
+function (response){
+    return {success : true, data : response.data};
+}, 
+function(error){
+    store.commit("addMessageToList", {text : error.response.data.message, success : false});
+    return {success : false};
+}
+);
+
 export default axiosInstance;

@@ -9,25 +9,28 @@ export default {
     actions : {
         async attemptLogin(context, credentials){
             let response = (await axios.post("/auth/login", credentials))
-            let token = response.data.body;
+            if(!response.success){
+                return response;
+            }
 
+            let token = response.data.body;
             context.commit("addMessageToList", {text : "Successfully logged in", success : true})
             context.commit("changeToken", token);
+            return response;
         }
     },
     mutations : {
         changeToken(state, newToken){
             state.token = newToken;
 
-            // let {exp} = parseJwt(newToken);
-            // let timeTillExpiration = exp * 1000 - Date.now();
-
+            let {exp} = parseJwt(newToken);
+            let timeTillExpiration = exp * 1000 - Date.now();
             let that = this;
 
             setTimeout(function(){
                 state.token = ""
                 that.commit("addMessageToList", {text : "Session expired", success : false})
-            }, 10000);
+            }, timeTillExpiration);
         }
     },
     getters : {

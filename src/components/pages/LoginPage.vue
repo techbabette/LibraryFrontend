@@ -24,11 +24,11 @@ export default {
         }
     },
     methods : {
-        attemptLogin(){
+        async attemptLogin(){
             let body = this.loginData;
-            let errors = this.$store.dispatch("attemptLogin", body);
+            let response = await this.$store.dispatch("attemptLogin", body);
 
-            if(Object.keys(errors).length < 1){
+            if(response.success){
                 this.$router.push("/");
             }
         }
