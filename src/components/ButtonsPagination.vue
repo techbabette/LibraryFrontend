@@ -33,7 +33,7 @@ export default {
                 let seoondPage = this.currentPage + 1;
                 pageButtonsToShow = [this.currentPage, seoondPage];
 
-                let thirdPageExists = nextPageExists(seoondPage);
+                let thirdPageExists = this.nextPageExists(seoondPage);
                 if (thirdPageExists) {
                     pageButtonsToShow.push(seoondPage + 1);
                 }
@@ -44,7 +44,7 @@ export default {
             let previousPage = this.currentPage - 1;
             pageButtonsToShow = [previousPage, this.currentPage];
 
-            if (nextPageExists(this.currentPage)) {
+            if (this.nextPageExists(this.currentPage)) {
                 pageButtonsToShow.push(this.currentPage + 1);
             }
 
