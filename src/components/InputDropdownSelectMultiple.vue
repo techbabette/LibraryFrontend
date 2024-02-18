@@ -40,7 +40,7 @@ export default {
 <template>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        {{Name}}
+        {{name}}
     </button>
     <ul class="dropdown-menu" id="categoryHolder" aria-labelledby="dropdownMenuButton1">
         <li v-for="option, key in options" :key="key">
