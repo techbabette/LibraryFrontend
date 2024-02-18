@@ -51,6 +51,7 @@ export default {
             let url = target + (callerId ? `/${callerId}` : "");
             if(httpVerbs.includes(verb)){
                 await axios({method : verb, url})
+                this.$emit('refresh');
             }
         }
     }

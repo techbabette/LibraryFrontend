@@ -16,7 +16,7 @@ export default {
             Tabs: [
                 {
                     "Title": "Currently loaned",
-                    "Endpoint": "loan",
+                    "Endpoint": "loan?current=true",
                     "IdField": "id",
                     "TableHeaders": [
                         {
@@ -33,6 +33,11 @@ export default {
                         }
                     ],
                     "ItemOptions": [
+                        {
+                            "Name" : "View",
+                            "Class" : "btn btn-primary mx-1",
+                            "onClick" : "dispatch|books/showbook"
+                        },
                         {
                             "Name" : "Extend",
                             "Class" : "btn btn-success mx-1",
@@ -94,6 +99,9 @@ export default {
     methods: {
         changeTab: function (newTab) {
             this.$store.dispatch("userbooks/changeTab", newTab);
+        },
+        fetchItems: function (){
+            this.$store.dispatch('userbooks/fetchItemsForTab', this.CurrentActiveTab);
         }
     },
 }
@@ -104,7 +112,7 @@ export default {
             <p class="h2">These are your books</p>
             <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
                 :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeTab(tab)" />
-            <GenericTable :items="ItemsForCurrentlyActiveTab" :headers="CurrentHeaders" :options="CurrentActiveTab.ItemOptions"/>
+            <GenericTable :items="ItemsForCurrentlyActiveTab" :headers="CurrentHeaders" :options="CurrentActiveTab.ItemOptions" @refresh="fetchItems"/>
             <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
         </div>
     </div>

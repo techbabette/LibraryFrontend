@@ -32,6 +32,13 @@ export default {
             let result = await axios.get(tab.Endpoint, {params});
 
             let maximumPage = result.body.last_page;
+            if(maximumPage < state.dataForTabTable[state.currentlyActiveTab].page){
+                if(maximumPage === 1){
+                    state.dataForTabTable[tab.Title].page = 1;
+                }else{
+                    state.dataForTabTable[tab.Title].page = maximumPage - 1;
+                }
+            }
             let items = result.body.data;
             state.dataForTabTable[tab.Title].maxPage = maximumPage;
             state.dataForTabTable[tab.Title].items = items;
