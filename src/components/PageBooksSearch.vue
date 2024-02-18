@@ -101,6 +101,9 @@ export default {
 
       let maximumPage = result.data.body.last_page;
       this.$store.commit("books/setSearchParam", { value: maximumPage, name: 'maximumPage' });
+    },
+    removeFilters(){
+      this.$store.commit("books/clearSearchParams");
     }
   }
 }
@@ -118,7 +121,7 @@ export default {
           v-model="selectedCategories" />
         <InputDropdownSelectMultiple name="Author" :options="paramOptions.authors" text_field="full_name"
           v-model="selectedAuthors" />
-        <a class="btn btn-dark w-100" id="resetFilterButton" href="#">Remove filters</a>
+        <a class="btn btn-dark w-100" id="resetFilterButton" @click.prevent="removeFilters" href="#">Remove filters</a>
       </div>
       <div class="mk-holder" id="filter-holder">
         <div class="container-fluid">
