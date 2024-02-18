@@ -102,28 +102,28 @@ export default {
         username : function(){
             return this.$store.getters['user/claims'].name;
         },
-        CurrentActiveTab : function(){
-            return this.Tabs.filter((tab) => tab.Title == this.CurrentlyActiveTabTitle)[0] ?? this.Tabs[0];
+        currentActiveTab : function(){
+            return this.Tabs.filter((tab) => tab.Title == this.currentlyActiveTabTitle)[0] ?? this.Tabs[0];
         },
-        CurrentTabPage : {
+        currentTabPage : {
             get(){
                 return this.$store.getters['userbooks/tabPage'];
             },
             async set(value){
-                let valueAndTab = {value, tab : this.CurrentActiveTab};
+                let valueAndTab = {value, tab : this.currentActiveTab};
                 await this.$store.dispatch("userbooks/changeTabPage", valueAndTab);
             }
         },
-        CurrentlyActiveTabTitle: function () {
+        currentlyActiveTabTitle: function () {
             return this.$store.getters['userbooks/activeTab'];
         },
-        ItemsForCurrentlyActiveTab: function () {
-            return this.$store.getters['userbooks/tabItems'](this.CurrentlyActiveTabTitle);
+        itemsForCurrentlyActiveTab: function () {
+            return this.$store.getters['userbooks/tabItems'](this.currentlyActiveTabTitle);
         },
-        CurrentHeaders : function(){
-            return this.CurrentActiveTab.TableHeaders
+        currentHeaders : function(){
+            return this.currentActiveTab.TableHeaders
         },
-        CurrentTabMaximumPage : function(){
+        currentTabMaximumPage : function(){
             return this.$store.getters['userbooks/tabMaximumPage'];
         }
     },
@@ -137,7 +137,7 @@ export default {
             this.$store.dispatch("userbooks/changeTab", newTab);
         },
         fetchItems: function (){
-            this.$store.dispatch('userbooks/fetchItemsForTab', this.CurrentActiveTab);
+            this.$store.dispatch('userbooks/fetchItemsForTab', this.currentActiveTab);
         }
     },
 }
@@ -147,9 +147,9 @@ export default {
         <div>
             <p class="h2">These are your books, {{ username }}</p>
             <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
-                :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeTab(tab)" />
-            <GenericTable :items="ItemsForCurrentlyActiveTab" :headers="CurrentHeaders" :options="CurrentActiveTab.ItemOptions" @refresh="fetchItems"/>
-            <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
+                :is_currenctly_active="currentlyActiveTabTitle === tab.Title" @click.native="changeTab(tab)" />
+            <GenericTable :items="itemsForCurrentlyActiveTab" :headers="currentHeaders" :options="currentActiveTab.ItemOptions" @refresh="fetchItems"/>
+            <PageButtons v-model="currentTabPage" :maximum_page="currentTabMaximumPage"/>
         </div>
     </div>
 </template>

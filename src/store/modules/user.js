@@ -1,5 +1,6 @@
 import axios from "@/axios/axios";
 import parseJwt from "@/lib/parseJWT";
+import router from '../../router/router';
 import { setTimeout } from "core-js";
 
 export default {
@@ -15,6 +16,7 @@ export default {
             }
 
             let token = response.data.body;
+            router.push("/").catch(()=>{});
             context.commit("messages/display", {text : "Successfully logged in", success : true}, {root : true});
             context.commit("changeToken", token);
             return response;
@@ -25,6 +27,7 @@ export default {
                 return response;
             }
 
+            router.push("/").catch(()=>{});
             context.commit("messages/display", {text : "Successfully logged out", success : true}, {root : true});
             context.commit("changeToken", "");
             return response;
@@ -44,6 +47,7 @@ export default {
                 if(expired){
                     state.token = ""
                     that.commit("messages/display", {text : "Session expired", success : false}, {root : true});
+                    router.push("/").catch(()=>{});
                 }
             }, timeTillExpiration);
         }
