@@ -36,6 +36,7 @@ export default {
     let blockWithTitle = (title) => this.InfoBlocks.filter((block) => block.title === title)[0];
 
     blockWithTitle("Titles").maxValue = (await this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}})).data.body; 
+    blockWithTitle("Lent books").maxValue = (await this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true}})).data.body; 
   }
 
 }

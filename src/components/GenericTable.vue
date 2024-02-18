@@ -54,7 +54,7 @@ export default {
                 this.$emit('refresh');
             }
 
-            if(result.success){
+            if(result.success && result.message){
                 this.$store.commit("messages/display", {text : result.message, success : true});
             }
         }

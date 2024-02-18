@@ -37,7 +37,7 @@ export default {
         <div class="card book mk-card-limit">
         <a href=""><img :src="imgSource(book.img)" :alt="book.name" class="card-img-top book-prev img-fluid"></a>
             <div class="card-body book-body">
-            <router-link :to="{name : 'book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
+            <router-link :to="{name : 'Book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
             <a href="" @click.prevent="setSearchParam('categories', [book.category.id])">{{ book.category.text }}</a>

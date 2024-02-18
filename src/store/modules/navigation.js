@@ -1,4 +1,5 @@
 import axios from "@/axios/axios";
+import router from '../../router/router';
 export default{
     namespaced: true,
     state : {
@@ -10,6 +11,11 @@ export default{
             let links = (await axios.get('/link')).data;
 
             context.commit("changeLinks", links);
+        },
+        async openBookPage(context, bookId){
+            router.push({name : 'Book preview', params : {id : bookId}});
+
+            return {success : true};
         }
     },
     mutations : {
