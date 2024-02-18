@@ -14,7 +14,7 @@ export default {
 
   methods : {
     async attemptLogout(){
-            let response = await this.$store.dispatch("attemptLogout");
+            let response = await this.$store.dispatch("user/attemptLogout");
 
             if(response.success){
                 this.$router.push("/").catch(() => {});

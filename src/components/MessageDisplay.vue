@@ -3,7 +3,7 @@ export default{
     name: "MessageDisplay",
     computed:{
         messages(){
-            return this.$store.getters.getAllMessages; 
+            return this.$store.getters['messages/get']; 
         }
     }
 }

@@ -16,24 +16,33 @@ export default {
             Tabs: [
                 {
                     "Title": "Currently loaned",
-                    "Endpoint": "loans",
+                    "Endpoint": "loan",
                     "IdField": "id",
                     "TableHeaders": [
                         {
-                            "Text": "Name",
-                            "Field": "name",
+                            "Text": "Book",
+                            "Field": "book.name",
                         },
                         {
-                            "Text": "Id",
-                            "Field": "id"
+                            "Text" : "Loaned on",
+                            "Field" : "start"
+                        },
+                        {
+                            "Text" : "Return by",
+                            "Field" : "end"
                         }
                     ],
                     "ItemOptions": [
                         {
+                            "Name" : "Extend",
+                            "Class" : "btn btn-success mx-1",
+                            "onClick" : "patch|loan/extend"
+                        },
+                        {
                             "Name" : "Return",
-                            "Class" : "btn btn-dark",
-                            "onClick" : "patch|loans/return"
-                        }
+                            "Class" : "btn btn-dark mx-1",
+                            "onClick" : "patch|loan/return"
+                        },
                     ]
                 },
                 {

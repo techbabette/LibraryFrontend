@@ -1,5 +1,5 @@
 import Vue from "vue";
-
+import axios from "@/axios/axios";
 export default {
     namespaced: true,
     state: {
@@ -18,9 +18,8 @@ export default {
                 Vue.set(state.dataForTabTable, newTab.Title, newTabObject);
             }
 
-            await dispatch("fetchItemsForTab", newTab);
-
             state.currentlyActiveTab = newTab.Title
+            await dispatch("fetchItemsForTab", newTab);
         },
         changeTabPage : async function({state, dispatch}, newTabPage){
             state.dataForTabTable[state.currentlyActiveTab].page = newTabPage.value;
@@ -29,8 +28,13 @@ export default {
         },
         fetchItemsForTab :  async function({state}, tab){
             //Make a request to the endpoint 
+            let params = {page : state.dataForTabTable[state.currentlyActiveTab].page, perPage : 5};
+            let result = await axios.get(tab.Endpoint, {params});
 
-            state.dataForTabTable[tab.Title].items = [{id: 2, name : "First book"}, {id: 1, name : "Second book"}];
+            let maximumPage = result.body.last_page;
+            let items = result.body.data;
+            state.dataForTabTable[tab.Title].maxPage = maximumPage;
+            state.dataForTabTable[tab.Title].items = items;
         }
     },
     mutations : {

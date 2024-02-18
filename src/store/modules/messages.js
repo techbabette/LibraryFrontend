@@ -7,5 +7,10 @@ export default {
         display(state, newMessage){
             state.messages.push(newMessage);
         },
+    },
+    getters : {
+        get(state){
+            return state.messages;
+        }
     }
 }

@@ -14,10 +14,14 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
 function (response){
-    return {success : true, data : response.data};
+    if(response.data){
+        return {success : true, data : response.data, message : response.data.message, body : response.data.body};
+    }
 }, 
 function(error){
-    store.commit("messages/display", {text : error.response.data.message, success : false});
+    if(error.response){
+        store.commit("messages/display", {text : error.response.data.message, success : false});
+    }
     return {success : false};
 }
 );

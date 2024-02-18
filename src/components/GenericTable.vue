@@ -1,6 +1,6 @@
 <script>
 import axios from '@/axios/axios';
-
+import getNestedField from '@/lib/getNestedField'
 export default {
     name: "GenericTable",
     props: {
@@ -34,6 +34,11 @@ export default {
 
             return header.Change(InputValue);
         },
+        displayValue(item, header){
+            let value = getNestedField(item, header.Field);
+
+            return this.ApplyChanges(value, header);
+        },
         async handleClick(onClick, callerId){
             let httpVerbs = ["get", "post", "put", "delete", "patch"];
             let verb = onClick.split('|')[0];
@@ -62,12 +67,12 @@ export default {
                 </tr>
             </thead>
             <tbody id="table-result-holder">
-                <tr v-for="Item, index in items" :key="index">
+                <tr v-for="item, index in items" :key="index">
                     <td>{{ index + 1 }}</td>
-                    <td v-for="header, hIndex in headers" :key="hIndex">{{ ApplyChanges(Item[header.Field], header) }}</td>
+                    <td v-for="header, hIndex in headers" :key="hIndex">{{ displayValue(item, header) }}</td>
                     <td v-if="options">
-                        <button v-for="option, oIndex in options" :data-id="Item[identification_field]" :key="oIndex"
-                            :class="option.Class" @click="handleClick(option.onClick, Item[identification_field])">{{ option.Name }}</button>
+                        <button v-for="option, oIndex in options" :data-id="item[identification_field]" :key="oIndex"
+                            :class="option.Class" @click="handleClick(option.onClick, item[identification_field])">{{ option.Name }}</button>
                     </td>
                 </tr>
             </tbody>
