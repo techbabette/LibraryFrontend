@@ -1,6 +1,6 @@
 <script>
 export default {
-    name: 'AdaptableInput',
+    name: 'InputAdaptable',
     data() {
         return {
             localValue: undefined,

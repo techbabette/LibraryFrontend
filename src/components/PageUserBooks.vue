@@ -1,25 +1,16 @@
-<template>
-    <div class="mk-page">
-        <div>
-            <p class="h2">These are your books</p>
-            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
-                :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
-            <GenericTable :Items="ItemsForCurrentlyActiveTab" :Headers="CurrentHeaders" :Options="CurrentActiveTab.ItemOptions"/>
-            <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
-        </div>
-    </div>
-</template>
 <script>
 import GenericTable from "./GenericTable"
 import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
 export default {
-    name: "YourBooksPage",
+    name: "PageUserBooks",
+
     components: {
         GenericTable,
         TableTab,
         PageButtons
     },
+
     data() {
         return {
             Tabs: [
@@ -63,6 +54,7 @@ export default {
             ]
         }
     },
+
     computed: {
         CurrentTabPage : {
             get(){
@@ -89,13 +81,26 @@ export default {
             return this.$store.getters.getYourBooksTabMaximumPage;
         }
     },
+
+    mounted(){
+        this.changeYourBooksTab(this.Tabs[0])
+    },
+
     methods: {
         changeYourBooksTab: function (newTab) {
             this.$store.dispatch("changeYourBooksTab", newTab);
         }
     },
-    mounted(){
-        this.changeYourBooksTab(this.Tabs[0])
-    }
 }
 </script>
+<template>
+    <div class="mk-page">
+        <div>
+            <p class="h2">These are your books</p>
+            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
+                :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeYourBooksTab(tab)" />
+            <GenericTable :items="ItemsForCurrentlyActiveTab" :headers="CurrentHeaders" :options="CurrentActiveTab.ItemOptions"/>
+            <PageButtons v-model="CurrentTabPage" :maximum_page="CurrentTabMaximumPage"/>
+        </div>
+    </div>
+</template>

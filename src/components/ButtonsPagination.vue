@@ -61,7 +61,7 @@ export default {
         changePage: function (newPage) {
             this.currentPage = newPage;
         },
-        nextPageExists: function(fromPage){
+        nextPageExists: function (fromPage) {
             return fromPage + 1 <= this.maximum_page;
         }
     }

@@ -3,7 +3,7 @@ export default {
     name : "BookShelfItem",
 
     props : {
-        Book : Object
+        book : Object
     },
 
     methods : {
@@ -28,15 +28,15 @@ export default {
 <template>
     <div class="flex col-12 col-md-6 col-lg-3 justify-content-center">
         <div class="card book mk-card-limit">
-        <a href=""><img :src="imgSource(Book.img)" :alt="Book.name" class="card-img-top book-prev img-fluid"></a>
+        <a href=""><img :src="imgSource(book.img)" :alt="book.name" class="card-img-top book-prev img-fluid"></a>
             <div class="card-body book-body">
-            <router-link :to="{name : 'Book preview', params: { id: Book.id }}"> <h5 class="card-title book-title">{{ Book.name }}</h5></router-link>
-            <p class="card-text book-desc"><em> {{ LimitToFullWords(Book.description,30) }}</em></p>
+            <router-link :to="{name : 'book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
+            <p class="card-text book-desc"><em> {{ LimitToFullWords(book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
-            <a href="">{{ Book.category.text }}</a>
+            <a href="">{{ book.category.text }}</a>
             </p>
                 <p class="card-text">
-                <a href>{{ Book.author.name + " " + Book.author.last_name}}</a>
+                <a href>{{ book.author.name + " " + book.author.last_name}}</a>
             </p>
         </div>
         </div>

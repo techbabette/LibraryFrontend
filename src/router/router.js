@@ -4,8 +4,8 @@ import Router from 'vue-router';
 import LandingPage from "../components/PageLanding.vue";
 import BooksPage from "../components/PageBooksSearch.vue";
 import BookPage from "../components/PageBookSingle.vue";
-import YourBooks from "../components/PageBooksForUser.vue";
-import LoginPage from "../components/PageLogin.vue";
+import YourBooks from "../components/PageUserBooks.vue";
+import LoginPage from "../components/PageUserLogin.vue";
 
 const routes = [
     {

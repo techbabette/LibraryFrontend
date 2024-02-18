@@ -4,7 +4,7 @@ import InputDropdownSelectMultiple from "./InputDropdownSelectMultiple";
 import DropdownSelect from "./InputDropdownSelect.vue";
 import ButtonsPagination from "./ButtonsPagination.vue";
 export default {
-  name: "BooksPage",
+  name: "PageBooksSearch",
 
   components: {
     BookShelf,
@@ -113,10 +113,10 @@ export default {
           <label for="textSearch">Search by title</label>
           <input type="text" name="textSearch" class="form-text" id="textSearch">
         </div>
-        <DropdownSelect optionsTextField="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
-        <InputDropdownSelectMultiple Name="Category" :options="paramOptions.categories" textField="text"
+        <DropdownSelect options_text_field="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
+        <InputDropdownSelectMultiple name="Category" :options="paramOptions.categories" text_field="text"
           v-model="selectedCategories" />
-        <InputDropdownSelectMultiple Name="Author" :options="paramOptions.authors" textField="full_name"
+        <InputDropdownSelectMultiple name="Author" :options="paramOptions.authors" text_field="full_name"
           v-model="selectedAuthors" />
         <a class="btn btn-dark w-100" id="resetFilterButton" href="#">Remove filters</a>
       </div>

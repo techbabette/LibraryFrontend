@@ -1,6 +1,6 @@
 <script>
 export default {
-    name : "BookPage",
+    name : "PageBookSingle",
 
     computed : {
         BookInformation : function(){

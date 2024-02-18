@@ -1,6 +1,6 @@
 <script>
 export default {
-    name : "BackToTopButton",
+    name : "ButtonBackToTop",
     
     data(){
         return {

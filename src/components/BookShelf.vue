@@ -25,7 +25,7 @@ export default {
 <template>
     <div class="container-fluid col-12">
         <div class="row">
-            <SingleBook v-for="book, key in Books" :key="key" :Book="book"/>
+            <SingleBook v-for="book, key in Books" :key="key" :book="book"/>
         </div>
     </div>
 </template>

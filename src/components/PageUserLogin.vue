@@ -1,7 +1,7 @@
 <script>
 import InputAdaptable from "@/components/InputAdaptable.vue";
 export default {
-    name : "LoginPage",
+    name : "PageUserLogin",
 
     components : {
         InputAdaptable

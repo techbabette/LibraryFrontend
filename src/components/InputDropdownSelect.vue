@@ -1,6 +1,6 @@
 <script>
 export default {
-    name : "DropdownSelect",
+    name : "InputDropdownSelect",
 
     props: {
         value : {
@@ -17,22 +17,22 @@ export default {
         hint : {
             Type : String
         },
-        errorMessage : {
+        error_message : {
             Type : String
         },
         options : {
             type: Array,
             required : false
         },
-        optionsValueField : {
+        options_value_field : {
             type: String,
             default: "id"
         },
-        optionsTextField : {
+        options_text_field : {
             type: String,
             default: "name"
         },
-        checkOnBlur : {
+        check_on_blur : {
             Type : Boolean,
             default : true
         }
@@ -68,8 +68,8 @@ export default {
         </button>
         <ul class="dropdown-menu" :aria-labelledby="id">
             <div v-for="option, key of options" :key="key" class="d-flex flex-row justify-content-between dropdown-item">
-                <a :id="option[optionsValueField]" class="w-100" :class="{active : localValue === option[optionsValueField]}"
-                 href="#" @click.prevent="setValueToSelf(option[optionsValueField])"> {{ option[optionsTextField] }}</a>
+                <a :id="option[options_value_field]" class="w-100" :class="{active : localValue === option[options_value_field]}"
+                 href="#" @click.prevent="setValueToSelf(option[options_value_field])"> {{ option[options_text_field] }}</a>
             </div>
         </ul>
     </div>

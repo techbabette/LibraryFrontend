@@ -1,8 +1,3 @@
-<template>
-    <button class="btn admin-tab" :class="{ 'PrimaryButton': !is_currenctly_active, 'PrimaryButtonActive': is_currenctly_active }">
-        {{ title }}
-    </button>
-</template>
 <script>
 export default {
     name: "GenericTableTab",
@@ -18,6 +13,13 @@ export default {
     }
 }
 </script>
+
+<template>
+    <button class="btn admin-tab" :class="{ 'PrimaryButton': !is_currenctly_active, 'PrimaryButtonActive': is_currenctly_active }">
+        {{ title }}
+    </button>
+</template>
+
 <style scoped>
 .admin-tab {
     border-radius: 15px 2px 2px 2px;

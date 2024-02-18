@@ -2,7 +2,7 @@
 import InfoBlock from "./InfoBlock.vue";
 import BookShelf from "./BookShelf.vue";
 export default {
-  name: 'LandingPage',
+  name: 'PageLanding',
 
   components : {
     InfoBlock,
