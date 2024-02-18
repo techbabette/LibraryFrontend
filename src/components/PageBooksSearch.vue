@@ -1,8 +1,8 @@
 <script>
-import BookShelf from "../BookShelf";
-import InputDropdownSelectMultiple from "../InputDropdownSelectMultiple";
-import DropdownSelect from "../InputDropdownSelect.vue";
-import ButtonsPagination from "../ButtonsPagination.vue";
+import BookShelf from "./BookShelf";
+import InputDropdownSelectMultiple from "./InputDropdownSelectMultiple";
+import DropdownSelect from "./InputDropdownSelect.vue";
+import ButtonsPagination from "./ButtonsPagination.vue";
 export default {
   name: "BooksPage",
 

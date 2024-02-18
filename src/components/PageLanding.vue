@@ -1,6 +1,6 @@
 <script>
-import InfoBlock from "../InfoBlock.vue";
-import BookShelf from "../BookShelf.vue";
+import InfoBlock from "./InfoBlock.vue";
+import BookShelf from "./BookShelf.vue";
 export default {
   name: 'LandingPage',
 

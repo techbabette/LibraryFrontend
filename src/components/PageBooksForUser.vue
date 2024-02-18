@@ -10,9 +10,9 @@
     </div>
 </template>
 <script>
-import GenericTable from "../GenericTable"
-import TableTab from "../GenericTableTab"
-import PageButtons from "../ButtonsPagination.vue"
+import GenericTable from "./GenericTable"
+import TableTab from "./GenericTableTab"
+import PageButtons from "./ButtonsPagination.vue"
 export default {
     name: "YourBooksPage",
     components: {

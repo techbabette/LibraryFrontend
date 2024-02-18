@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import LandingPage from "../components/pages/PageLanding.vue";
-import BooksPage from "../components/pages/PageBooksSearch.vue";
-import BookPage from "../components/pages/PageBookSingle.vue";
-import YourBooks from "../components/pages/PageBooksForUser.vue";
-import LoginPage from "../components/pages/PageLogin.vue";
+import LandingPage from "../components/PageLanding.vue";
+import BooksPage from "../components/PageBooksSearch.vue";
+import BookPage from "../components/PageBookSingle.vue";
+import YourBooks from "../components/PageBooksForUser.vue";
+import LoginPage from "../components/PageLogin.vue";
 
 const routes = [
     {
