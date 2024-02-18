@@ -14,11 +14,11 @@ export default {
       InfoBlocks : [
         {
           title : "Members",
-          maxValue : 150
+          maxValue : 0
         },
         {
           title : "Years since founding",
-          maxValue : new Date().getFullYear() - 1930
+          maxValue : 0
         },
         {
           title : "Titles",
@@ -26,7 +26,7 @@ export default {
         },
         {
           title : "Lent books",
-          maxValue : 250
+          maxValue : 0
         }
       ],
     }
@@ -34,9 +34,17 @@ export default {
 
   async mounted(){
     let blockWithTitle = (title) => this.InfoBlocks.filter((block) => block.title === title)[0];
+    let yearsSinceFounding = new Date().getFullYear() - 1930
+    let [bookCount, loanCount, memberCount] = await Promise.all([
+        this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}}),
+        this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true}}),
+        this.$store.dispatch("fetch", {url : "/user", params : {onlyCount : true}})
+    ])
 
-    blockWithTitle("Titles").maxValue = (await this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}})).data.body; 
-    blockWithTitle("Lent books").maxValue = (await this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true}})).data.body; 
+    blockWithTitle("Titles").maxValue = bookCount.body; 
+    blockWithTitle("Lent books").maxValue = loanCount.body; 
+    blockWithTitle("Members").maxValue = memberCount.body; 
+    blockWithTitle("Years since founding").maxValue = yearsSinceFounding; 
   }
 
 }
@@ -106,6 +114,5 @@ export default {
           </div>
       </div>
   </div>
-  <!--Footer-->
   </div>
 </template>

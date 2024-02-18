@@ -13,6 +13,12 @@ export default {
     computed : {
         Books : function(){
             return this.$store.getters['books/get'](this.source);
+        },
+        booksExist : function(){
+            if(this.Books && this.Books.length >= 1){
+                return true;
+            }
+            return false;
         }
     },
     mounted(){
@@ -24,8 +30,11 @@ export default {
 </script>
 <template>
     <div class="container-fluid col-12">
-        <div class="row">
+        <div class="row" v-if="booksExist">
             <SingleBook v-for="book, key in Books" :key="key" :book="book"/>
+        </div>
+        <div class="d-flex justify-content-center" v-else>
+            <p>No books found</p>
         </div>
     </div>
 </template>

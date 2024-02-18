@@ -26,6 +26,7 @@ export default{
             }
 
             let books = result.data.body.data;
+            
             Vue.set(state.books, additionalOptions.name, books);
             return result;
         },
