@@ -99,6 +99,9 @@ export default {
     },
 
     computed: {
+        username : function(){
+            return this.$store.getters['user/claims'].name;
+        },
         CurrentActiveTab : function(){
             return this.Tabs.filter((tab) => tab.Title == this.CurrentlyActiveTabTitle)[0] ?? this.Tabs[0];
         },
@@ -142,7 +145,7 @@ export default {
 <template>
     <div class="mk-page">
         <div>
-            <p class="h2">These are your books</p>
+            <p class="h2">These are your books, {{ username }}</p>
             <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
                 :is_currenctly_active="CurrentlyActiveTabTitle === tab.Title" @click.native="changeTab(tab)" />
             <GenericTable :items="ItemsForCurrentlyActiveTab" :headers="CurrentHeaders" :options="CurrentActiveTab.ItemOptions" @refresh="fetchItems"/>
