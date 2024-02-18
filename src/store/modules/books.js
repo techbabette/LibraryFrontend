@@ -8,6 +8,7 @@ export default{
         },
         searchData : {
             sort : 0,
+            title : "",
             categories : [],
             authors : [],
             maximumPage : 1,
@@ -35,6 +36,7 @@ export default{
             state.searchData[name] = value;
         },
         clearSearchParams(state){
+            state.searchData.title = "";
             state.searchData.sort = 0;
             state.searchData.categories = [];
             state.searchData.authors = [];

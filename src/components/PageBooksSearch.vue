@@ -3,6 +3,7 @@ import BookShelf from "./BookShelf";
 import InputDropdownSelectMultiple from "./InputDropdownSelectMultiple";
 import DropdownSelect from "./InputDropdownSelect.vue";
 import ButtonsPagination from "./ButtonsPagination.vue";
+import InputAdaptable from "./InputAdaptable.vue";
 export default {
   name: "PageBooksSearch",
 
@@ -10,7 +11,8 @@ export default {
     BookShelf,
     InputDropdownSelectMultiple,
     ButtonsPagination,
-    DropdownSelect
+    DropdownSelect,
+    InputAdaptable
   },
 
   data() {
@@ -33,6 +35,14 @@ export default {
       },
       set(value) {
         this.$store.commit("books/setSearchParam", { value, name: 'categories' });
+      }
+    },
+    searchTitle: {
+      get() {
+        return this.$store.getters['books/getSearchParam']('title');
+      },
+      set(value) {
+        this.$store.commit("books/setSearchParam", { value, name: 'title' });
       }
     },
     selectedAuthors: {
@@ -63,7 +73,8 @@ export default {
       return this.$store.getters['books/getSearchParam']("maximumPage");
     },
     Params: function () {
-      let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, page: this.page ?? 0, sortSelected: this.selectedSort };
+      let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, 
+        page: this.page ?? 0, sortSelected: this.selectedSort, title : this.searchTitle };
       return paramObject;
     }
   },
@@ -112,10 +123,7 @@ export default {
   <div class="mk-solo-page page container-fluid">
     <div class="row spec-row d-flex flex-row">
       <div id="filters">
-        <div class="d-flex flex-column text-center">
-          <label for="textSearch">Search by title</label>
-          <input type="text" name="textSearch" class="form-text" id="textSearch">
-        </div>
+        <InputAdaptable class="d-flex flex-column text-center" v-model="searchTitle" label="Search by title"/>
         <DropdownSelect options_text_field="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
         <InputDropdownSelectMultiple name="Category" :options="paramOptions.categories" text_field="text"
           v-model="selectedCategories" />
