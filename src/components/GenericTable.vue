@@ -43,15 +43,19 @@ export default {
             let httpVerbs = ["get", "post", "put", "delete", "patch"];
             let verb = onClick.split('|')[0];
             let target = onClick.split('|')[1];
-
+            let result = {};
             if(verb === "dispatch"){
-                await this.$store.dispatch(target, callerId);
+                result = await this.$store.dispatch(target, callerId);
             }
 
             let url = target + (callerId ? `/${callerId}` : "");
             if(httpVerbs.includes(verb)){
-                await axios({method : verb, url})
+                result = await axios({method : verb, url})
                 this.$emit('refresh');
+            }
+
+            if(result.success){
+                this.$store.commit("messages/display", {text : result.message, success : true});
             }
         }
     }

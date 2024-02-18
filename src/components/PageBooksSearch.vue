@@ -72,7 +72,7 @@ export default {
     Params: {
       handler: async function (newValue, oldValue) {
         if (newValue.page == oldValue.page) {
-          this.params.page = 1;
+          this.page = 1;
         }
         await this.getItems(newValue);
       },

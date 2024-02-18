@@ -30,6 +30,13 @@ export default {
                         {
                             "Text" : "Return by",
                             "Field" : "end"
+                        },
+                        {
+                            "Text" : "Extended",
+                            "Field" : "extended",
+                            "Change" : function(val){
+                                return val ? 'Yes' : 'No'
+                            }
                         }
                     ],
                     "ItemOptions": [
@@ -48,6 +55,32 @@ export default {
                             "Class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
                         },
+                    ]
+                },
+                {
+                    "Title": "Previously loaned",
+                    "Endpoint": "loan?previous=true",
+                    "IdField": "id",
+                    "TableHeaders": [
+                        {
+                            "Text": "Book",
+                            "Field": "book.name",
+                        },
+                        {
+                            "Text" : "Loaned on",
+                            "Field" : "start"
+                        },
+                        {
+                            "Text" : "Returned on",
+                            "Field" : "returned"
+                        }
+                    ],
+                    "ItemOptions": [
+                        {
+                            "Name" : "View",
+                            "Class" : "btn btn-primary mx-1",
+                            "onClick" : "dispatch|books/showbook"
+                        }
                     ]
                 },
                 {

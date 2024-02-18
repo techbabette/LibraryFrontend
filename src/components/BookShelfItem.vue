@@ -21,7 +21,14 @@ export default {
         },
         imgSource : function (img){
             return require('@/assets/imgs/'+img)
-        } 
+        },
+        setSearchParam(param, newValue){
+            this.$store.commit("books/clearSearchParams");
+            this.$store.commit("books/setSearchParam", { value: newValue, name: param });
+            if(this.$route.path !== '/books'){
+                this.$router.push("/books");
+            }
+        }
     },
 }
 </script>
@@ -33,10 +40,10 @@ export default {
             <router-link :to="{name : 'book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
-            <a href="">{{ book.category.text }}</a>
+            <a href="" @click.prevent="setSearchParam('categories', [book.category.id])">{{ book.category.text }}</a>
             </p>
                 <p class="card-text">
-                <a href>{{ book.author.name + " " + book.author.last_name}}</a>
+                <a href @click.prevent="setSearchParam('authors', [book.author.id])">{{ book.author.name + " " + book.author.last_name}}</a>
             </p>
         </div>
         </div>

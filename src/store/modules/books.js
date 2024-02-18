@@ -34,6 +34,11 @@ export default{
             let {name, value} = info;
             state.searchData[name] = value;
         },
+        clearSearchParams(state){
+            state.searchData.sort = 0;
+            state.searchData.categories = [];
+            state.searchData.authors = [];
+        },
         setSearchPage(state, newPage){
             state.searchData.currentPage = newPage;
         },
