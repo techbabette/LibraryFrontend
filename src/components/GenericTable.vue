@@ -1,4 +1,6 @@
 <script>
+import axios from '@/axios/axios';
+
 export default {
     name: "GenericTable",
     props: {
@@ -21,16 +23,30 @@ export default {
     },
     computed: {
         ShowTable: function () {
-            return this.Items && this.Items.length > 0;
+            return this.items && this.items.length > 0;
         }
     },
     methods: {
-        ApplyChanges(InputValue, Header) {
-            if (!Header.Change) {
+        ApplyChanges(InputValue, header) {
+            if (!header.Change) {
                 return InputValue
             }
 
-            return Header.Change(InputValue);
+            return header.Change(InputValue);
+        },
+        async handleClick(onClick, callerId){
+            let httpVerbs = ["get", "post", "put", "delete", "patch"];
+            let verb = onClick.split('|')[0];
+            let target = onClick.split('|')[1];
+
+            if(verb === "dispatch"){
+                await this.$store.dispatch(target, callerId);
+            }
+
+            let url = target + (callerId ? `/${callerId}` : "");
+            if(httpVerbs.includes(verb)){
+                await axios({method : verb, url})
+            }
         }
     }
 }
@@ -41,22 +57,22 @@ export default {
             <thead>
                 <tr id="header-table-row">
                     <th>#</th>
-                    <th v-for="Header, index in Headers" :key="index">{{ Header.Text }}</th>
-                    <th v-if="Options">Options</th>
+                    <th v-for="header, index in headers" :key="index">{{ header.Text }}</th>
+                    <th v-if="options">Options</th>
                 </tr>
             </thead>
             <tbody id="table-result-holder">
-                <tr v-for="Item, index in Items" :key="index">
+                <tr v-for="Item, index in items" :key="index">
                     <td>{{ index + 1 }}</td>
-                    <td v-for="Header, hIndex in Headers" :key="hIndex">{{ ApplyChanges(Item[Header.Field], Header) }}</td>
-                    <td v-if="Options">
-                        <button v-for="Option, oIndex in Options" :data-id="Item[identification_field]" :key="oIndex"
-                            :class="Option.Class" @click="Option.onClick">{{ Option.Name }}</button>
+                    <td v-for="header, hIndex in headers" :key="hIndex">{{ ApplyChanges(Item[header.Field], header) }}</td>
+                    <td v-if="options">
+                        <button v-for="option, oIndex in options" :data-id="Item[identification_field]" :key="oIndex"
+                            :class="option.Class" @click="handleClick(option.onClick, Item[identification_field])">{{ option.Name }}</button>
                     </td>
                 </tr>
             </tbody>
-            <button v-for="TableOption, index in table_options" @click="TableOption.onClick" :class="TableOption.Class"
-                :key="index">{{ TableOption.Name }}</button>
+            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick, 0)" :class="table_option.Class"
+                :key="index">{{ table_option.Name }}</button>
         </table>
         <p v-else>No items found</p>
     </div>

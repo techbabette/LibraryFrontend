@@ -16,8 +16,7 @@ export default {
             Tabs: [
                 {
                     "Title": "Currently loaned",
-                    "Getter": "getUserCurrentlyLoanedBooks",
-                    "Endpoint": "books/loaned",
+                    "Endpoint": "loans",
                     "IdField": "id",
                     "TableHeaders": [
                         {
@@ -33,15 +32,12 @@ export default {
                         {
                             "Name" : "Return",
                             "Class" : "btn btn-dark",
-                            "onClick" : () => {
-                                console.log("Hello I was clicked")
-                            }
+                            "onClick" : "patch|loans/return"
                         }
                     ]
                 },
                 {
                     "Title": "Favorites",
-                    "Getter": "getUserFavoriteBooks",
                     "Endpoint": "books/favorite",
                     "IdField": "id",
                     "TableHeaders": [
@@ -72,7 +68,7 @@ export default {
             return this.$store.getters['userbooks/activeTab'];
         },
         ItemsForCurrentlyActiveTab: function () {
-            return this.$store.getters['userbooks/tabBooks'](this.CurrentlyActiveTabTitle);
+            return this.$store.getters['userbooks/tabItems'](this.CurrentlyActiveTabTitle);
         },
         CurrentHeaders : function(){
             return this.CurrentActiveTab.TableHeaders

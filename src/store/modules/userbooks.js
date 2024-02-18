@@ -13,7 +13,7 @@ export default {
             if(typeof(state.dataForTabTable[newTab.Title]) === 'undefined'){
                 let newTabObject = {};
                 newTabObject.page = 1;
-                newTabObject.maxPage = 3;
+                newTabObject.maxPage = 1;
                 newTabObject.items = [];
                 Vue.set(state.dataForTabTable, newTab.Title, newTabObject);
             }
@@ -51,7 +51,7 @@ export default {
             }
             return state.dataForTabTable[state.currentlyActiveTab].maxPage
         },
-        tabBooks : (state) => (tab) => {
+        tabItems : (state) => (tab) => {
             if(typeof state.dataForTabTable[tab] === 'undefined'){
                 return [];
             }
