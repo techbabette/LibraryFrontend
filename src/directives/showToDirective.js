@@ -1,6 +1,6 @@
 export default {
     inserted: function(el, binding, vnode) {
-        let accessLevel = vnode.context.$store.getters.acitveUserAccessLevel
+        let accessLevel = vnode.context.$store.getters['user/accessLevel'];
 
         let accessLevelRequired = binding.value;
 
@@ -12,7 +12,7 @@ export default {
         }
     },
     update: function(el, binding, vnode) {
-        let accessLevel = vnode.context.$store.getters.acitveUserAccessLevel
+        let accessLevel = vnode.context.$store.getters['user/accessLevel'];
 
         let accessLevelRequired = binding.value;
 

@@ -29,38 +29,38 @@ export default {
   computed: {
     selectedCategories: {
       get() {
-        return this.$store.getters.getSearchParam('categories');
+        return this.$store.getters['books/getSearchParam']('categories');
       },
       set(value) {
-        this.$store.commit("setSearchParam", { value, name: 'categories' });
+        this.$store.commit("books/setSearchParam", { value, name: 'categories' });
       }
     },
     selectedAuthors: {
       get() {
-        return this.$store.getters.getSearchParam('authors');
+        return this.$store.getters['books/getSearchParam']('authors');
       },
       set(value) {
-        this.$store.commit("setSearchParam", { value, name: 'authors' });
+        this.$store.commit("books/setSearchParam", { value, name: 'authors' });
       }
     },
     selectedSort : {
       get() {
-        return this.$store.getters.getSearchParam('sort');
+        return this.$store.getters['books/getSearchParam']('sort');
       },
       set(value) {
-        this.$store.commit("setSearchParam", { value, name: 'sort' });
+        this.$store.commit("books/setSearchParam", { value, name: 'sort' });
       }
     },
     page: {
       get() {
-        return this.$store.getters.getSearchParam('page');
+        return this.$store.getters['books/getSearchParam']('page');
       },
       set(value) {
-        this.$store.commit("setSearchParam", { value, name: 'page' });
+        this.$store.commit("books/setSearchParam", { value, name: 'page' });
       }
     },
     maximumPage: function () {
-      return this.$store.getters.getSearchParam("maximumPage");
+      return this.$store.getters['books/getSearchParam']("maximumPage");
     },
     Params: function () {
       let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, page: this.page ?? 0, sortSelected: this.selectedSort };
@@ -97,10 +97,10 @@ export default {
 
   methods: {
     async getItems(params) {
-      let result = await this.$store.dispatch("fetchBooks", { params, name: "SearchBooks" });
+      let result = await this.$store.dispatch("books/fetch", { params, name: "SearchBooks" });
 
       let maximumPage = result.data.body.last_page;
-      this.$store.commit("setSearchParam", { value: maximumPage, name: 'maximumPage' });
+      this.$store.commit("books/setSearchParam", { value: maximumPage, name: 'maximumPage' });
     }
   }
 }

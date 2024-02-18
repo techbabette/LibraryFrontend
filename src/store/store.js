@@ -3,9 +3,9 @@ import Vuex from 'vuex'
 import axios from "@/axios/axios";
 
 import navigation from "./modules/navigation"
-import users from './modules/users';
+import user from './modules/user';
 import books from './modules/books'
-import yourbooks from './modules/yourbooks'
+import userbooks from './modules/userbooks'
 import messages from './modules/messages'
 
 Vue.use(Vuex);
@@ -13,9 +13,9 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     modules : {
         navigation,
-        users,
+        user,
         books,
-        yourbooks,
+        userbooks,
         messages
     },
     actions : {

@@ -9,14 +9,14 @@ Vue.directive("showto", showToDirective);
 
 require('@/assets/styles/style.css');
 
-await store.dispatch("fetchNavigationLinks");
+await store.dispatch("navigation/fetch");
 
 router.beforeEach(async function (to, from, next){
   let requestedPage = to.name;
-  let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.to === requestedPage);
+  let userAllowedAccess = store.getters['navigation/links'].some(link => link.to === requestedPage);
   if(userAllowedAccess){
     document.title = to.name;
-    store.commit("changeActiveRouteName", requestedPage);
+    store.commit("navigation/changeActiveRouteName", requestedPage);
     next();
     return;
   }

@@ -1,30 +1,10 @@
 import axios from "@/axios/axios";
 import Vue from "vue";
 export default{
+    namespaced: true,
     state : {
         books : {
 
-        },
-        searchOptions : {
-            sorts : [
-
-            ],
-            categories : [
-                {
-                    name : "Sci-Fi",
-                    id : 1
-                },
-                {
-                    name : "Historical",
-                    id : 2
-                }
-            ],
-            authors : [
-
-            ],
-            years : [
-
-            ]
         },
         searchData : {
             sort : 0,
@@ -34,54 +14,9 @@ export default{
             page : 1,
             years : [],
         },
-        currentlyViewedBookInfo : {
-            currentBookId : "0",
-            data : {
-                id : 0,
-                name : "",
-                author : {},
-                category : {},
-                img : "",
-                description:"",
-                copies:5,
-                releaseDate:2022,
-                timeLoaned : 5
-            }
-        },
-    },
-    mutations : {
-        setSearchParam(state, info){
-            let {name, value} = info;
-            state.searchData[name] = value;
-        },
-        setSearchPage(state, newPage){
-            state.searchData.currentPage = newPage;
-        },
-        setCurrentBookId(state, newId){
-            state.currentlyViewedBookInfo.currentBookId = newId;
-        },
-        setCurrentlyViewedBookInfo(state, currentlyViewedBookData){
-            state.currentlyViewedBookInfo.data = currentlyViewedBookData
-        }
-    },
-    getters : {
-        getSearchParam : (state) => (param) => {
-            return state.searchData[param];
-        },
-        getViewedBookInfo(state){
-            return state.currentlyViewedBookInfo.data;
-        },
-        getBooks: (state) => (alias) => {
-            return state.books[alias];
-        }
     },
     actions : {
-        async getBookInformationById({state, commit}, bookId){
-            commit("setCurrentBookId", bookId);
-            let bookInfo = state.books.newestBooks.find((el) => el.id === parseInt(bookId));
-            commit("setCurrentlyViewedBookInfo", bookInfo)
-        },
-        async fetchBooks({state}, additionalOptions){
+        async fetch({state}, additionalOptions){
             let params = additionalOptions.params;
 
             let result = (await axios.get("/book", {params}));
@@ -93,5 +28,22 @@ export default{
             Vue.set(state.books, additionalOptions.name, books);
             return result;
         },
-    }
+    },
+    mutations : {
+        setSearchParam(state, info){
+            let {name, value} = info;
+            state.searchData[name] = value;
+        },
+        setSearchPage(state, newPage){
+            state.searchData.currentPage = newPage;
+        },
+    },
+    getters : {
+        get: (state) => (alias) => {
+            return state.books[alias];
+        },
+        getSearchParam : (state) => (param) => {
+            return state.searchData[param];
+        },
+    },
 }

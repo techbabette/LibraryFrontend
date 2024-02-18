@@ -22,7 +22,7 @@ export default{
             return !this.linkHasUrl;
         },
         currentlyActiveRoute : function(){
-            return this.$store.getters.getCurrentlyActiveRoute
+            return this.$store.getters['navigation/activeRoute'];
         }
     }
 }

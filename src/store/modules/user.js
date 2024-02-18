@@ -3,6 +3,7 @@ import parseJwt from "@/lib/parseJWT";
 import { setTimeout } from "core-js";
 
 export default {
+    namespaced : true,
     state : {
         token : "",
     },
@@ -14,7 +15,7 @@ export default {
             }
 
             let token = response.data.body;
-            context.commit("addMessageToList", {text : "Successfully logged in", success : true})
+            context.commit("messages/display", {text : "Successfully logged in", success : true}, {root : true});
             context.commit("changeToken", token);
             return response;
         },
@@ -24,7 +25,7 @@ export default {
                 return response;
             }
 
-            context.commit("addMessageToList", {text : "Successfully logged out", success : true})
+            context.commit("messages/display", {text : "Successfully logged out", success : true}, {root : true});
             context.commit("changeToken", "");
             return response;
         }
@@ -42,7 +43,7 @@ export default {
                 let expired = (parseJwt(state.token).exp ?? 0) < 1000 - Date.now();
                 if(expired){
                     state.token = ""
-                    that.commit("addMessageToList", {text : "Session expired", success : false})
+                    that.commit("messages/display", {text : "Session expired", success : false}, {root : true});
                 }
             }, timeTillExpiration);
         }
@@ -56,7 +57,7 @@ export default {
 
             return JWTClaims;
         },
-        acitveUserAccessLevel(state, getters){
+        accessLevel(state, getters){
             return getters.claims.access_level ?? -1;
         }
     }

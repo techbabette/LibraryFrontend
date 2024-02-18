@@ -19,7 +19,7 @@ export default {
     methods : {
         async attemptLogin(){
             let body = this.loginData;
-            let response = await this.$store.dispatch("attemptLogin", body);
+            let response = await this.$store.dispatch("user/attemptLogin", body);
 
             if(response.success){
                 this.$router.push("/");

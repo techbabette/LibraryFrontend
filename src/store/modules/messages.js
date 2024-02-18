@@ -1,15 +1,11 @@
 export default {
+    namespaced: true,
     state: {
         messages : []
     },
     mutations : {
-        addMessageToList(state, newMessage){
+        display(state, newMessage){
             state.messages.push(newMessage);
         },
-    },
-    getters:{
-        getAllMessages(state){
-            return state.messages;
-        }
     }
 }

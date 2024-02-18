@@ -67,7 +67,7 @@ export default {
                   <h2 id="mk-book-category">Recent additions</h2>
                   <hr/>
                 </div>
-                <BookShelf source="NewestBooks" mount_action="fetchBooks" :query_params="{perPage : 4}"/>
+                <BookShelf source="NewestBooks" mount_action="books/fetch" :query_params="{perPage : 4}"/>
             </div>
           </div>
     </div>

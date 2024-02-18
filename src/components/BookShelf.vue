@@ -12,7 +12,7 @@ export default {
     },
     computed : {
         Books : function(){
-            return this.$store.getters.getBooks(this.source);
+            return this.$store.getters['books/get'](this.source);
         }
     },
     mounted(){

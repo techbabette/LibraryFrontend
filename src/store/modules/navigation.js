@@ -1,47 +1,44 @@
 import axios from "@/axios/axios";
 export default{
+    namespaced: true,
     state : {
         currentlyActiveRoute : "Home page",
-        navigationLinks : []
+        links : []
+    },
+    actions : {
+        async fetch(context){
+            let links = (await axios.get('/link')).data;
+
+            context.commit("changeLinks", links);
+        }
     },
     mutations : {
         changeActiveRouteName(state, newRouteName){
             state.currentlyActiveRoute = newRouteName
         },
-        changeNavigationLinks(state, newNavigationLinks){
-            state.navigationLinks = newNavigationLinks;
-        }
-    },
-    actions : {
-        async fetchNavigationLinks(context){
-            let navigationLinks = (await axios.get('/link')).data;
-
-            context.commit("changeNavigationLinks", navigationLinks);
+        changeLinks(state, newNavigationLinks){
+            state.links = newNavigationLinks;
         }
     },
     getters : {
-        getNavigationLinks(state, getters, rootState, rootGetters){
-            if(rootGetters.claims.links){
-                console.log(rootGetters.claims.links);
-                return rootGetters.claims.links;
+        links(state, getters, rootState, rootGetters){
+            if((rootGetters['user/claims'].links)){
+                return rootGetters['user/claims'].links;
             }
 
-            return state.navigationLinks;
+            return state.links;
         },
-        getHeaderLink(state, getters){
-            return getters.getNavigationLinks.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
-        },
-        getNavbarLinks(state, getters){
-            return getters.getNavigationLinks.filter(link => link.position === "navbar").sort((a,b) => b.weight - a.weight);
-        },
-        getFooterLinks(state, getters){
-            return getters.getNavigationLinks.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
-        },
-        getCurrentlyActiveRoute(state){
+        activeRoute(state){
             return state.currentlyActiveRoute
         },
-        getLinksUserIsAllowed(state, getters){
-            return getters.getNavigationLinks;
+        headerLink(state, getters){
+            return getters.links.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
+        },
+        userNavbar(state, getters){
+            return getters.links.filter(link => link.position === "navbar").sort((a,b) => b.weight - a.weight);
+        },
+        userFooter(state, getters){
+            return getters.links.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
         }
     }
 }

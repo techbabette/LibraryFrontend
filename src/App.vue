@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <TheUserNavigationBar :links="navbarLinks" :header-link="HeaderLink"/>
+    <TheUserNavigationBar :links="navbarLinks" :header_link="HeaderLink"/>
     <router-view></router-view>
     <TheUserFooterBar :links="footerLinks"/>
     <ButtonBackToTop/>
@@ -27,13 +27,13 @@ export default {
   },
   computed : {
     navbarLinks : function(){
-      return this.$store.getters.getNavbarLinks;
+      return this.$store.getters['navigation/userNavbar'];
     },
     footerLinks : function(){
-      return this.$store.getters.getFooterLinks;
+      return this.$store.getters['navigation/userFooter'];
     },
     HeaderLink : function(){
-        return this.$store.getters.getHeaderLink;
+        return this.$store.getters['navigation/headerLink'];
     }
   }
 }
