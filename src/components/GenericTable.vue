@@ -28,17 +28,15 @@ export default {
         }
     },
     methods: {
-        ApplyChanges(InputValue, header) {
+        applyChanges(item, header) {
             if (!header.Change) {
-                return InputValue
+                return getNestedField(item, header.Field);
             }
 
-            return header.Change(InputValue);
+            return header.Change(item);
         },
         displayValue(item, header){
-            let value = getNestedField(item, header.Field);
-
-            return this.ApplyChanges(value, header);
+            return this.applyChanges(item, header);
         },
         async handleClick(onClick, item = undefined){
             let httpVerbs = ["get", "post", "put", "delete", "patch"];

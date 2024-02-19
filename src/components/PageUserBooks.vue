@@ -32,10 +32,17 @@ export default {
                             "Field" : "end"
                         },
                         {
+                            "Text" : "Late",
+                            "Field" : "end",
+                            "Change" : function(item){
+                                return (new Date(item.end).getTime() / 1000) <= Math.floor((new Date()).getTime() / 1000) ? "Yes" : "No";
+                            }
+                        },
+                        {
                             "Text" : "Extended",
                             "Field" : "extended",
-                            "Change" : function(val){
-                                return val ? 'Yes' : 'No'
+                            "Change" : function(item){
+                                return item.extended ? 'Yes' : 'No'
                             }
                         }
                     ],
@@ -73,6 +80,16 @@ export default {
                         {
                             "Text" : "Returned on",
                             "Field" : "returned"
+                        },
+                        {
+                            "Text" : "Days kept",
+                            "Field" : "returned",
+                            "Change" : function(item){
+                                let startDate = new Date(item.start);
+                                let returnDate = new Date(item.returned);
+                                let daysKept = Math.floor((returnDate - startDate) / (1000 * 60 * 60 * 24)); 
+                                return daysKept;
+                            }
                         }
                     ],
                     "ItemOptions": [
