@@ -23,10 +23,17 @@ export default {
 <template>
     <div class="d-flex flex-row min-vh-100">
         <TheAdminSidebar :navigation_links="navbarLinks" :footer_link="footerLinks"/>
-        <router-view></router-view>
+        <router-view class="admin-page"></router-view>
     </div>
 </template>
 
 <style scoped>
-.page{}
+.admin-page{
+    max-width: 80vw;
+}
+@media only screen and (min-width: 600px) {
+.admin-page{
+    max-width: 90vw;
+}
+}
 </style>
