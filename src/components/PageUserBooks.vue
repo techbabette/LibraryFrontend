@@ -25,7 +25,7 @@ export default {
                         },
                         {
                             "Text" : "Loaned on",
-                            "Field" : "start"
+                            "Field" : "started_at"
                         },
                         {
                             "Text" : "Return by",
@@ -75,11 +75,21 @@ export default {
                         },
                         {
                             "Text" : "Loaned on",
-                            "Field" : "start"
+                            "Field" : "started_at"
                         },
                         {
                             "Text" : "Return by",
                             "Field" : "end"
+                        },
+                        {
+                            "Text" : "Days late",
+                            "field" : "end",
+                            "Change" : function(item){
+                                let currentDate = new Date().getTime();
+                                let returnBy = new Date(item.end);
+                                let daysLate = Math.floor((currentDate - returnBy) / (1000 * 60 * 60 * 24)); 
+                                return daysLate;
+                            }
                         },
                         {
                             "Text" : "Extended",
@@ -118,18 +128,18 @@ export default {
                         },
                         {
                             "Text" : "Loaned on",
-                            "Field" : "start"
+                            "Field" : "started_at"
                         },
                         {
                             "Text" : "Returned on",
-                            "Field" : "returned"
+                            "Field" : "returned_at"
                         },
                         {
                             "Text" : "Days kept",
-                            "Field" : "returned",
+                            "Field" : "returned_at",
                             "Change" : function(item){
-                                let startDate = new Date(item.start);
-                                let returnDate = new Date(item.returned);
+                                let startDate = new Date(item.started_at);
+                                let returnDate = new Date(item.returned_at);
                                 let daysKept = Math.floor((returnDate - startDate) / (1000 * 60 * 60 * 24)); 
                                 return daysKept;
                             }
