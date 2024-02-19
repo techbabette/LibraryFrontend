@@ -100,16 +100,13 @@ export default {
     <div class="row w-100">
       <div class="col-12 container-fluid w-100">
               <div class="row mk-sorted-book-holder mk-clear">
-                <div class="col-1 mk-flex-column-center"><a href="#" class="moveButton" id="moveLeftButton">&lArr;</a></div>
                 <div class="container-fluid  col-12 col-md-10">
                   <div class="row">
                     <h2 id="mk-book-category">Most popular books</h2>
                     <hr/>
                   </div>
-                  <div class="row" id="pop">
-                  </div>
+                  <BookShelf source="MostPopularBooks" mount_action="books/fetch" :query_params="{perPage : 4, sortSelected : 4}"/>
                 </div>
-                <div class="col-1 mk-flex-column-center"><a href="#" class="moveButton" id="moveRightButton">&rArr;</a></div>
             </div>
           </div>
       </div>

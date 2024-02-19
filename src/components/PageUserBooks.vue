@@ -16,7 +16,7 @@ export default {
             Tabs: [
                 {
                     "Title": "Currently loaned",
-                    "Endpoint": "loan?current=true",
+                    "Endpoint": "loan?current=true&onlyForUser=true",
                     "IdField": "id",
                     "TableHeaders": [
                         {
@@ -59,7 +59,7 @@ export default {
                 },
                 {
                     "Title": "Previously loaned",
-                    "Endpoint": "loan?previous=true",
+                    "Endpoint": "loan?previous=true&onlyForUser=true",
                     "IdField": "id",
                     "TableHeaders": [
                         {
