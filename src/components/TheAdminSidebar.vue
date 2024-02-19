@@ -17,10 +17,10 @@ export default {
 <template>
 <div class="d-flex flex-column flex-shrink-0 bg-light sidebar-width">
     <ul class="nav nav-flush flex-column mb-auto text-center">
-    <SmartRouteLink v-for="link, key in navigation_links" class="sidebar-link" active_class="sidebar-link-dark" :link="link" :key="key"/>
+    <SmartRouteLink v-for="link, key in navigation_links" class="sidebar-link border-bottom my-1" active_class="sidebar-link-dark" :link="link" :key="key"/>
     </ul>
-    <ul class="border-top">
-        <SmartRouteLink :link="footer_link" class="sidebar-link" active_class="sidebar-link-dark"/>
+    <ul class="nav flex-column text-center border-top">
+        <SmartRouteLink :link="footer_link" class="sidebar-link my-1" active_class="sidebar-link-dark"/>
     </ul>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
 <style>
 .sidebar-link{
     color: grey !important;
-    font-size: 20px;
+    font-size: 26px;
 }
 .sidebar-link-dark{
     color: black !important;
@@ -38,12 +38,12 @@ export default {
 }
 
 .sidebar-width{
-    width: 20vw !important;
+    min-width: 20vw !important;
 }
 
 @media only screen and (min-width: 600px) {
 .sidebar-width{
-    width: 10vw !important;
+    min-width: 10vw !important;
 }
 }
 </style>

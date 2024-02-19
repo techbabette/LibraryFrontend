@@ -14,7 +14,12 @@ export default {
             default: 1
         },
         time_to_load: {
-            Type: Number
+            Type: Number,
+            default : 2500
+        },
+        prop_class: {
+            Type: String,
+            default : "col-12 col-md-6 info-block mk-flex-column-center"
         }
     },
 
@@ -54,7 +59,7 @@ export default {
 }
 </script>
 <template>
-    <div class="col-12 col-md-6 info-block mk-flex-column-center">
+    <div :class="prop_class">
         <h2 id="memNum">{{ shownValue }}</h2>
         <h3>{{ title }}</h3>
     </div>
