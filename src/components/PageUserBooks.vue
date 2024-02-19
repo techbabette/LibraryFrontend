@@ -16,7 +16,7 @@ export default {
             Tabs: [
                 {
                     "Title": "Currently loaned",
-                    "Endpoint": "loan?current=true&onlyForUser=true",
+                    "Endpoint": "loan?current=true",
                     "IdField": "id",
                     "TableHeaders": [
                         {
@@ -35,8 +35,51 @@ export default {
                             "Text" : "Late",
                             "Field" : "end",
                             "Change" : function(item){
-                                return (new Date(item.end).getTime() / 1000) <= Math.floor((new Date()).getTime() / 1000) ? "Yes" : "No";
+                                return Math.floor(new Date(item.end).getTime() / 1000) <= Math.floor((new Date()).getTime() / 1000) ? "Yes" : "No";
                             }
+                        },
+                        {
+                            "Text" : "Extended",
+                            "Field" : "extended",
+                            "Change" : function(item){
+                                return item.extended ? 'Yes' : 'No'
+                            }
+                        }
+                    ],
+                    "ItemOptions": [
+                        {
+                            "Name" : "View",
+                            "Class" : "btn btn-primary mx-1",
+                            "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                        },
+                        {
+                            "Name" : "Extend",
+                            "Class" : "btn btn-success mx-1",
+                            "onClick" : "patch|loan/extend"
+                        },
+                        {
+                            "Name" : "Return",
+                            "Class" : "btn btn-dark mx-1",
+                            "onClick" : "patch|loan/return"
+                        },
+                    ]
+                },
+                {
+                    "Title": "Late",
+                    "Endpoint": "loan?late=true",
+                    "IdField": "id",
+                    "TableHeaders": [
+                        {
+                            "Text": "Book",
+                            "Field": "book.name",
+                        },
+                        {
+                            "Text" : "Loaned on",
+                            "Field" : "start"
+                        },
+                        {
+                            "Text" : "Return by",
+                            "Field" : "end"
                         },
                         {
                             "Text" : "Extended",
