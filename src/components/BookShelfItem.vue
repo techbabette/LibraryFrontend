@@ -23,7 +23,6 @@ export default {
         imgSource: function (img) {
             return require("@/assets/imgs/" + img);
         },
-
     },
 }
 </script>

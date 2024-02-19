@@ -43,7 +43,7 @@ export default {
                         {
                             "Name" : "View",
                             "Class" : "btn btn-primary mx-1",
-                            "onClick" : "dispatch|navigation/openBookPage"
+                            "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         },
                         {
                             "Name" : "Extend",
@@ -79,7 +79,7 @@ export default {
                         {
                             "Name" : "View",
                             "Class" : "btn btn-primary mx-1",
-                            "onClick" : "dispatch|navigation/openBookPage"
+                            "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         }
                     ]
                 },

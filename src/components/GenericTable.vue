@@ -1,6 +1,7 @@
 <script>
 import axios from '@/axios/axios';
 import getNestedField from '@/lib/getNestedField'
+import getParam from '@/lib/getParam';
 export default {
     name: "GenericTable",
     props: {
@@ -39,10 +40,18 @@ export default {
 
             return this.ApplyChanges(value, header);
         },
-        async handleClick(onClick, callerId){
+        async handleClick(onClick, item = undefined){
             let httpVerbs = ["get", "post", "put", "delete", "patch"];
             let verb = onClick.split('|')[0];
             let target = onClick.split('|')[1];
+
+            let callerIdField = getParam(onClick, "callerField") ?? this.identification_field;
+            let callerId = 0;
+
+            if(item){
+                callerId = getNestedField(item, callerIdField);
+            }
+
             let result = {};
             if(verb === "dispatch"){
                 result = await this.$store.dispatch(target, callerId);
@@ -77,11 +86,11 @@ export default {
                     <td v-for="header, hIndex in headers" :key="hIndex">{{ displayValue(item, header) }}</td>
                     <td v-if="options">
                         <button v-for="option, oIndex in options" :data-id="item[identification_field]" :key="oIndex"
-                            :class="option.Class" @click="handleClick(option.onClick, item[identification_field])">{{ option.Name }}</button>
+                            :class="option.Class" @click="handleClick(option.onClick, item)">{{ option.Name }}</button>
                     </td>
                 </tr>
             </tbody>
-            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick, 0)" :class="table_option.Class"
+            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick)" :class="table_option.Class"
                 :key="index">{{ table_option.Name }}</button>
         </table>
         <p v-else>No items found</p>

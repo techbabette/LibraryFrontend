@@ -24,6 +24,7 @@ export default {
     async mounted(){
          this.bookInformation = (await this.$store.dispatch("fetch", {url : `/book/${this.$route.params.id}`})).body;
     },
+    
     methods: {
       imgSource : function (img){
             return require('@/assets/imgs/'+img)
