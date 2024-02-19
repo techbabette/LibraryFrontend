@@ -20,7 +20,7 @@ function (response){
 }, 
 function(error){
     if(error.response){
-        store.commit("messages/display", {text : error.response.data.message, success : false});
+        store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
     }
     return {success : false};
 }
