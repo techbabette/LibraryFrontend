@@ -7,7 +7,6 @@ Vue.config.productionTip = false
 
 Vue.directive("showto", showToDirective);
 
-require('@/assets/styles/style.css');
 
 await store.dispatch("navigation/fetch");
 

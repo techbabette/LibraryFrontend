@@ -46,7 +46,7 @@ body{
     color: red;
   }
   .nav-link, .navbar-brand{
-    color: #f7bd2f !important;
+    color: #f7bd2f;
   }
   a.active{
     color: #e7c776 !important;
@@ -415,7 +415,7 @@ body{
     display: inline;
   }
   a{
-    color: #f7bd2f !important;
+    color: #f7bd2f;
   }
   a:link {
     text-decoration: none;

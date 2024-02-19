@@ -37,6 +37,9 @@ export default{
         activeRoute(state){
             return state.currentlyActiveRoute
         },
+        adminRouteActive(state, getters){
+            return getters.activeRoute.startsWith("Admin");
+        },
         headerLink(state, getters){
             return getters.links.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
         },
@@ -45,6 +48,12 @@ export default{
         },
         userFooter(state, getters){
             return getters.links.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
+        },
+        adminNavbar(state, getters){
+            return getters.links.filter(link => link.position === "adminNavbar").sort((a,b) => b.weight - a.weight);
+        },
+        adminFooter(state, getters){
+            return getters.links.filter(link => link.position === "adminFooter").sort((a,b) => b.weight - a.weight)[0];
         }
     }
 }

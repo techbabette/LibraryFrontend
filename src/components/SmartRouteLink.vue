@@ -4,6 +4,10 @@ export default{
 
     props : {
         link : Object,
+        active_class: {
+            type : String,
+            default : "active"
+        }
     },
 
     computed : {
@@ -23,27 +27,30 @@ export default{
         },
         currentlyActiveRoute : function(){
             return this.$store.getters['navigation/activeRoute'];
+        },
+        additonalClasses : function(){
+            let classObject = {};
+            classObject[this.active_class] = this.currentlyActiveRoute === this.link.to;
+            return classObject;
         }
     }
 }
 </script>
 <template>
-    <div>
-        <router-link v-if="linkHasRoute" :to="{ 'name' : link.to  }" class="nav-link" :class="{active : currentlyActiveRoute === link.to}">
-            <span v-if="linkHasIcon">
-                <span class="iconify" :data-icon="link.icon"></span>
-            </span>
-            <span v-else-if="linkHasText">
-                {{link.text}}
-            </span>
-        </router-link>
-        <a v-else-if="linkHasUrl" :href="link.to">
-            <span v-if="linkHasIcon">
-                <span class="iconify" :data-icon="link.icon"></span>
-            </span>
-            <span v-else-if="linkHasText">
-                {{link.text}}
-            </span>
-        </a>
-    </div>
+    <router-link :title="link.text" v-if="linkHasRoute" :to="{ 'name' : link.to  }" class="nav-link" :class="additonalClasses">
+        <span  v-if="linkHasIcon">
+            <span class="iconify" :data-icon="link.icon"></span>
+        </span>
+        <span v-else-if="linkHasText">
+            {{link.text}}
+        </span>
+    </router-link>
+    <a :title="link.text" v-else-if="linkHasUrl" :href="link.to">
+        <span  v-if="linkHasIcon">
+            <span class="iconify" :data-icon="link.icon"></span>
+        </span>
+        <span v-else-if="linkHasText">
+            {{link.text}}
+        </span>
+    </a>
 </template>
