@@ -1,34 +1,29 @@
 <script>
+import BookButtonFollowValue from './BookButtonFollowValue.vue'
 export default {
-    name : "BookShelfItem",
-
-    props : {
-        book : Object
+    name: "BookShelfItem",
+    components: { BookButtonFollowValue },
+    props: {
+        book: Object
     },
-
-    methods : {
-        LimitToFullWords : function(text, maximumCharacterLength){
+    methods: {
+        LimitToFullWords: function (text, maximumCharacterLength) {
             let textSplit = text.split(" ");
             let returnText = "";
-            for(let word of textSplit){
-                if(word.length + returnText.length <= maximumCharacterLength) returnText += word + ' ';
-                else{
-                    returnText = returnText.trim() + '...';
+            for (let word of textSplit) {
+                if (word.length + returnText.length <= maximumCharacterLength)
+                    returnText += word + " ";
+                else {
+                    returnText = returnText.trim() + "...";
                     break;
                 }
             }
             return returnText;
         },
-        imgSource : function (img){
-            return require('@/assets/imgs/'+img)
+        imgSource: function (img) {
+            return require("@/assets/imgs/" + img);
         },
-        setSearchParam(param, newValue){
-            this.$store.commit("books/clearSearchParams");
-            this.$store.commit("books/setSearchParam", { value: newValue, name: param });
-            if(this.$route.path !== '/books'){
-                this.$router.push("/books");
-            }
-        }
+
     },
 }
 </script>
@@ -40,10 +35,10 @@ export default {
             <router-link :to="{name : 'Book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
-            <a href="" @click.prevent="setSearchParam('categories', [book.category.id])">{{ book.category.text }}</a>
+            <BookButtonFollowValue :text="book.category.text" :value="book.category.id" name="categories"/>
             </p>
                 <p class="card-text">
-                <a href @click.prevent="setSearchParam('authors', [book.author.id])">{{ book.author.name + " " + book.author.last_name}}</a>
+                <BookButtonFollowValue :text='book.author.name + " " + book.author.last_name' :value="book.author.id" name="authors"/>
             </p>
         </div>
         </div>
