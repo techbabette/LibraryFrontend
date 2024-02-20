@@ -2,13 +2,15 @@
 import GenericTable from "./GenericTable"
 import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
+import InputAdaptable from "./InputAdaptable.vue"
 export default {
     name: "PageAdminControl",
 
     components: {
         GenericTable,
         TableTab,
-        PageButtons
+        PageButtons,
+        InputAdaptable
     },
 
     data(){
@@ -82,10 +84,19 @@ export default {
     <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
         :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"
     />
-    <p>Search options go here</p>
+    <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0" class="col-12 d-flex justify-content-space-between">
+        <InputAdaptable class="d-flex flex-column col-2" v-for="inputBind, index in Object.keys(currentTab.searchInputs ?? {})" 
+        :key="index + 'a'" :field_type="currentTab.searchInputs[inputBind].field_type" :label="currentTab.searchInputs[inputBind].label"
+        v-model="currentTab.searchParams[inputBind]"
+        />
+    </div>
+    <div v-else>
+        Search options will appear here if available
+    </div>
+
     <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
         @refresh="fetchItems"
     />
-    <PageButtons v-model="currentTab.searchParams.page" :maximum_page="currentTab.maximumPage" />
+    <PageButtons v-model="currentTab.searchParams['page']" :maximum_page="currentTab.maximumPage" />
 </div>
 </template>

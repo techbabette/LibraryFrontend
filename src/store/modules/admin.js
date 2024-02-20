@@ -65,8 +65,15 @@ export default {
                     }
                 ],
                 items : [],
+                searchInputs : {
+                    "since" : {
+                        label : "Loaned after",
+                        field_type : "datetime"
+                    }
+                },
                 searchParams : {
-                    "page" : 1
+                    "page" : 1,
+                    "since" : undefined
                 },
                 maximumPage : 1,
             },

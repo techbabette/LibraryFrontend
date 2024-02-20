@@ -97,6 +97,9 @@ export default {
         <input v-if="field_type == 'number'" v-model="localValue" :name="name" :id="id" type="number" class="form-control"
             @blur="emitNameOnBlur">
 
+        <input v-if="field_type == 'datetime'" v-model="localValue" :name="name" :id="id" type="datetime-local"
+        @blur="emitNameOnBlur">
+
         <select v-if="field_type == 'select'" v-model="localValue" :name="name" :id="id" class="col-12">
             <option v-for="option in options" :key="option[options_value_field]" :value="option[options_value_field]">
                 {{ makeUpperCase(option[options_text_field]) }}
