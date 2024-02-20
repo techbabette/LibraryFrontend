@@ -19,6 +19,7 @@ export default {
             },
             ChartData : [],
             chartOptions : {
+                maintainAspectRatio : false,
                 plugins: {
                     title: {
                         display: true,
@@ -127,11 +128,18 @@ export default {
                  title="Late loans" :max_value="this.InfoBlocksData.lateLoans"/>
             </div>
         </div>
-        <ChartBar id="mychart" title="New chart" class="max-vh-25" style="max-height: 50vh;" :options="chartOptions"
+        <ChartBar id="mychart" title="Loans by category" class="chartHeight" :options="chartOptions"
         :labels="this.chartDataLabels" :datasets="this.chartDatasets"/>
     </div>
 </template>
 
-<style>
-
+<style scoped>
+.chartHeight{
+    max-height: 80vh;
+}
+@media only screen and (min-width: 600px) {
+.chartHeight{
+    max-height: 55vh !important;
+}
+}
 </style>
