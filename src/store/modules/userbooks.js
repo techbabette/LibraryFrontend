@@ -10,15 +10,15 @@ export default {
     },
     actions : {
         changeTab : async function({state, dispatch}, newTab){
-            if(typeof(state.dataForTabTable[newTab.Title]) === 'undefined'){
+            if(typeof(state.dataForTabTable[newTab.title]) === 'undefined'){
                 let newTabObject = {};
                 newTabObject.page = 1;
                 newTabObject.maxPage = 1;
                 newTabObject.items = [];
-                Vue.set(state.dataForTabTable, newTab.Title, newTabObject);
+                Vue.set(state.dataForTabTable, newTab.title, newTabObject);
             }
 
-            state.currentlyActiveTab = newTab.Title
+            state.currentlyActiveTab = newTab.title
             await dispatch("fetchItemsForTab", newTab);
         },
         changeTabPage : async function({state, dispatch}, newTabPage){
@@ -29,7 +29,7 @@ export default {
         fetchItemsForTab :  async function({state}, tab){
             //Make a request to the endpoint 
             let params = {page : state.dataForTabTable[state.currentlyActiveTab].page, perPage : 5};
-            let result = await axios.get(tab.Endpoint, {params});
+            let result = await axios.get(tab.endpoint, {params});
 
             if(!result.success){
                 return;
@@ -38,14 +38,14 @@ export default {
             let maximumPage = result.body.last_page;
             if(maximumPage < state.dataForTabTable[state.currentlyActiveTab].page){
                 if(maximumPage === 1){
-                    state.dataForTabTable[tab.Title].page = 1;
+                    state.dataForTabTable[tab.title].page = 1;
                 }else{
-                    state.dataForTabTable[tab.Title].page = maximumPage - 1;
+                    state.dataForTabTable[tab.title].page = maximumPage - 1;
                 }
             }
             let items = result.body.data;
-            state.dataForTabTable[tab.Title].maxPage = maximumPage;
-            state.dataForTabTable[tab.Title].items = items;
+            state.dataForTabTable[tab.title].maxPage = maximumPage;
+            state.dataForTabTable[tab.title].items = items;
         }
     },
     mutations : {

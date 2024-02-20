@@ -111,7 +111,7 @@ export default {
 }
 </script>
 <template>
-    <div class="col-12 px-2 py-1">
+    <div class="">
         <h2>Welcome to the dashboard, {{ adminName }}</h2>
         <hr>
         <div class="col-12 d-flex flex-row flex-wrap p-2 align-items-center">

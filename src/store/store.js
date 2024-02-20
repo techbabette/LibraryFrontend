@@ -7,6 +7,7 @@ import user from './modules/user';
 import books from './modules/books'
 import userbooks from './modules/userbooks'
 import messages from './modules/messages'
+import admin from "./modules/admin"
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
         user,
         books,
         userbooks,
-        messages
+        messages,
+        admin
     },
     actions : {
         async fetch(context, options){

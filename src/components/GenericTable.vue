@@ -29,11 +29,11 @@ export default {
     },
     methods: {
         applyChanges(item, header) {
-            if (!header.Change) {
-                return getNestedField(item, header.Field);
+            if (!header.change) {
+                return getNestedField(item, header.field);
             }
 
-            return header.Change(item);
+            return header.change(item);
         },
         displayValue(item, header){
             return this.applyChanges(item, header);
@@ -74,7 +74,7 @@ export default {
             <thead>
                 <tr id="header-table-row">
                     <th>#</th>
-                    <th v-for="header, index in headers" :key="index">{{ header.Text }}</th>
+                    <th v-for="header, index in headers" :key="index">{{ header.text }}</th>
                     <th v-if="options">Options</th>
                 </tr>
             </thead>
@@ -84,12 +84,12 @@ export default {
                     <td v-for="header, hIndex in headers" :key="hIndex">{{ displayValue(item, header) }}</td>
                     <td v-if="options">
                         <button v-for="option, oIndex in options" :data-id="item[identification_field]" :key="oIndex"
-                            :class="option.Class" @click="handleClick(option.onClick, item)">{{ option.Name }}</button>
+                            :class="option.class" @click="handleClick(option.onClick, item)">{{ option.name }}</button>
                     </td>
                 </tr>
             </tbody>
-            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick)" :class="table_option.Class"
-                :key="index">{{ table_option.Name }}</button>
+            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick)" :class="table_option.class"
+                :key="index">{{ table_option.name }}</button>
         </table>
         <p v-else>No items found</p>
     </div>

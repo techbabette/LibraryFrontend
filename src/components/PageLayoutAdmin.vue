@@ -23,7 +23,7 @@ export default {
 <template>
     <div class="d-flex flex-row min-vh-100">
         <TheAdminSidebar :navigation_links="navbarLinks" :footer_link="footerLinks"/>
-        <router-view class="admin-page"></router-view>
+        <router-view class="admin-page col-12 px-2 py-1"></router-view>
     </div>
 </template>
 

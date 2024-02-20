@@ -15,76 +15,76 @@ export default {
         return {
             Tabs: [
                 {
-                    "Title": "Currently loaned",
-                    "Endpoint": "loan?current=true",
-                    "IdField": "id",
-                    "TableHeaders": [
+                    "title": "Currently loaned",
+                    "endpoint": "loan?current=true",
+                    "idField": "id",
+                    "tableHeaders": [
                         {
-                            "Text": "Book",
-                            "Field": "book.name",
+                            "text": "Book",
+                            "field": "book.name",
                         },
                         {
-                            "Text" : "Loaned on",
-                            "Field" : "started_at"
+                            "text" : "Loaned on",
+                            "field" : "started_at"
                         },
                         {
-                            "Text" : "Return by",
-                            "Field" : "end"
+                            "text" : "Return by",
+                            "field" : "end"
                         },
                         {
-                            "Text" : "Late",
-                            "Field" : "end",
-                            "Change" : function(item){
+                            "text" : "Late",
+                            "field" : "end",
+                            "change" : function(item){
                                 return Math.floor(new Date(item.end).getTime() / 1000) <= Math.floor((new Date()).getTime() / 1000) ? "Yes" : "No";
                             }
                         },
                         {
-                            "Text" : "Extended",
-                            "Field" : "extended",
-                            "Change" : function(item){
+                            "text" : "Extended",
+                            "field" : "extended",
+                            "change" : function(item){
                                 return item.extended ? 'Yes' : 'No'
                             }
                         }
                     ],
-                    "ItemOptions": [
+                    "itemOptions": [
                         {
-                            "Name" : "View",
-                            "Class" : "btn btn-primary mx-1",
+                            "name" : "View",
+                            "class" : "btn btn-primary mx-1",
                             "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         },
                         {
-                            "Name" : "Extend",
-                            "Class" : "btn btn-success mx-1",
+                            "name" : "Extend",
+                            "class" : "btn btn-success mx-1",
                             "onClick" : "patch|loan/extend"
                         },
                         {
-                            "Name" : "Return",
-                            "Class" : "btn btn-dark mx-1",
+                            "name" : "Return",
+                            "class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
                         },
                     ]
                 },
                 {
-                    "Title": "Late",
-                    "Endpoint": "loan?late=true",
-                    "IdField": "id",
-                    "TableHeaders": [
+                    "title": "Late",
+                    "endpoint": "loan?late=true",
+                    "idField": "id",
+                    "tableHeaders": [
                         {
-                            "Text": "Book",
-                            "Field": "book.name",
+                            "text": "Book",
+                            "field": "book.name",
                         },
                         {
-                            "Text" : "Loaned on",
-                            "Field" : "started_at"
+                            "text" : "Loaned on",
+                            "field" : "started_at"
                         },
                         {
-                            "Text" : "Return by",
-                            "Field" : "end"
+                            "text" : "Return by",
+                            "field" : "end"
                         },
                         {
-                            "Text" : "Days late",
+                            "text" : "Days late",
                             "field" : "end",
-                            "Change" : function(item){
+                            "change" : function(item){
                                 let currentDate = new Date().getTime();
                                 let returnBy = new Date(item.end);
                                 let daysLate = Math.floor((currentDate - returnBy) / (1000 * 60 * 60 * 24)); 
@@ -92,52 +92,52 @@ export default {
                             }
                         },
                         {
-                            "Text" : "Extended",
-                            "Field" : "extended",
-                            "Change" : function(item){
+                            "text" : "Extended",
+                            "field" : "extended",
+                            "change" : function(item){
                                 return item.extended ? 'Yes' : 'No'
                             }
                         }
                     ],
-                    "ItemOptions": [
+                    "itemOptions": [
                         {
-                            "Name" : "View",
-                            "Class" : "btn btn-primary mx-1",
+                            "name" : "View",
+                            "class" : "btn btn-primary mx-1",
                             "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         },
                         {
-                            "Name" : "Extend",
-                            "Class" : "btn btn-success mx-1",
+                            "name" : "Extend",
+                            "class" : "btn btn-success mx-1",
                             "onClick" : "patch|loan/extend"
                         },
                         {
-                            "Name" : "Return",
-                            "Class" : "btn btn-dark mx-1",
+                            "name" : "Return",
+                            "class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
                         },
                     ]
                 },
                 {
-                    "Title": "Previously loaned",
-                    "Endpoint": "loan?previous=true&onlyForUser=true",
-                    "IdField": "id",
-                    "TableHeaders": [
+                    "title": "Previously loaned",
+                    "endpoint": "loan?previous=true&onlyForUser=true",
+                    "idField": "id",
+                    "tableHeaders": [
                         {
-                            "Text": "Book",
-                            "Field": "book.name",
+                            "text": "Book",
+                            "field": "book.name",
                         },
                         {
-                            "Text" : "Loaned on",
-                            "Field" : "started_at"
+                            "text" : "Loaned on",
+                            "field" : "started_at"
                         },
                         {
-                            "Text" : "Returned on",
-                            "Field" : "returned_at"
+                            "text" : "Returned on",
+                            "field" : "returned_at"
                         },
                         {
-                            "Text" : "Days kept",
-                            "Field" : "returned_at",
-                            "Change" : function(item){
+                            "text" : "Days kept",
+                            "field" : "returned_at",
+                            "change" : function(item){
                                 let startDate = new Date(item.started_at);
                                 let returnDate = new Date(item.returned_at);
                                 let daysKept = Math.floor((returnDate - startDate) / (1000 * 60 * 60 * 24)); 
@@ -145,22 +145,22 @@ export default {
                             }
                         }
                     ],
-                    "ItemOptions": [
+                    "itemOptions": [
                         {
-                            "Name" : "View",
-                            "Class" : "btn btn-primary mx-1",
+                            "name" : "View",
+                            "class" : "btn btn-primary mx-1",
                             "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         }
                     ]
                 },
                 {
-                    "Title": "Favorites",
-                    "Endpoint": "books/favorite",
-                    "IdField": "id",
-                    "TableHeaders": [
+                    "title": "Favorites",
+                    "endpoint": "books/favorite",
+                    "idField": "id",
+                    "tableHeaders": [
                         {
-                            "Text": "Name",
-                            "Field": "name",
+                            "text": "name",
+                            "field": "name",
                         }
                     ],
                 }
@@ -173,7 +173,7 @@ export default {
             return this.$store.getters['user/claims'].name;
         },
         currentActiveTab : function(){
-            return this.Tabs.filter((tab) => tab.Title == this.currentlyActiveTabTitle)[0] ?? this.Tabs[0];
+            return this.Tabs.filter((tab) => tab.title == this.currentlyActiveTabTitle)[0] ?? this.Tabs[0];
         },
         currentTabPage : {
             get(){
@@ -191,7 +191,7 @@ export default {
             return this.$store.getters['userbooks/tabItems'](this.currentlyActiveTabTitle);
         },
         currentHeaders : function(){
-            return this.currentActiveTab.TableHeaders
+            return this.currentActiveTab.tableHeaders
         },
         currentTabMaximumPage : function(){
             return this.$store.getters['userbooks/tabMaximumPage'];
@@ -216,9 +216,9 @@ export default {
     <div class="mk-page">
         <div>
             <p class="h2">These are your books, {{ username }}</p>
-            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.Title"
-                :is_currenctly_active="currentlyActiveTabTitle === tab.Title" @click.native="changeTab(tab)" />
-            <GenericTable :items="itemsForCurrentlyActiveTab" :headers="currentHeaders" :options="currentActiveTab.ItemOptions" @refresh="fetchItems"/>
+            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.title"
+                :is_currenctly_active="currentlyActiveTabTitle === tab.title" @click.native="changeTab(tab)" />
+            <GenericTable :items="itemsForCurrentlyActiveTab" :headers="currentHeaders" :options="currentActiveTab.itemOptions" @refresh="fetchItems"/>
             <PageButtons v-model="currentTabPage" :maximum_page="currentTabMaximumPage"/>
         </div>
     </div>

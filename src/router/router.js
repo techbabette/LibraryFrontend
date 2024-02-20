@@ -8,6 +8,7 @@ import YourBooks from "../components/PageUserBooks.vue";
 import LoginPage from "../components/PageUserLogin.vue";
 
 import PageAdminDashboard from "../components/PageAdminDashboard.vue"
+import PageAdminControl from "../components/PageAdminControl.vue"
 
 const routes = [
     {
@@ -27,6 +28,9 @@ const routes = [
     },
     {
       path : "/admin", component : PageAdminDashboard, name : "Admin Dashboard"
+    },
+    {
+      path : "admin/control", component : PageAdminControl, name : "Admin Control"
     }
   ]
 
