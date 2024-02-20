@@ -95,12 +95,12 @@ export default {
     let bookResult = await this.getItems(this.Params);
 
     let [categoryResult, authorResult, sortResult] = await Promise.all([
-      this.$store.dispatch("fetch", { url: 'category' }),
-      this.$store.dispatch("fetch", { url: 'author' }),
+      this.$store.dispatch("fetch", { url: 'category', params : {bookCountInName : true, havingBooks : true} }),
+      this.$store.dispatch("fetch", { url: 'author', params: {bookCountInName : true, havingBooks : true} }),
       this.$store.dispatch("fetch", { url: 'book', params: { sortOptions: true } }),
     ])
-    this.paramOptions.categories = categoryResult.data;
-    this.paramOptions.authors = authorResult.data;
+    this.paramOptions.categories = categoryResult.data.body;
+    this.paramOptions.authors = authorResult.data.body;
     this.paramOptions.sort = sortResult.data.body;
 
     this.items = bookResult;
