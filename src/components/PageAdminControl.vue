@@ -1,40 +1,104 @@
 <script>
-import GenericTable from "./GenericTable"
-import TableTab from "./GenericTableTab"
-import PageButtons from "./ButtonsPagination.vue"
-import InputAdaptable from "./InputAdaptable.vue"
+// import GenericTable from "./GenericTable"
+// import TableTab from "./GenericTableTab"
+// import PageButtons from "./ButtonsPagination.vue"
+// import InputAdaptable from "./InputAdaptable.vue"
+import GenericTableAdmin from "./GenericTableAdmin.vue"
 export default {
     name: "PageAdminControl",
 
     components: {
-        GenericTable,
-        TableTab,
-        PageButtons,
-        InputAdaptable
+        GenericTableAdmin
     },
 
     data(){
         return {
+            adminTabs : {
+            "Users" : {
+                "title" : "Users",
+                "weight" : 100,
+                "endpoint" : "user",
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Email",
+                        "field" : "email"
+                    },
+                    {
+                        "text" : "Registered on",
+                        "field" : "created_at"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Assume",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "get|user/assume"
+                    }
+                ],
+                items : [],
+                searchParams : {
+                    "page" : 1
+                },
+                maximumPage : 1,
+            },
+            "Loans" : {
+                "title" : "Loans",
+                "weight" : 90,
+                "endpoint" : "loan?panel=true",
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "User",
+                        "field" : "user.email"
+                    },
+                    {
+                        "text" : "Book",
+                        "field" : "book.name"
+                    },
+                    {
+                        "text" : "Loaned on",
+                        "field" : "started_at"
+                    },
+                    {
+                        "text" : "Returned on",
+                        "field" : "returned_at",
+                        change : function(item){
+                            return item.returned_at ?? "/";
+                        }
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Assume",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "get|user/assume"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                    "since" : {
+                        label : "Loaned after",
+                        field_type : "datetime"
+                    }
+                },
+                searchParams : {
+                    "page" : 1,
+                    "since" : undefined
+                },
+                maximumPage : 1,
+            },
+            },
+            currentTabName : "Users"
         }
     },
 
     computed : {
-        currentTabName : function(){
-            return this.$store.getters['admin/getCurrentTab'];
+        tabs: function(){
+            return this.adminTabs
         },
         currentTab : function(){
-            return this.$store.getters['admin/getTab'];
-        },
-        currentPage :{
-            get : function(){
-                return this.currentTab.page;
-            },
-            set : function(value){
-                this.$store.commit("admin/setTabSearchParam", {name : 'page' ,value});
-            }
-        },
-        tabs: function(){
-            return this.$store.getters['admin/getTabs']
+            return this.tabs[this.currentTabName]
         },
         saerchInformation: function(){
             return {
@@ -64,13 +128,13 @@ export default {
             this.changeTab(firstTab);
         },
         changeTab: function(newTab){
-            this.$store.commit('admin/setCurrentTab', newTab);
+            this.currentTabName = newTab;
         },
         fetchItems: async function(){
             let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params : this.currentTab.searchParams});
 
-            this.$store.commit("admin/setTabField", {name : 'items', value : items.body.data});
-            this.$store.commit("admin/setTabField", {name : 'maximumPage' ,value : items.body.last_page});
+            this.adminTabs[this.currentTabName].items = items.body.data;
+            this.adminTabs[this.currentTabName].maximumPage = items.body.last_page;
         },
         refresh: async function(){
             await this.fetchItems();
@@ -81,22 +145,6 @@ export default {
 <template>
 <div>
     <h2>This is the control panel</h2>
-    <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
-        :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"
-    />
-    <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0" class="col-12 d-flex justify-content-space-between">
-        <InputAdaptable class="d-flex flex-column col-2" v-for="inputBind, index in Object.keys(currentTab.searchInputs ?? {})" 
-        :key="index + 'a'" :field_type="currentTab.searchInputs[inputBind].field_type" :label="currentTab.searchInputs[inputBind].label"
-        v-model="currentTab.searchParams[inputBind]"
-        />
-    </div>
-    <div v-else>
-        Search options will appear here if available
-    </div>
-
-    <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
-        @refresh="fetchItems"
-    />
-    <PageButtons v-model="currentTab.searchParams['page']" :maximum_page="currentTab.maximumPage" />
+    <GenericTableAdmin :_tabs="adminTabs" :_default_tab="currentTabName"/>
 </div>
 </template>
