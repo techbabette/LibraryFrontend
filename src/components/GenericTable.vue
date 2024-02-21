@@ -65,6 +65,19 @@ export default {
             }
             return "&uarr;"
         },
+        getOptionsForItem(item) {
+            let itemOptions = [];
+            for(let option of this.options){
+                if(!option.onlyIf){
+                    itemOptions.push(option);
+                    continue;
+                }
+                if(option.onlyIf(item)){
+                    itemOptions.push(option);
+                }
+            }
+            return itemOptions
+        },
         async handleClick(onClick, item = undefined){
             let httpVerbs = ["get", "post", "put", "delete", "patch"];
             let verb = onClick.split('|')[0];
@@ -112,7 +125,7 @@ export default {
                     <td>{{ index + first_item_positon + 1 }}</td>
                     <td v-for="header, hIndex in headers" :key="hIndex">{{ displayValue(item, header) }}</td>
                     <td v-if="options">
-                        <button v-for="option, oIndex in options" :data-id="item[identification_field]" :key="oIndex"
+                        <button v-for="option, oIndex in getOptionsForItem(item)" :data-id="item[identification_field]" :key="oIndex"
                             :class="option.class" @click="handleClick(option.onClick, item)">{{ option.name }}</button>
                     </td>
                 </tr>

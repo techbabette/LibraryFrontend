@@ -49,14 +49,17 @@ export default {
                             "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         },
                         {
-                            "name" : "Extend",
-                            "class" : "btn btn-success mx-1",
-                            "onClick" : "patch|loan/extend"
-                        },
-                        {
                             "name" : "Return",
                             "class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
+                        },
+                        {
+                            "name" : "Extend",
+                            "class" : "btn btn-success mx-1",
+                            "onClick" : "patch|loan/extend",
+                            "onlyIf" : function (item) {
+                                return !item.extended;
+                            }
                         },
                     ],
                     items : [],
@@ -119,7 +122,10 @@ export default {
                         {
                             "name" : "Extend",
                             "class" : "btn btn-success mx-1",
-                            "onClick" : "patch|loan/extend"
+                            "onClick" : "patch|loan/extend",
+                            "onlyIf" : function (item) {
+                                return !item.extended;
+                            }
                         },
                         {
                             "name" : "Return",
@@ -218,7 +224,7 @@ export default {
 }
 </script>
 <template>
-    <div class="mk-page">
+    <div class="mk-solo-page mx-3">
         <div>
             Hello {{ username }}, these are your books
             <GenericTableComplete :_tabs="tabs" :_default_tab="currentTab"/>
