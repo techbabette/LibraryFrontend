@@ -24,7 +24,7 @@ export default {
         return this.bookInformation.loan_id ? true : false;
       },
       loanButtonText : function(){
-        return this.loanedToUser ? "Return book" : "Loan out";
+        return this.loanedToUser ? "Return book" : "Borrow book";
       }
     },
 

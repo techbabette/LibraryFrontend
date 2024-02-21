@@ -6,6 +6,7 @@ import BooksPage from "../components/PageBooksSearch.vue";
 import BookPage from "../components/PageBookSingle.vue";
 import YourBooks from "../components/PageUserBooks.vue";
 import LoginPage from "../components/PageUserLogin.vue";
+import PageContact from "@/components/PageContact.vue";
 
 import PageAdminDashboard from "../components/PageAdminDashboard.vue"
 import PageAdminControl from "../components/PageAdminControl.vue"
@@ -28,13 +29,16 @@ const routes = [
       path : "/login", component : LoginPage, name : "Login"
     },
     {
+      path : "/contact", component : PageContact, name : "Contact"
+    },
+    {
       path : "/admin", component : PageAdminDashboard, name : "Admin Dashboard"
     },
     {
-      path : "admin/control", component : PageAdminControl, name : "Admin Control"
+      path : "/admin/control", component : PageAdminControl, name : "Admin Control"
     },
     {
-      path : "admin/logs", component : PageAdminLogs, name : "Admin Logs"
+      path : "/admin/logs", component : PageAdminLogs, name : "Admin Logs"
     }
   ]
 

@@ -91,6 +91,9 @@ export default {
         <input v-if="field_type == 'string'" v-model="localValue" :name="name" :id="id" type="text" class="form-control"
             @blur="emitNameOnBlur">
 
+        <textarea v-if="field_type === 'text'" v-model="localValue" :name="name" :id="id" cols="30" rows="5"
+        class="form-control" @blur="emitNameOnBlur"></textarea>
+
         <input v-if="field_type == 'password'" v-model="localValue" :name="name" :id="id" type="password"
             class="form-control" @blur="emitNameOnBlur">
 
@@ -100,7 +103,8 @@ export default {
         <input v-if="field_type == 'datetime'" v-model="localValue" :name="name" :id="id" type="datetime-local"
         @blur="emitNameOnBlur">
 
-        <select v-if="field_type == 'select'" v-model="localValue" :name="name" :id="id" class="col-12">
+        <select v-if="field_type == 'select'" v-model="localValue" :name="name" :id="id" class="col-12 form-select">
+            <option value="-1" disabled>Select option</option>
             <option v-for="option in options" :key="option[options_value_field]" :value="option[options_value_field]">
                 {{ makeUpperCase(option[options_text_field]) }}
             </option>
