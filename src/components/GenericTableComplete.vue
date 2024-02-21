@@ -4,7 +4,7 @@ import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
 import InputAdaptable from "./InputAdaptable.vue"
 export default {
-    name : "GenericTableAdmin",
+    name : "GenericTableComplete",
     components : {
         GenericTable,
         TableTab,

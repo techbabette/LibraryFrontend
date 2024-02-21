@@ -3,12 +3,12 @@
 // import TableTab from "./GenericTableTab"
 // import PageButtons from "./ButtonsPagination.vue"
 // import InputAdaptable from "./InputAdaptable.vue"
-import GenericTableAdmin from "./GenericTableAdmin.vue"
+import GenericTableComplete from "./GenericTableComplete.vue"
 export default {
     name: "PageAdminControl",
 
     components: {
-        GenericTableAdmin
+        GenericTableComplete
     },
 
     data(){
@@ -96,6 +96,6 @@ export default {
 </script>
 <template>
 <div>
-    <GenericTableAdmin :_tabs="adminTabs" :_default_tab="currentTabName"/>
+    <GenericTableComplete :_tabs="adminTabs" :_default_tab="currentTabName"/>
 </div>
 </template>

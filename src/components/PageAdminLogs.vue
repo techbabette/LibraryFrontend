@@ -1,10 +1,10 @@
 <script>
-import GenericTableAdmin from "./GenericTableAdmin.vue"
+import GenericTableComplete from "./GenericTableComplete.vue"
 export default {
     name: "PageAdminLogs",
 
     components: {
-        GenericTableAdmin
+        GenericTableComplete
     },
 
     data(){
@@ -52,5 +52,5 @@ export default {
 }
 </script>
 <template>
-    <GenericTableAdmin :_tabs="tabs" :_default_tab="currentTab"/>
+    <GenericTableComplete :_tabs="tabs" :_default_tab="currentTab"/>
 </template>
