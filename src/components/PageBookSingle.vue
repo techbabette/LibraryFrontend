@@ -44,6 +44,7 @@ export default {
         let result = await (axios.post('/loan', {book_id : this.bookInformation.id}));  
         
         if(result.success){
+          this.$store.commit("messages/display", {text : result.message, success : true})
           this.bookInformation.loan_id = result.body.loan_id;
           this.updateBookInfo();
         }
