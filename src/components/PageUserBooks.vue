@@ -151,7 +151,7 @@ export default {
                 },
                 "Previously loaned" : {
                     "title": "Previously loaned",
-                    "endpoint": "loan?previous=true&onlyForUser=true",
+                    "endpoint": "loan?previous=true",
                     "idField": "id",
                     "tableHeaders": [
                         {
@@ -168,7 +168,7 @@ export default {
                         },
                         {
                             "text" : "Days kept",
-                            "field" : "returned_at",
+                            "field" : "!!computed",
                             "change" : function(item){
                                 let startDate = new Date(item.started_at);
                                 let returnDate = new Date(item.returned_at);
