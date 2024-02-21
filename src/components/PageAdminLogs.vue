@@ -29,6 +29,16 @@ export default {
                             "field" : "created_at" 
                         }
                     ],
+                    searchInputs : {
+                        "since" : {
+                            label : "Performed after",
+                            field_type : "datetime"
+                            },
+                        "before" : {
+                            label : "Performed before",
+                            field_type : "datetime"
+                        }
+                    },
                     items : [],
                     searchParams : {
                     },

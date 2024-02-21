@@ -96,7 +96,6 @@ export default {
 </script>
 <template>
 <div>
-    <h2>This is the control panel</h2>
     <GenericTableAdmin :_tabs="adminTabs" :_default_tab="currentTabName"/>
 </div>
 </template>

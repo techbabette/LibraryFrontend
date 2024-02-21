@@ -30,5 +30,6 @@ export default {
 }
 .PrimaryButtonActive{
     border: 2px solid black;
+    border-bottom: 0px;
 }
 </style>
