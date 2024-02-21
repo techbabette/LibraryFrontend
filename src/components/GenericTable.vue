@@ -17,6 +17,12 @@ export default {
         table_options: {
             Type: Array
         },
+        sort_options : {
+            Type: Object
+        },
+        current_sort : {
+            Type : String
+        },
         identification_field: {
             Type: String,
             default: "id"
@@ -37,6 +43,24 @@ export default {
         },
         displayValue(item, header){
             return this.applyChanges(item, header);
+        },
+        fieldHasSort(field){
+            console.log(Object.keys(this.sort_options).includes(field));
+            return Object.hasOwn(this.sort_options, field);
+        },
+        emitFieldName(field){
+            this.$emit("newSort", field);
+        },
+        headerSortSignifier(field){
+            let isActive = this.current_sort.startsWith(field);
+            if(!isActive){
+                return "";
+            }
+            let currentlyDesc = (this.current_sort).endsWith("_desc");
+            if(currentlyDesc){
+                    return "&darr;"
+            }
+            return "&uarr;"
         },
         async handleClick(onClick, item = undefined){
             let httpVerbs = ["get", "post", "put", "delete", "patch"];
@@ -74,7 +98,9 @@ export default {
             <thead>
                 <tr id="header-table-row">
                     <th>#</th>
-                    <th v-for="header, index in headers" :key="index">{{ header.text }}</th>
+                    <th v-for="header, index in headers" :key="index" :class="{clickable : fieldHasSort(header.field)}"
+                    v-on="fieldHasSort(header.field) ? {click: () => emitFieldName(header.field)} : {}">
+                    {{ header.text }} <span v-html="headerSortSignifier(header.field)"></span></th>
                     <th v-if="options">Options</th>
                 </tr>
             </thead>
@@ -94,3 +120,9 @@ export default {
         <p v-else>No items found</p>
     </div>
 </template>
+
+<style scoped>
+.clickable {
+    cursor: pointer
+}
+</style>

@@ -31,9 +31,10 @@ export default {
         saerchInformation: function(){
             return {
                 tab : this.currentTabName,
-                searchParams : (this.currentTab ?? {searchParams : "empty"}).searchParams ?? {}
+                page : (this.currentTab ?? {page : 1}).page ?? 1, 
+                searchParams : (this.currentTab ?? {searchParams : "empty"}).searchParams ?? {},
             }
-        }
+        },
     },
 
     watch : {
@@ -55,10 +56,49 @@ export default {
             this.currentTabName = newTab;
         },
         fetchItems: async function(){
+            let params = this.currentTab.searchParams;
+
+            if(this.currentTab.selectedSort){
+                params.sortSelected = this.currentTab.selectedSort;
+            }
+
+            params.page = this.currentTab.page;
+
             let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params : this.currentTab.searchParams});
 
             this.tabs[this.currentTabName].items = items.body.data;
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
+
+            if(items.data.sortOptions){
+                let newSortOptions = {};
+                items.data.sortOptions.forEach(sortOption => 
+                {
+                    newSortOptions[sortOption.id] = sortOption.default; 
+                    if(sortOption.default && !this.currentTab.selectedSort){
+                        this.currentTab.selectedSort = `${sortOption.id}_${sortOption.default}`;
+                    }
+                });
+                this.tabs[this.currentTabName].sortOptions = newSortOptions;
+            }
+        },
+        newSort: function(field){
+            let currentlyActive = (this.currentTab.selectedSort ?? "").startsWith(field);
+            if(!currentlyActive){
+                this.currentTab.selectedSort = `${field}_desc`;
+                this.fetchItems();
+                return;
+            }
+            //If currently active
+            let currentlyDesc = (this.currentTab.selectedSort ?? "").endsWith("_desc");
+            if(currentlyDesc){
+                this.currentTab.selectedSort = `${field}_asc`;
+                this.fetchItems();
+                return;
+            }
+
+            this.currentTab.selectedSort = `${field}_desc`;
+            this.fetchItems();
+            return;
         },
         refresh: async function(){
             await this.fetchItems();
@@ -82,8 +122,9 @@ export default {
     </div>
 
     <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
-        @refresh="fetchItems"
+        @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? {}" :current_sort="currentTab.selectedSort ?? ''"
+        @newSort="newSort"
     />
-    <PageButtons v-model="currentTab.searchParams['page']" :maximum_page="currentTab.maximumPage" />
+    <PageButtons v-model="currentTab['page']" :maximum_page="currentTab.maximumPage" />
 </div>
 </template>

@@ -38,8 +38,8 @@ export default {
                 ],
                 items : [],
                 searchParams : {
-                    "page" : 1
                 },
+                "page" : 1,
                 maximumPage : 1,
             },
             "Loans" : {
@@ -83,9 +83,9 @@ export default {
                     }
                 },
                 searchParams : {
-                    "page" : 1,
                     "since" : undefined
                 },
+                "page" : 1,
                 maximumPage : 1,
             },
             },
