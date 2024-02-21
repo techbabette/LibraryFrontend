@@ -1,7 +1,7 @@
 <script>
-import axios from '@/axios/axios';
 import getNestedField from '@/lib/getNestedField'
 import getParam from '@/lib/getParam';
+import paramRequest from '@/lib/paramRequest'
 export default {
     name: "GenericTable",
     props: {
@@ -80,25 +80,21 @@ export default {
             return itemOptions
         },
         async handleClick(onClick, item = undefined){
-            let httpVerbs = ["get", "post", "put", "delete", "patch"];
-            let verb = onClick.split('|')[0];
-            let target = onClick.split('|')[1];
+            let callerField = getParam(onClick, "callerField") ?? this.identification_field;
+            let refresh = getParam(onClick, "refresh") ?? true;
+            let caller = 0;
 
-            let callerIdField = getParam(onClick, "callerField") ?? this.identification_field;
-            let callerId = 0;
+
 
             if(item){
-                callerId = getNestedField(item, callerIdField);
+                caller = getNestedField(item, callerField);
             }
 
-            let result = {};
-            if(verb === "dispatch"){
-                result = await this.$store.dispatch(target, callerId);
-            }
+            caller = getParam(onClick, "caller") ?? caller;
 
-            let url = target + (callerId ? `/${callerId}` : "");
-            if(httpVerbs.includes(verb)){
-                result = await axios({method : verb, url})
+            let result = await paramRequest(onClick, caller);
+
+            if(refresh){
                 this.$emit('refresh');
             }
 

@@ -1,15 +1,32 @@
 <script>
-import InputAdaptable from "@/components/InputAdaptable.vue";
+// import InputAdaptable from "@/components/InputAdaptable.vue";
+import InputForm from "./InputForm.vue";
 import axios from "@/axios/axios";
 export default {
     name : "PageContact",
 
     components : {
-        InputAdaptable
+        InputForm
+        // InputAdaptable
     },
 
     data(){
         return {
+            formElements : {
+                "title" : {
+                    field_type: "string",
+                    label: "Title"
+                },
+                "message_type_id" : {
+                    field_type: "select",
+                    label: "Message type",
+                    source: "get|messagetype"
+                },
+                "body" : {
+                    field_type: "text",
+                    label: "Message text",
+                }
+            },
             message : {
                 title : "",
                 body : "",
@@ -43,9 +60,11 @@ export default {
     <div class="mk-solo-page page container-fluid">
         <div class="col-6">
             <h2>Send a message to the administration team</h2>
-                <InputAdaptable v-model="message.title" field_type="string" label="Title"/>
+                <InputForm :elements="formElements" v-model="message"/>
+                <!-- <InputAdaptable v-model="message.title" field_type="string" label="Title"/>
                 <InputAdaptable v-model="message.message_type_id" field_type="select" label="Message type" :options="messageTypes"/>
-                <InputAdaptable v-model="message.body" field_type="text" label="Text"/>
+                <InputAdaptable v-model="message.body" field_type="text" label="Text"/> -->
+
             <a href="" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">Send</a>
         </div>
     </div>
