@@ -92,54 +92,6 @@ export default {
             currentTabName : "Users"
         }
     },
-
-    computed : {
-        tabs: function(){
-            return this.adminTabs
-        },
-        currentTab : function(){
-            return this.tabs[this.currentTabName]
-        },
-        saerchInformation: function(){
-            return {
-                tab : this.currentTabName,
-                searchParams : this.currentTab.searchParams
-            }
-        }
-    },
-
-    watch : {
-        saerchInformation : {
-            handler: function(){
-                this.refresh();
-            },
-            deep: true
-        }
-    },
-
-    mounted(){
-        this.fetchItems();
-    },
-
-    methods: {
-        loadFirstTab: function(){
-            let tabs = Object.keys(this.tabs);
-            let firstTab = tabs[0];
-            this.changeTab(firstTab);
-        },
-        changeTab: function(newTab){
-            this.currentTabName = newTab;
-        },
-        fetchItems: async function(){
-            let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params : this.currentTab.searchParams});
-
-            this.adminTabs[this.currentTabName].items = items.body.data;
-            this.adminTabs[this.currentTabName].maximumPage = items.body.last_page;
-        },
-        refresh: async function(){
-            await this.fetchItems();
-        }
-    }
 }
 </script>
 <template>

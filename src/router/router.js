@@ -9,6 +9,7 @@ import LoginPage from "../components/PageUserLogin.vue";
 
 import PageAdminDashboard from "../components/PageAdminDashboard.vue"
 import PageAdminControl from "../components/PageAdminControl.vue"
+import PageAdminLogs from "../components/PageAdminLogs.vue"
 
 const routes = [
     {
@@ -31,6 +32,9 @@ const routes = [
     },
     {
       path : "admin/control", component : PageAdminControl, name : "Admin Control"
+    },
+    {
+      path : "admin/logs", component : PageAdminLogs, name : "Admin Logs"
     }
   ]
 
