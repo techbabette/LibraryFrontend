@@ -23,6 +23,10 @@ export default {
         current_sort : {
             Type : String
         },
+        first_item_positon : {
+            Type : Number,
+            default : 0
+        },
         identification_field: {
             Type: String,
             default: "id"
@@ -45,7 +49,6 @@ export default {
             return this.applyChanges(item, header);
         },
         fieldHasSort(field){
-            console.log(Object.keys(this.sort_options).includes(field));
             return Object.hasOwn(this.sort_options, field);
         },
         emitFieldName(field){
@@ -106,7 +109,7 @@ export default {
             </thead>
             <tbody id="table-result-holder">
                 <tr v-for="item, index in items" :key="index">
-                    <td>{{ index + 1 }}</td>
+                    <td>{{ index + first_item_positon + 1 }}</td>
                     <td v-for="header, hIndex in headers" :key="hIndex">{{ displayValue(item, header) }}</td>
                     <td v-if="options">
                         <button v-for="option, oIndex in options" :data-id="item[identification_field]" :key="oIndex"

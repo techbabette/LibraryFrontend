@@ -124,7 +124,7 @@ export default {
 
         <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
             @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? {}" :current_sort="currentTab.selectedSort ?? ''"
-            @newSort="newSort"
+            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
         />
     </div>
 
