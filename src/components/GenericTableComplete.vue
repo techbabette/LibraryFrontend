@@ -103,7 +103,7 @@ export default {
 }
 </script>
 <template>
-    <div v-if="currentTab">
+    <div>
         <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
         :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"
     />
@@ -124,6 +124,12 @@ export default {
         />
     </div>
 
+    <div id="modal-background" class="mk-modal">
+        <div id="user-modal" class="mk-modal-content">
+            Hello I am a div
+        </div>
+    </div>
+
     <PageButtons v-model="currentTab['page']" :maximum_page="currentTab.maximumPage" />
 </div>
 </template>
@@ -132,5 +138,11 @@ export default {
 .adminBorder {
 	border: 2px solid black;
     border-top: 0px;
+}
+</style>
+
+<style scoped>
+.mk-modal-content{
+    color: white;
 }
 </style>

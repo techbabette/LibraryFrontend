@@ -51,11 +51,6 @@ export default {
 </script>
 <template>
   <div>
-  <div id="errorModal" class="mk-modal">
-    <div class="mk-modal-content">
-      <p id="error-content">Generička greška</p>
-    </div>
-  </div>
   <!--First page-->
   <div id="landing-page" class="mk-page page container-fluid ">
       <div class="row mk-clear">
