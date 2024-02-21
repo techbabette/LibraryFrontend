@@ -70,14 +70,10 @@ export default {
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
 
             if(items.data.sortOptions){
-                let newSortOptions = {};
-                items.data.sortOptions.forEach(sortOption => 
-                {
-                    newSortOptions[sortOption.id] = sortOption.default; 
-                    if(sortOption.default && !this.currentTab.selectedSort){
-                        this.currentTab.selectedSort = `${sortOption.id}_${sortOption.default}`;
-                    }
-                });
+                let newSortOptions = items.data.sortOptions.map((option) => option.id);
+                if(items.data.sortDefault && !this.currentTab.selectedSort){
+                    this.currentTab.selectedSort = items.data.sortDefault;
+                }
                 this.tabs[this.currentTabName].sortOptions = newSortOptions;
             }
         },
@@ -123,7 +119,7 @@ export default {
         </div>
 
         <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
-            @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? {}" :current_sort="currentTab.selectedSort ?? ''"
+            @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? []" :current_sort="currentTab.selectedSort ?? ''"
             @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
         />
     </div>

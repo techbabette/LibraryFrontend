@@ -18,7 +18,8 @@ export default {
             Type: Array
         },
         sort_options : {
-            Type: Object
+            Type: Array,
+            default : () => []
         },
         current_sort : {
             Type : String
@@ -49,7 +50,7 @@ export default {
             return this.applyChanges(item, header);
         },
         fieldHasSort(field){
-            return Object.hasOwn(this.sort_options, field);
+            return this.sort_options.includes(field);
         },
         emitFieldName(field){
             this.$emit("newSort", field);
@@ -59,7 +60,7 @@ export default {
             if(!isActive){
                 return "";
             }
-            let currentlyDesc = (this.current_sort).endsWith("_desc");
+            let currentlyDesc = this.current_sort.endsWith("_desc");
             if(currentlyDesc){
                     return "&darr;"
             }
