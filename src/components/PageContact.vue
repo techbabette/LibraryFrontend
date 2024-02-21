@@ -1,5 +1,4 @@
 <script>
-// import InputAdaptable from "@/components/InputAdaptable.vue";
 import InputForm from "./InputForm.vue";
 import axios from "@/axios/axios";
 export default {
@@ -7,7 +6,6 @@ export default {
 
     components : {
         InputForm
-        // InputAdaptable
     },
 
     data(){
@@ -41,10 +39,6 @@ export default {
     },
 
     methods : {
-        getMessageTypes : async function(){
-            let result = await axios.get("messagetype");
-            this.messageTypes = result.data;
-        },
         sendMessage : async function(){
             let result = await axios.post("message", this.message);
 

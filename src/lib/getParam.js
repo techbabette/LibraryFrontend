@@ -1,4 +1,7 @@
 function getParam(params, requestedParam){
+    if(!params){
+        return undefined;
+    }
     let paramPairs = params.split("|");
 
     let requestedParamChunk = paramPairs.filter((pair) => pair.split(":")[0] === requestedParam)[0] ?? "";
