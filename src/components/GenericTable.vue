@@ -128,4 +128,7 @@ export default {
 .clickable {
     cursor: pointer
 }
+.clickable:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
 </style>

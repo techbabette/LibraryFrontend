@@ -48,6 +48,12 @@ export default {
         currentPage: function () {
             this.$emit("input", this.currentPage)
         },
+        maximum_page: function (newMaxPage){
+            if(newMaxPage < this.currentPage){
+                console.log("in here!");
+                this.currentPage = newMaxPage;
+            }
+        },
         value: function () {
             this.currentPage = this.value;
         }

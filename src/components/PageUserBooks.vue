@@ -1,20 +1,16 @@
 <script>
-import GenericTable from "./GenericTable"
-import TableTab from "./GenericTableTab"
-import PageButtons from "./ButtonsPagination.vue"
+import GenericTableComplete from "./GenericTableComplete.vue"
 export default {
     name: "PageUserBooks",
 
     components: {
-        GenericTable,
-        TableTab,
-        PageButtons
+        GenericTableComplete,
     },
 
     data() {
         return {
-            Tabs: [
-                {
+            tabs: {
+                "Currently loaned" : {
                     "title": "Currently loaned",
                     "endpoint": "loan?current=true",
                     "idField": "id",
@@ -44,7 +40,7 @@ export default {
                             "change" : function(item){
                                 return item.extended ? 'Yes' : 'No'
                             }
-                        }
+                        },
                     ],
                     "itemOptions": [
                         {
@@ -62,9 +58,24 @@ export default {
                             "class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
                         },
-                    ]
+                    ],
+                    items : [],
+                    searchInputs : {
+                        "since" : {
+                            label : "Loaned after",
+                            field_type : "datetime"
+                            },
+                        "before" : {
+                            label : "Loaned before",
+                            field_type : "datetime"
+                        }
+                    },
+                    searchParams : {
+                    },
+                    "page" : 1,
+                    maximumPage : 1,
                 },
-                {
+                "Late" : {
                     "title": "Late",
                     "endpoint": "loan?late=true",
                     "idField": "id",
@@ -115,9 +126,24 @@ export default {
                             "class" : "btn btn-dark mx-1",
                             "onClick" : "patch|loan/return"
                         },
-                    ]
+                    ],
+                    items : [],
+                    searchInputs : {
+                        "since" : {
+                            label : "Loaned after",
+                            field_type : "datetime"
+                            },
+                        "before" : {
+                            label : "Loaned before",
+                            field_type : "datetime"
+                        }
+                    },
+                    searchParams : {
+                    },
+                    "page" : 1,
+                    maximumPage : 1,
                 },
-                {
+                "Previously loaned" : {
                     "title": "Previously loaned",
                     "endpoint": "loan?previous=true&onlyForUser=true",
                     "idField": "id",
@@ -151,9 +177,24 @@ export default {
                             "class" : "btn btn-primary mx-1",
                             "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
                         }
-                    ]
+                    ],
+                    items : [],
+                    searchInputs : {
+                        "since" : {
+                            label : "Loaned after",
+                            field_type : "datetime"
+                            },
+                        "before" : {
+                            label : "Loaned before",
+                            field_type : "datetime"
+                        }
+                    },
+                    searchParams : {
+                    },
+                    "page" : 1,
+                    maximumPage : 1,
                 },
-                {
+                "Favorites" : {
                     "title": "Favorites",
                     "endpoint": "books/favorite",
                     "idField": "id",
@@ -164,7 +205,8 @@ export default {
                         }
                     ],
                 }
-            ]
+            },
+            currentTab : "Currently loaned"
         }
     },
 
@@ -172,54 +214,14 @@ export default {
         username : function(){
             return this.$store.getters['user/claims'].name;
         },
-        currentActiveTab : function(){
-            return this.Tabs.filter((tab) => tab.title == this.currentlyActiveTabTitle)[0] ?? this.Tabs[0];
-        },
-        currentTabPage : {
-            get(){
-                return this.$store.getters['userbooks/tabPage'];
-            },
-            async set(value){
-                let valueAndTab = {value, tab : this.currentActiveTab};
-                await this.$store.dispatch("userbooks/changeTabPage", valueAndTab);
-            }
-        },
-        currentlyActiveTabTitle: function () {
-            return this.$store.getters['userbooks/activeTab'];
-        },
-        itemsForCurrentlyActiveTab: function () {
-            return this.$store.getters['userbooks/tabItems'](this.currentlyActiveTabTitle);
-        },
-        currentHeaders : function(){
-            return this.currentActiveTab.tableHeaders
-        },
-        currentTabMaximumPage : function(){
-            return this.$store.getters['userbooks/tabMaximumPage'];
-        }
-    },
-
-    mounted(){
-        this.changeTab(this.Tabs[0])
-    },
-
-    methods: {
-        changeTab: function (newTab) {
-            this.$store.dispatch("userbooks/changeTab", newTab);
-        },
-        fetchItems: function (){
-            this.$store.dispatch('userbooks/fetchItemsForTab', this.currentActiveTab);
-        }
-    },
+    }
 }
 </script>
 <template>
     <div class="mk-page">
         <div>
-            <p class="h2">These are your books, {{ username }}</p>
-            <TableTab v-for="tab, index in Tabs" :key="index" :title="tab.title"
-                :is_currenctly_active="currentlyActiveTabTitle === tab.title" @click.native="changeTab(tab)" />
-            <GenericTable :items="itemsForCurrentlyActiveTab" :headers="currentHeaders" :options="currentActiveTab.itemOptions" @refresh="fetchItems"/>
-            <PageButtons v-model="currentTabPage" :maximum_page="currentTabMaximumPage"/>
+            Hello {{ username }}, these are your books
+            <GenericTableComplete :_tabs="tabs" :_default_tab="currentTab"/>
         </div>
     </div>
 </template>
