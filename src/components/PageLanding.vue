@@ -76,7 +76,7 @@ export default {
                   <h2 id="mk-book-category">Recent additions</h2>
                   <hr/>
                 </div>
-                <BookShelf source="NewestBooks" mount_action="books/fetch" :query_params="{perPage : 4}"/>
+                <BookShelf source="NewestBooks" mount_action="books/fetch" :query_params="{perPage : 4, sortSelected : 'created_at_desc'}"/>
             </div>
           </div>
     </div>
@@ -105,7 +105,7 @@ export default {
                     <h2 id="mk-book-category">Most popular books</h2>
                     <hr/>
                   </div>
-                  <BookShelf source="MostPopularBooks" mount_action="books/fetch" :query_params="{perPage : 4, sortSelected : 4}"/>
+                  <BookShelf source="MostPopularBooks" mount_action="books/fetch" :query_params="{perPage : 4, sortSelected : 'all_loans_count_desc'}"/>
                 </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ export default{
 
         },
         searchData : {
-            sort : 0,
+            sort : "created_at_desc",
             title : "",
             categories : [],
             authors : [],

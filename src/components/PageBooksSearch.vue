@@ -99,9 +99,18 @@ export default {
       this.$store.dispatch("fetch", { url: 'author', params: {bookCountInName : true, havingBooks : true} }),
       this.$store.dispatch("fetch", { url: 'book', params: { sortOptions: true } }),
     ])
+    let sortOptions = [];
+    sortResult.data.body.forEach((el) => { 
+      if(el.text.startsWith("!!")){
+        return;
+      }
+      sortOptions.push({id : `${el.id}_desc`, text : `${el.text} (Desc)`}),
+      sortOptions.push({id : `${el.id}_asc`, text : `${el.text} (Asc)`})}
+    )
+
     this.paramOptions.categories = categoryResult.data.body;
     this.paramOptions.authors = authorResult.data.body;
-    this.paramOptions.sort = sortResult.data.body;
+    this.paramOptions.sort = sortOptions;
 
     this.items = bookResult;
   },
