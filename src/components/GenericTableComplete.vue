@@ -2,7 +2,6 @@
 import GenericTable from "./GenericTable"
 import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
-// import InputAdaptable from "./InputAdaptable.vue"
 import InputForm from "./InputForm.vue"
 import axiosInstance from "@/axios/axios"
 export default {
@@ -11,7 +10,6 @@ export default {
         GenericTable,
         TableTab,
         PageButtons,
-        // InputAdaptable,
         InputForm
     },
 
@@ -98,7 +96,7 @@ export default {
 
             params.page = this.currentTab.page;
 
-            let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params : this.currentTab.searchParams});
+            let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params});
 
             this.tabs[this.currentTabName].items = items.body.data;
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
