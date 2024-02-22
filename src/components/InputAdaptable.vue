@@ -1,6 +1,10 @@
 <script>
+import InputDropdownSelectMultiple from './InputDropdownSelectMultiple.vue';
 export default {
     name: 'InputAdaptable',
+
+    components : {InputDropdownSelectMultiple},
+
     data() {
         return {
             localValue: undefined,
@@ -45,6 +49,10 @@ export default {
         check_on_blur: {
             Type: Boolean,
             default: true
+        },
+        show_values : {
+            Type: Boolean,
+            default: false
         }
     },
 
@@ -69,6 +77,9 @@ export default {
 
     methods: {
         makeUpperCase(string) {
+            if(!string){
+                return;
+            }
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
         emitName() {
@@ -109,6 +120,10 @@ export default {
                 {{ makeUpperCase(option[options_text_field]) }}
             </option>
         </select>
+
+        <InputDropdownSelectMultiple v-if="field_type == 'selectMultiple'" :options="options" 
+        :text_field="options_text_field" :value_field="options_value_field" :name="label"
+        v-model="localValue" :id="id" :show_values="show_values"/>
 
         <p v-if="error_message" class="alert alert-danger py-2 my-1">{{ error_message }}</p>
         <p v-if="ShowHint">{{ hint }}</p>

@@ -4,7 +4,10 @@ export default {
 
     props : {
         name : String,
-        options : Array,
+        options : {
+            type : Array,
+            default : () => []
+        },
         text_field : {
             default : 'name',
             type : String
@@ -14,13 +17,37 @@ export default {
             type : String
         },
         value : {
-            type: [Array]
+            type: Array,
+            default : () => []
         },
     },
     data(){
         return {
             localValue : []
         }
+    },
+
+    computed : {
+        buttonText: function(){
+            let selectedOptionsText = ""
+            if(this.localValue){
+                let textValues = [];
+                this.options.forEach((option) => {
+                    if(this.localValue.includes(option[this.value_field])){
+                        textValues.push(option[this.text_field]);
+                    }
+                })
+                selectedOptionsText = textValues.join(", ")
+            }
+
+
+
+            if(!selectedOptionsText && this.name){
+                return this.name
+            }
+
+            return selectedOptionsText;
+       }
     },
 
     watch: {
@@ -40,7 +67,7 @@ export default {
 <template>
     <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-        {{name}}
+        {{buttonText}}
     </button>
     <ul class="dropdown-menu" id="categoryHolder" aria-labelledby="dropdownMenuButton1">
         <li v-for="option, key in options" :key="key">

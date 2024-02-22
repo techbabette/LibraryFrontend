@@ -105,6 +105,53 @@ export default {
                 page : 1,
                 maximumPage : 1,
             },
+            "Books" : {
+                "title" : "Book",
+                "weight" : 90,
+                "endpoint" : "book?perPage=5&withActiveLoanCount=true&withLoanCount=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "name"
+                    },
+                    {
+                        "text" : "Category",
+                        "field" : "category.text"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                    "categories" : {
+                        "label" : "Categories",
+                        "field_type" : "selectMultiple",
+                        "showValues" : true,
+                        "name" : "Category",
+                        "source" : "get|category?noPage=true",
+                        "options_text_field" : "text"
+                    }
+                },
+                searchParams : {
+                },
+                page : 1,
+                maximumPage : 1,
+            },
             "Loans" : {
                 "title" : "Loans",
                 "weight" : 90,

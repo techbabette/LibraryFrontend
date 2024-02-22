@@ -2,7 +2,7 @@
 import GenericTable from "./GenericTable"
 import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
-import InputAdaptable from "./InputAdaptable.vue"
+// import InputAdaptable from "./InputAdaptable.vue"
 import InputForm from "./InputForm.vue"
 import axiosInstance from "@/axios/axios"
 export default {
@@ -11,7 +11,7 @@ export default {
         GenericTable,
         TableTab,
         PageButtons,
-        InputAdaptable,
+        // InputAdaptable,
         InputForm
     },
 
@@ -156,10 +156,7 @@ export default {
     />
     <div class="adminBorder rounded-left rounded-bottom rounded-right">
         <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0" class="col-12 d-flex justify-content-start">
-        <InputAdaptable class="d-flex flex-column col-2 px-2" v-for="inputBind, index in Object.keys(currentTab.searchInputs ?? {})" 
-        :key="index + 'a'" :field_type="currentTab.searchInputs[inputBind].field_type" :label="currentTab.searchInputs[inputBind].label"
-        v-model="currentTab.searchParams[inputBind]"
-        />
+            <InputForm :elements="currentTab.searchInputs" v-model="currentTab.searchParams"/>
         </div>
         <div v-else>
             Search options will appear here if available

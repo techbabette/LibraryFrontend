@@ -86,8 +86,8 @@ export default {
 
 <template>
     <div>
-        <InputAdaptable :class="elements[inputBind].class" v-for="inputBind, index of Object.keys(elements)" 
-        :key="index + 'a'" :field_type="elements[inputBind].field_type" :label="elements[inputBind].label" :options="formSources[elementSource(inputBind)]"
+        <InputAdaptable v-for="inputBind, index of Object.keys(elements)" 
+        :key="index + 'a'" v-bind="elements[inputBind]" :options="formSources[elementSource(inputBind)]"
         v-model="formValue[inputBind]"/>
     </div>
 </template>
