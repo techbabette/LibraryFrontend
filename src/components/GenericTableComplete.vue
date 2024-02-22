@@ -54,6 +54,28 @@ export default {
                 this.refresh();
             },
             deep: true
+        },
+        tabs : {
+            handler: function(){
+                this.$emit("newTabState", this.tabs);
+            },
+            deep : true
+        },
+        currentTabName : {
+            handler: function(){
+                this.$emit("newTab", this.currentTabName);
+            }
+        },
+        _default_tab : {
+            handler: function(){
+                this.currentTabName = this._default_tab;
+            }
+        },
+        _tabs: {
+            handler: function(){
+                this.tabs = this._tabs;
+            },
+            deep : true
         }
     },
 
