@@ -3,30 +3,41 @@ import GenericTable from "./GenericTable"
 import TableTab from "./GenericTableTab"
 import PageButtons from "./ButtonsPagination.vue"
 import InputAdaptable from "./InputAdaptable.vue"
+import InputForm from "./InputForm.vue"
+import axiosInstance from "@/axios/axios"
 export default {
     name : "GenericTableComplete",
     components : {
         GenericTable,
         TableTab,
         PageButtons,
-        InputAdaptable
+        InputAdaptable,
+        InputForm
     },
 
     props : {
         _tabs: Object,
-        _default_tab: String
+        _forms : Object,
+        _default_tab: String,
     },
 
     data(){
         return {
             tabs : {},
-            currentTabName : this._default_tab
+            forms : {},
+            currentTabName : this._default_tab,
+            formData : {},
+            showForm : false,
+            openFormIndex : -1
         }
     },
 
     computed : {
         currentTab : function(){
             return this.tabs[this.currentTabName];
+        },
+        baseEndpoint : function(){
+            return this.currentTab.endpoint.split("?")[0];
         },
         saerchInformation: function(){
             return {
@@ -48,6 +59,7 @@ export default {
 
     beforeMount(){
         this.tabs = this._tabs;
+        this.forms = this._forms ?? {};
         this.currentTabName = this._default_tab;
     },
 
@@ -96,6 +108,19 @@ export default {
             this.fetchItems();
             return;
         },
+        openForm : async function(callerId = 0){
+            //If called with id, get current information and store to formData before opening
+
+            let method = callerId ? "patch" : "post";
+
+            if(method === "patch"){
+                let currentInformation = (await axiosInstance.get(`${this.baseEndpoint}/${callerId}`)).body;
+                this.formData = currentInformation;
+            }
+
+            //After form is ready, set showForm to true
+            this.showForm = true;
+        },
         refresh: async function(){
             await this.fetchItems();
         }
@@ -120,13 +145,13 @@ export default {
 
         <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
             @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? []" :current_sort="currentTab.selectedSort ?? ''"
-            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
+            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)" @openForm="openForm"
         />
     </div>
 
-    <div id="modal-background" class="mk-modal">
-        <div id="user-modal" class="mk-modal-content">
-            Hello I am a div
+    <div id="modal-background" class="mk-modal" :class="{hidden : !showForm}">
+        <div class="mk-modal-content" >
+            <InputForm :elements="(forms[currentTabName] ?? {elements : {}}).elements" v-model="formData"/>
         </div>
     </div>
 

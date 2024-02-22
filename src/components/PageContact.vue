@@ -54,10 +54,6 @@ export default {
         <div class="col-6">
             <h2>Send a message to the administration team</h2>
                 <InputForm :elements="formElements" v-model="message"/>
-                <!-- <InputAdaptable v-model="message.title" field_type="string" label="Title"/>
-                <InputAdaptable v-model="message.message_type_id" field_type="select" label="Message type" :options="messageTypes"/>
-                <InputAdaptable v-model="message.body" field_type="text" label="Text"/> -->
-
             <a href="" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">Send</a>
         </div>
     </div>

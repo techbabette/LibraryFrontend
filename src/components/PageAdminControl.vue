@@ -42,6 +42,80 @@ export default {
                 "page" : 1,
                 maximumPage : 1,
             },
+            "Authors" : {
+                "title" : "Authors",
+                "weight" : 95,
+                "endpoint" : "author?withBookCount=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "name"
+                    },
+                    {
+                        "text" : "Last name",
+                        "field" : "last_name"
+                    },
+                    {
+                        "text" : "Books",
+                        "field" : "books_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                },
+                searchParams : {
+                },
+                "page" : 1,
+                maximumPage : 1,
+            },
+            "Categories" : {
+                "title" : "Category",
+                "weight" : 95,
+                "endpoint" : "category?withActiveLoanCount=true&withLoanCount=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "text"
+                    },
+                    {
+                        "text" : "Books",
+                        "field" : "books_count"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                },
+                searchParams : {
+                },
+                page : 1,
+                maximumPage : 1,
+            },
             "Loans" : {
                 "title" : "Loans",
                 "weight" : 90,
