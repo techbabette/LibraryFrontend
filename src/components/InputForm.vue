@@ -15,7 +15,8 @@ export default {
             default : () => {}
         },
         value : {
-            Type : Object
+            Type : Object,
+            default : () => {}
         }
     },
 
@@ -27,16 +28,15 @@ export default {
     },
 
     watch: {
+        value: function () {
+            this.formValue = this.value
+        },
         localValue: function () {
             this.$emit("input", this.formValue)
         },
-        value: function () {
-            this.formValue = this.value
-        }
     },
 
     mounted(){
-        console.log(Object.keys(this.elements));
         this.formValue = this.value;
         this.loadSources();
     },

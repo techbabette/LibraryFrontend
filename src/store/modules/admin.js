@@ -95,6 +95,11 @@ export default {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "Show books",
+                        "class" : "btn btn-info mx-1",
+                        "onClick" : "dispatch|admin/booksWithCategory"
                     }
                 ],
                 items : [],
@@ -203,7 +208,12 @@ export default {
     },
 
     actions : {
+        booksWithCategory(context, categoryId){
+            Vue.set(context.state, 'currentTab', "Books");
+            Vue.set(context.state.adminTabs.Books.searchParams, 'categories', [categoryId]);
 
+            return {success : true};
+        }
     },
 
     mutations : {

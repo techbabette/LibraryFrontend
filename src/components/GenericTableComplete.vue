@@ -90,7 +90,7 @@ export default {
             this.currentTabName = newTab;
         },
         fetchItems: async function(){
-            let params = this.currentTab.searchParams;
+            let params = {...this.currentTab.searchParams};
 
             if(this.currentTab.selectedSort){
                 params.sortSelected = this.currentTab.selectedSort;
