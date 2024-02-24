@@ -19,10 +19,15 @@ function (response){
     }
 }, 
 function(error){
+    let response = {success : false};
     if(error.response){
+        response.errors = {};
+        for(let key of Object.keys(error.response.data.errors)){
+            response.errors[key] = error.response.data.errors[key][0];
+        }
         store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
     }
-    return {success : false};
+    return response;
 }
 );
 
