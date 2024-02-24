@@ -20,6 +20,7 @@ export default {
         },
         errors : {
             Type : Object,
+            required : false,
             default : () => {}
         },
         _class : {
@@ -96,7 +97,7 @@ export default {
     <div :class="_class">
         <InputAdaptable v-for="inputBind, index of Object.keys(elements)" 
         :key="index + 'a'" v-bind="elements[inputBind]" :options="formSources[elementSource(inputBind)]"
-        :error_message="errors[inputBind]"
+        :error_message="(errors ?? {})[inputBind]"
         v-model="formValue[inputBind]"/>
     </div>
 </template>
