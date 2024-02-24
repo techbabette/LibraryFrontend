@@ -21,7 +21,10 @@ export default {
         return Object.keys(this.bookInformation).length > 0;
       },
       loanedToUser(){
-        return this.bookInformation.loan_id ? true : false;
+        return this.bookInformation.loan_to_user_id ? true : false;
+      },
+      numberAvailable(){
+        return Math.max(this.bookInformation.number_owned - this.bookInformation.loans_count, 0);
       },
       loanButtonText : function(){
         return this.loanedToUser ? "Return book" : "Borrow book";
@@ -44,14 +47,14 @@ export default {
         let result = await (axios.post('/loan', {book_id : this.bookInformation.id}));  
         
         if(result.success){
+          console.log("Here");
           this.$store.commit("messages/display", {text : result.message, success : true})
-          this.bookInformation.loan_id = result.body.loan_id;
+          this.bookInformation.loan_to_user_id = result.body.loan_to_user_id;
           this.updateBookInfo();
         }
       },
       returnBook : async function (){
-        let result = await (axios.patch(`/loan/return/${this.bookInformation.loan_id}`));  
-        
+        let result = await (axios.patch(`/loan/return/${this.bookInformation.loan_to_user_id}`));  
         if(result.success){
           this.$store.commit("messages/display", {text : result.message, success : true})
           this.updateBookInfo();
@@ -95,14 +98,17 @@ export default {
               </p> 
             </div> 
             <div class="dynamic-field">
-              <p id="loaned-field">Loaned {{ bookInformation.total_loans }} times</p>
+              <p id="loaned-field">Loaned {{ bookInformation.all_loans_count }} times</p>
             </div>
             <div class="dynamic-field">
-             <p id="availability-field">Number of available copies: {{ Math.max(bookInformation.currently_available, 0) }}</p>
+             <p id="availability-field">Number of available copies: {{ numberAvailable }}</p>
             </div>
             <a class="btn bigButton btn-light w-50" @click.prevent="handleLoanButtonClick">{{ loanButtonText }}</a>
             </div>
           </div>
+      </div>
+      <div v-else>
+           No active book found
       </div>
   </div>
 </template>
