@@ -23,6 +23,9 @@ export default {
       loanedToUser(){
         return this.bookInformation.loan_to_user_id ? true : false;
       },
+      favorite(){
+        return this.bookInformation.favorite_to_user_id ? true : false
+      },
       numberAvailable(){
         return Math.max(this.bookInformation.number_owned - this.bookInformation.loans_count, 0);
       },
@@ -56,7 +59,6 @@ export default {
         let result = await (axios.post('/loan', {book_id : this.bookInformation.id}));  
         
         if(result.success){
-          console.log("Here");
           this.$store.commit("messages/display", {text : result.message, success : true})
           this.updateBookInfo();
         }
@@ -75,6 +77,28 @@ export default {
           await this.loanOut();
         }
       },
+      addtoFavorites : async function(){
+        let result = await (axios.post('/favorite', {book_id : this.bookInformation.id}));  
+        
+        if(result.success){
+          this.$store.commit("messages/display", {text : result.message, success : true})
+          this.bookInformation.favorite_to_user_id = result.body.favorite_id;
+        }
+      },
+      removeFromFavorites : async function(){
+        let result = await (axios.delete(`/favorite/${this.bookInformation.favorite_to_user_id}`));  
+        if(result.success){
+          this.$store.commit("messages/display", {text : result.message, success : true})
+          this.bookInformation.favorite_to_user_id = false;
+        }
+      },
+      handleFavoriteButtonClick : async function(){
+        if(this.favorite){
+          await this.removeFromFavorites();
+        }else{
+          await this.addtoFavorites();
+        }
+      },
       updateBookInfo : async function (){
         this.bookInformation = (await this.$store.dispatch("fetch", {url : `/book/${this.$route.params.id}`})).body;
       }
@@ -87,6 +111,10 @@ export default {
           <div class="col-12 col-lg-3">
             <div class="position-relative">
               <img :src="imgSource(bookInformation.img)" id="bookImage" class="card-img-top img-fluid image-zoom data-zoom" alt="Korica knjige">
+              <a href="#" @click.prevent="handleFavoriteButtonClick" class="mk-favorite-icon-holder">
+                <IconifyIcon class="iconify mk-favorite-icon"
+                :icon="favorite ? 'mdi:cards-heart' : 'mdi:cards-heart-outline'"></IconifyIcon>
+              </a>
             </div>
           </div>
           <div class="col-12 col-lg-9" id="bookInfo">

@@ -202,14 +202,35 @@ export default {
                 },
                 "Favorites" : {
                     "title": "Favorites",
-                    "endpoint": "books/favorite",
+                    "endpoint": "favorite",
                     "idField": "id",
                     "tableHeaders": [
                         {
-                            "text": "name",
-                            "field": "name",
+                            "text": "Book",
+                            "field": "book.name",
+                        },
+                        {
+                            "text": "Added at",
+                            "field": "created_at"
                         }
                     ],
+                    "itemOptions": [
+                        {
+                            "name" : "View",
+                            "class" : "btn btn-primary mx-1",
+                            "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                        },
+                        {
+                            "name" : "Remove",
+                            "class" : "btn btn-danger mx-1",
+                            "onClick" : "delete|favorite"
+                        },
+                    ],
+                    items : [],
+                    searchParams : {
+                    },
+                    "page" : 1,
+                    maximumPage : 1,
                 }
             },
             currentTab : "Currently loaned"
