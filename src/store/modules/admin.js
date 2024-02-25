@@ -46,7 +46,7 @@ export default {
                 searchParams : {
                     "since" : undefined
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Books" : {
@@ -172,7 +172,7 @@ export default {
                 },
                 searchParams : {
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Links" : {
@@ -200,7 +200,7 @@ export default {
                 items : [],
                 searchParams : {
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Users" : {
@@ -228,7 +228,7 @@ export default {
                 items : [],
                 searchParams : {
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Message Types" : {
@@ -256,7 +256,7 @@ export default {
                 items : [],
                 searchParams : {
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Messages" : {
@@ -289,7 +289,7 @@ export default {
                 items : [],
                 searchParams : {
                 },
-                "page" : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             }
         },

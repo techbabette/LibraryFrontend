@@ -42,7 +42,7 @@ export default {
                     items : [],
                     searchParams : {
                     },
-                    "page" : 1,
+                    "selectedSort" : "", "page" : 1,
                     maximumPage : 1,
                 },
             },

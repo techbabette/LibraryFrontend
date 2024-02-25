@@ -42,13 +42,17 @@ export default {
                 tab : this.currentTabName,
                 page : (this.currentTab ?? {page : 1}).page ?? 1, 
                 searchParams : (this.currentTab ?? {searchParams : "empty"}).searchParams ?? {},
+                selectedSort : (this.currentTab ?? {selectedSort : ""}).selectedSort ?? ""
             }
         },
     },
 
     watch : {
         saerchInformation : {
-            handler: function(){
+            handler: function(oldData, newData){
+                if(oldData.page === newData.page){
+                    this.currentTab.page = 1;
+                }
                 this.refresh();
             },
             deep: true
@@ -112,20 +116,17 @@ export default {
         newSort: function(field){
             let currentlyActive = (this.currentTab.selectedSort ?? "").startsWith(field);
             if(!currentlyActive){
-                this.currentTab.selectedSort = `${field}_desc`;
-                this.fetchItems();
+                this.currentTab['selectedSort'] = `${field}_desc`;
                 return;
             }
             //If currently active
             let currentlyDesc = (this.currentTab.selectedSort ?? "").endsWith("_desc");
             if(currentlyDesc){
-                this.currentTab.selectedSort = `${field}_asc`;
-                this.fetchItems();
+                this.currentTab['selectedSort'] = `${field}_asc`;
                 return;
             }
 
-            this.currentTab.selectedSort = `${field}_desc`;
-            this.fetchItems();
+            this.currentTab['selectedSort'] = `${field}_desc`;
             return;
         },
         openForm : async function(callerId = 0){
@@ -172,7 +173,7 @@ export default {
         </div>
     </div>
 
-    <PageButtons v-model="currentTab['page']" :maximum_page="currentTab.maximumPage" />
+    <PageButtons v-model="currentTab['page']" :maximum_page="currentTab.maximumPage" buttonClass="bg-white text-dark"/>
 </div>
 </template>
 
@@ -180,6 +181,16 @@ export default {
 .adminBorder {
 	border: 2px solid black;
     border-top: 0px;
+}
+.text-dark{
+    color: grey !important;
+}
+.text-dark.active{
+    border: 1.5px solid black !important;
+    color: black !important;
+}
+.text-dark:hover{
+    color: black !important;
 }
 </style>
 

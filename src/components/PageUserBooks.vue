@@ -75,7 +75,7 @@ export default {
                     },
                     searchParams : {
                     },
-                    "page" : 1,
+                    "selectedSort" : "", "page" : 1,
                     maximumPage : 1,
                 },
                 "Late" : {
@@ -146,7 +146,7 @@ export default {
                     },
                     searchParams : {
                     },
-                    "page" : 1,
+                    "selectedSort" : "", "page" : 1,
                     maximumPage : 1,
                 },
                 "Previously loaned" : {
@@ -197,7 +197,7 @@ export default {
                     },
                     searchParams : {
                     },
-                    "page" : 1,
+                    "selectedSort" : "", "page" : 1,
                     maximumPage : 1,
                 },
                 "Favorites" : {
@@ -229,7 +229,7 @@ export default {
                     items : [],
                     searchParams : {
                     },
-                    "page" : 1,
+                    "selectedSort" : "", "page" : 1,
                     maximumPage : 1,
                 }
             },
