@@ -34,10 +34,10 @@ export default {
             <router-link :to="{name : 'Book preview', params: { id: book.id }}"> <h5 class="card-title book-title">{{ book.name }}</h5></router-link>
             <p class="card-text book-desc"><em> {{ LimitToFullWords(book.description,30) }}</em></p>
             <p class="card-text mk-light-yellow">
-            <BookButtonFollowValue :text="book.category.text" :value="book.category.id" name="categories"/>
+            <BookButtonFollowValue :text="book.category.text" :value="book.category" name="categories"/>
             </p>
                 <p class="card-text">
-                <BookButtonFollowValue :text='book.author.name + " " + book.author.last_name' :value="book.author.id" name="authors"/>
+                <BookButtonFollowValue :text='book.author.name + " " + book.author.last_name' :value="book.author" name="authors"/>
             </p>
         </div>
         </div>

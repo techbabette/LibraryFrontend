@@ -26,8 +26,17 @@ export default {
       numberAvailable(){
         return Math.max(this.bookInformation.number_owned - this.bookInformation.loans_count, 0);
       },
+      showLoanButton : function(){
+        return !this.inactive || this.loanedToUser
+      },
       loanButtonText : function(){
         return this.loanedToUser ? "Return book" : "Borrow book";
+      },
+      inactive : function(){
+        return this.bookInformation.deleted_at ? true : false;
+      },
+      inactiveText : function(){
+        return this.inactive ? "<INACTIVE>" : "";
       }
     },
 
@@ -49,7 +58,6 @@ export default {
         if(result.success){
           console.log("Here");
           this.$store.commit("messages/display", {text : result.message, success : true})
-          this.bookInformation.loan_to_user_id = result.body.loan_to_user_id;
           this.updateBookInfo();
         }
       },
@@ -83,27 +91,27 @@ export default {
           </div>
           <div class="col-12 col-lg-9" id="bookInfo">
             <div class="w-100 mk-yellow">
-              <h2 id="book-title">{{ bookInformation.name }}</h2>
+              <h2 id="book-title">{{ bookInformation.name }} <span class="text-danger">{{ inactiveText }}</span></h2>
           </div>
           <p id="book-description"> {{ bookInformation.description }}</p>
           <div>
             <div class="dynamic-field" id="author-field">
               <p>Author: 
-                <BookButtonFollowValue :text='bookInformation.author.name + " " + bookInformation.author.last_name' :value="bookInformation.author.id" name="authors"/>
+                <BookButtonFollowValue :text='bookInformation.author.name + " " + bookInformation.author.last_name' :value="bookInformation.author" name="authors"/>
               </p> 
             </div>
             <div class="dynamic-field" id="category-field">
               <p>Category:
-                 <BookButtonFollowValue :text="bookInformation.category.text" :value="bookInformation.category.id" name="categories"/>
+                 <BookButtonFollowValue :text="bookInformation.category.text" :value="bookInformation.category" name="categories"/>
               </p> 
             </div> 
             <div class="dynamic-field">
               <p id="loaned-field">Loaned {{ bookInformation.all_loans_count }} times</p>
             </div>
-            <div class="dynamic-field">
+            <div class="dynamic-field" v-if="!inactive">
              <p id="availability-field">Number of available copies: {{ numberAvailable }}</p>
             </div>
-            <a class="btn bigButton btn-light w-50" @click.prevent="handleLoanButtonClick">{{ loanButtonText }}</a>
+            <a class="btn bigButton btn-light w-50" @click.prevent="handleLoanButtonClick" v-if="showLoanButton">{{ loanButtonText }}</a>
             </div>
           </div>
       </div>

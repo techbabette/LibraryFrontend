@@ -4,14 +4,19 @@ export default{
 
 	props : {
 		name : String,
-		value : Number,
+		value : Object,
 		text : String
 	},
 
 	methods : {
-		setSearchParam(param, newValue) {
+		setSearchParam(param, bookDescriber) {
+			if(bookDescriber.deleted_at){
+				this.$store.commit("messages/display", {text : "No longer available", success : false});
+				return;
+			}
+			console.log(bookDescriber);
             this.$store.commit("books/clearSearchParams");
-            this.$store.commit("books/setSearchParam", { value: newValue, name: param });
+            this.$store.commit("books/setSearchParam", { value: [bookDescriber.id], name: param });
             if (this.$route.path !== "/books") {
                 this.$router.push("/books");
             }
@@ -21,5 +26,5 @@ export default{
 </script>
 
 <template>
-	<a href @click.prevent="setSearchParam(name, [value])">{{ text }}</a>
+	<a href @click.prevent="setSearchParam(name, value)">{{ text }}</a>
 </template>
