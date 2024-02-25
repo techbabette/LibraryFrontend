@@ -189,8 +189,15 @@ export default {
                         "field" : "to"
                     },
                     {
-                        "text" : "Access level required",
-                        "field" : "access_level.access_level"
+                        "text" : "Shown to",
+                        "field" : "access_level.access_level",
+                        "change" : function(item){
+                            return item.access_level.name;
+                        }
+                    },
+                    {
+                        "text" : "Position",
+                        "field" : "link_position.position"
                     },
                     {
                         "text" : "Icon",

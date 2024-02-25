@@ -8,7 +8,7 @@ export default{
     },
     actions : {
         async fetch(context){
-            let links = (await axios.get('/link')).data;
+            let links = (await axios.get('/link/me')).data;
 
             context.commit("changeLinks", links);
         },

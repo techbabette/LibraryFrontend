@@ -150,9 +150,10 @@ export default {
 </script>
 <template>
     <div>
-        <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
-        :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"
-    />
+        <div class="overflow-x-scroll">
+            <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
+            :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"/>
+        </div>
     <div class="adminBorder rounded-left rounded-bottom rounded-right">
         <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0" class="col-12 d-flex justify-content-start">
             <InputForm :elements="currentTab.searchInputs" v-model="currentTab.searchParams"/>
@@ -195,6 +196,9 @@ export default {
 </style>
 
 <style scoped>
+.overflow-x-scroll{
+    overflow-x: scroll;
+}
 .mk-modal-content{
     color: white;
 }
