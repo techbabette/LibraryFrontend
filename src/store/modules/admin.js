@@ -80,6 +80,11 @@ export default {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "Delete",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|book"
                     }
                 ],
                 items : [],
