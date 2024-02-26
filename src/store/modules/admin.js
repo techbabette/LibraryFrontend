@@ -301,7 +301,7 @@ export default {
                 "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
-            "Inactive loans" : {
+            "Returned loans" : {
                 "title" : "Loans",
                 "weight" : 90,
                 "endpoint" : "loan?previous=true&panel=true",
@@ -325,13 +325,6 @@ export default {
                         change : function(item){
                             return item.returned_at ?? "/";
                         }
-                    }
-                ],
-                "itemOptions" : [
-                    {
-                        "name" : "Assume",
-                        "class" : "btn btn-danger mx-1",
-                        "onClick" : "get|user/assume"
                     }
                 ],
                 items : [],
