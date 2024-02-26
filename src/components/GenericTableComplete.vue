@@ -169,7 +169,7 @@ export default {
             let result = await axiosInstance({method : verb, url, data : limitedDataObject});
 
             if(result.success){
-                this.$store.commit("message/display", {text : result.message, success : result.success});
+                this.$store.commit("messages/display", {text : result.message, success : result.success});
                 this.fetchItems();
                 this.showForm = false;
             }

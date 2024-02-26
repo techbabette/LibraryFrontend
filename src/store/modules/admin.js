@@ -486,10 +486,12 @@ export default {
         async assumeUser(context, userId){
             let response = await axiosInstance.get(`user/assume/${userId}`);
 
-            router.push("/");
+            router.push("/").catch(() => {});
 
             context.commit("messages/display", {text : "Successfully assumed user", success : true}, {root : true});
             context.commit("user/changeToken", response.body, {root : true});
+
+            return {success : true};
         },
         booksWithCategory(context, categoryId){
             Vue.set(context.state, 'currentTab', "Books");
