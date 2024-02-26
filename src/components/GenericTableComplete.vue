@@ -25,6 +25,7 @@ export default {
             forms : {},
             currentTabName : this._default_tab,
             formData : {},
+            formErrors : {},
             showForm : false,
             openFormIndex : -1
         }
@@ -137,6 +138,9 @@ export default {
         },
         openForm : async function(callerId = 0){
             //If called with id, get current information and store to formData before opening
+            this.openFormIndex = callerId;
+            this.formData = {};
+            this.formErrors = {};
 
             if(callerId){
                 let currentInformation = (await axiosInstance.get(`${this.baseEndpoint}/edit/${callerId}`)).body;
@@ -145,6 +149,33 @@ export default {
 
             //After form is ready, set showForm to true
             this.showForm = true;
+        },
+        submitForm : async function(){
+            let url = this.baseEndpoint;
+            let verb = "post";
+
+            if(this.openFormIndex){
+                url += `/update/${this.openFormIndex}`;
+                verb = "patch";
+            }
+
+            let keysToSend = Object.keys(this.currentForm);
+            let limitedDataObject = {};
+
+            for(let key of keysToSend){
+                limitedDataObject[key] = this.formData[key];
+            }
+
+            let result = await axiosInstance({method : verb, url, data : limitedDataObject});
+
+            if(result.success){
+                this.$store.commit("message/display", {text : result.message, success : result.success});
+                this.fetchItems();
+                this.showForm = false;
+            }
+            if(result.errors){
+                this.formErrors = result.errors;
+            }
         },
         refresh: async function(){
             await this.fetchItems();
@@ -175,8 +206,8 @@ export default {
 
     <div id="modal-background" class="mk-modal" v-if="currentForm" :class="{hidden : !showForm}">
         <div class="mk-modal-content" >
-            <InputForm :elements="currentForm" v-model="formData"/>
-            <a href="" class="col-12 btn btn-success text-light my-2" @click.prevent="closeForm">Submit</a>
+            <InputForm :elements="currentForm" :errors="formErrors" v-model="formData"/>
+            <a href="" class="col-12 btn btn-success text-light my-2" @click.prevent="submitForm">Submit</a>
             <a href="" class="col-12 btn btn-danger text-light my-2" @click.prevent="closeForm">Close form</a>
         </div>
     </div>

@@ -15,6 +15,9 @@ axiosInstance.interceptors.request.use(
 axiosInstance.interceptors.request.use(
     function(config){
         config.params = {...config.params, _method : `${config.method}`};
+        if(config.method != 'get'){
+            config.method = 'post';            
+        }
         return config;
     }, function (error){
         console.log(error);
