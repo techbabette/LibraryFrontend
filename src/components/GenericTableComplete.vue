@@ -24,6 +24,7 @@ export default {
             tabs : {},
             forms : {},
             currentTabName : this._default_tab,
+            currentItemPage : 1,
             formData : {},
             formErrors : {},
             showForm : false,
@@ -106,9 +107,10 @@ export default {
 
             let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params});
 
+
             this.tabs[this.currentTabName].items = items.body.data;
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
-
+            this.currentItemPage = items.body.current_page;
             if(items.data.sortOptions){
                 let newSortOptions = items.data.sortOptions.map((option) => option.id);
                 if(items.data.sortDefault && !this.currentTab.selectedSort){
@@ -199,7 +201,7 @@ export default {
 
         <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions" :table_options="currentTab.table_options"
             @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? []" :current_sort="currentTab.selectedSort ?? ''"
-            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
+            @newSort="newSort" :first_item_positon="(currentItemPage - 1) * (currentTab.perPage ?? 5)"
             @showForm="openForm"
         />
     </div>
