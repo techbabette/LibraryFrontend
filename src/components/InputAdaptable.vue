@@ -58,7 +58,7 @@ export default {
 
     computed: {
         ShowHint() {
-            return this.hint && !this.error_message;
+            return this.hint && !this.error_message && this.field_type !== "selectMultiple";
         }
     },
 
@@ -123,7 +123,7 @@ export default {
 
         <InputDropdownSelectMultiple v-if="field_type == 'selectMultiple'" :options="options" 
         :text_field="options_text_field" :value_field="options_value_field" :name="label"
-        v-model="localValue" :id="id" :show_values="show_values"/>
+        v-model="localValue" :id="id" :hint="hint"/>
 
         <p v-if="error_message" class="alert alert-danger py-2 my-1">{{ error_message }}</p>
         <p v-if="ShowHint">{{ hint }}</p>

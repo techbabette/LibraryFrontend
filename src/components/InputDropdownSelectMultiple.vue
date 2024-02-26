@@ -3,7 +3,11 @@ export default {
     name : "InputDropdownSelectMultiple",
 
     props : {
-        name : String,
+        hint : String,
+        hint_only : {
+            type : Boolean,
+            default : false
+        },
         options : {
             type : Array,
             default : () => []
@@ -30,6 +34,9 @@ export default {
     computed : {
         buttonText: function(){
             let selectedOptionsText = ""
+            if(this.hint_only && this.hint){
+                return this.hint;
+            }
             if(this.localValue){
                 let textValues = [];
                 this.options.forEach((option) => {
@@ -42,8 +49,8 @@ export default {
 
 
 
-            if(!selectedOptionsText && this.name){
-                return this.name
+            if(!selectedOptionsText && this.hint){
+                return this.hint
             }
 
             return selectedOptionsText;

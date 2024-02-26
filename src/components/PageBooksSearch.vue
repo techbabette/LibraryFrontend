@@ -134,9 +134,9 @@ export default {
       <div id="filters">
         <InputAdaptable class="d-flex flex-column text-center" v-model="searchTitle" label="Search by title"/>
         <DropdownSelect options_text_field="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
-        <InputDropdownSelectMultiple name="Category" :options="paramOptions.categories" text_field="text"
+        <InputDropdownSelectMultiple hint="Category" :hint_only="true" :options="paramOptions.categories" text_field="text"
           v-model="selectedCategories" />
-        <InputDropdownSelectMultiple name="Author" :options="paramOptions.authors" text_field="full_name"
+        <InputDropdownSelectMultiple hint="Author" :hint_only="true" :options="paramOptions.authors" text_field="full_name"
           v-model="selectedAuthors" />
         <a class="btn btn-dark w-100" id="resetFilterButton" @click.prevent="removeFilters" href="#">Remove filters</a>
       </div>

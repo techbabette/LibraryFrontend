@@ -93,7 +93,7 @@ export default {
                         "label" : "Categories",
                         "field_type" : "selectMultiple",
                         "showValues" : true,
-                        "name" : "Category",
+                        "hint" : "Click to show options",
                         "source" : "get|category?noPage=true",
                         "options_text_field" : "text"
                     }
