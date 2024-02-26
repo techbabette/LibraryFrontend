@@ -43,6 +43,12 @@ export default {
         localValue: function () {
             this.$emit("input", this.formValue)
         },
+        elements : {
+            handler : function(){
+                this.loadSources();
+            },
+            deep : true
+        }
     },
 
     mounted(){

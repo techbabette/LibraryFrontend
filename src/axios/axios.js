@@ -21,7 +21,7 @@ function (response){
 function(error){
     let response = {success : false};
     store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
-    if(!error.response){
+    if(typeof error.response === undefined){
         return response;
     }
     if(!error.response.data.errors){

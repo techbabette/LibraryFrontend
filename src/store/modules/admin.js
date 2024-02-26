@@ -1,4 +1,6 @@
+import axiosInstance from "@/axios/axios";
 import Vue from "vue";
+import router from '../../router/router';
 export default {
     namespaced : true,
     state : {
@@ -31,7 +33,7 @@ export default {
                 ],
                 "itemOptions" : [
                     {
-                        "name" : "Assume",
+                        "name" : "Return",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "get|user/assume"
                     }
@@ -66,11 +68,11 @@ export default {
                     },
                     {
                         "text" : "Active loans",
-                        "field" : "active_loans_count"
+                        "field" : "loans_count"
                     },
                     {
                         "text" : "Total loans",
-                        "field" : "loans_count"
+                        "field" : "all_loans_count"
                     }
                 ],
                 "itemOptions" : [
@@ -229,7 +231,7 @@ export default {
                     {
                         "name" : "Assume",
                         "class" : "btn btn-danger mx-1",
-                        "onClick" : "get|user/assume"
+                        "onClick" : "dispatch|admin/assumeUser"
                     }
                 ],
                 items : [],
@@ -298,12 +300,192 @@ export default {
                 },
                 "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
-            }
+            },
+            "Inactive loans" : {
+                "title" : "Loans",
+                "weight" : 90,
+                "endpoint" : "loan?previous=true&panel=true",
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "User",
+                        "field" : "user.email"
+                    },
+                    {
+                        "text" : "Book",
+                        "field" : "book.name"
+                    },
+                    {
+                        "text" : "Loaned on",
+                        "field" : "started_at"
+                    },
+                    {
+                        "text" : "Returned on",
+                        "field" : "returned_at",
+                        change : function(item){
+                            return item.returned_at ?? "/";
+                        }
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Assume",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "get|user/assume"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                    "since" : {
+                        label : "Loaned after",
+                        field_type : "datetime"
+                    }
+                },
+                searchParams : {
+                    "since" : undefined
+                },
+                "selectedSort" : "", "page" : 1,
+                maximumPage : 1,
+            },
+            "Inactive books" : {
+                "title" : "Book",
+                "weight" : 90,
+                "endpoint" : "book?perPage=5&previous=true&withLoanCount=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "name"
+                    },
+                    {
+                        "text" : "Category",
+                        "field" : "category.text"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                    "categories" : {
+                        "label" : "Categories",
+                        "field_type" : "selectMultiple",
+                        "showValues" : true,
+                        "name" : "Category",
+                        "source" : "get|category?noPage=true",
+                        "options_text_field" : "text"
+                    }
+                },
+                searchParams : {
+                },
+                page : 1,
+                maximumPage : 1,
+            },
+            "Inactive categories" : {
+                "title" : "Category",
+                "weight" : 95,
+                "endpoint" : "category?previous=true&withLoanCount=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "text"
+                    },
+                    {
+                        "text" : "Books",
+                        "field" : "books_count"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "Show books",
+                        "class" : "btn btn-info mx-1",
+                        "onClick" : "dispatch|admin/booksWithCategory"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                },
+                searchParams : {
+                },
+                page : 1,
+                maximumPage : 1,
+            },
+            "Inactive authors" : {
+                "title" : "Authors",
+                "weight" : 95,
+                "endpoint" : "author?withBookCount=true&previous=true",
+                "showParams" : {},
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "Name",
+                        "field" : "name"
+                    },
+                    {
+                        "text" : "Last name",
+                        "field" : "last_name"
+                    },
+                    {
+                        "text" : "Books",
+                        "field" : "books_count"
+                    }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                },
+                searchParams : {
+                },
+                "selectedSort" : "", "page" : 1,
+                maximumPage : 1,
+            },
         },
-        currentTab : "Users"
+        currentTab : "Loans"
     },
 
     actions : {
+        async assumeUser(context, userId){
+            let response = await axiosInstance.get(`user/assume/${userId}`);
+
+            router.push("/");
+
+            context.commit("messages/display", {text : "Successfully assumed user", success : true}, {root : true});
+            context.commit("user/changeToken", response.body, {root : true});
+        },
         booksWithCategory(context, categoryId){
             Vue.set(context.state, 'currentTab', "Books");
             Vue.set(context.state.adminTabs.Books.searchParams, 'categories', [categoryId]);

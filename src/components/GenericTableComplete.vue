@@ -150,7 +150,7 @@ export default {
 </script>
 <template>
     <div>
-        <div class="overflow-x-scroll">
+        <div class="overflow-x-scroll d-flex">
             <TableTab v-for="tab, index in Object.keys(tabs)" :key="index" :title="tab"
             :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"/>
         </div>

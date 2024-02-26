@@ -18,7 +18,7 @@ export default {
                 "message_type_id" : {
                     field_type: "select",
                     label: "Message type",
-                    source: "get|messagetype"
+                    source: "get|messagetype?noPage=true"
                 },
                 "body" : {
                     field_type: "text",
