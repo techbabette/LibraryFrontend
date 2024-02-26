@@ -36,9 +36,9 @@ export default {
     let blockWithTitle = (title) => this.InfoBlocks.filter((block) => block.title === title)[0];
     let yearsSinceFounding = new Date().getFullYear() - 1930
     let [bookCount, loanCount, memberCount] = await Promise.all([
-        this.$store.dispatch("fetch", {url : "/book", params : {onlyCount : true}}),
-        this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, currentAndPrevious : true}}),
-        this.$store.dispatch("fetch", {url : "/user", params : {onlyCount : true}})
+        this.$store.dispatch("fetch", {url : "/book", params : {allCount : true}}),
+        this.$store.dispatch("fetch", {url : "/loan", params : {allCount : true}}),
+        this.$store.dispatch("fetch", {url : "/user", params : {allCount : true}})
     ])
 
     blockWithTitle("Titles").maxValue = bookCount.body; 

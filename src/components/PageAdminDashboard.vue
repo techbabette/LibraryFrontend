@@ -92,10 +92,10 @@ export default {
             yesterdayDate.setDate(yesterdayDate.getDate() - 1);
             yesterdayDate = yesterdayDate.toISOString();
             let [totalLoans, newLoans, activeLoans, lateLoans, categoriesWithLoans] = await Promise.all([
-                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, currentAndPrevious : true}}),
-                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, since : yesterdayDate}}),
-                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true}}),
-                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, late  : true}}),
+                this.$store.dispatch("fetch", {url : "/loan", params : {allCount : true}}),
+                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, since : yesterdayDate, panel : true}}),
+                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, panel : true}}),
+                this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, late  : true, panel : true}}),
                 this.$store.dispatch("fetch", {url : "/category", 
                 params : {onlyLoanCount : true, withActiveLoanCount : true, withLateLoanCount: true, withNewLoanCount: true}}),
             ])
