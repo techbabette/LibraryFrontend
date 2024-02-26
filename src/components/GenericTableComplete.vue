@@ -55,8 +55,12 @@ export default {
     watch : {
         saerchInformation : {
             handler: function(oldData, newData){
-                if(oldData.page === newData.page){
+                if(oldData.page === newData.page && (oldData.tab === newData.tab)){
                     this.currentTab.page = 1;
+                    this.currentItemPage = 1;
+                }
+                if(!(oldData.tab === newData.tab)){
+                    this.currentItemPage = this.currentTab.page;
                 }
                 this.refresh();
             },
@@ -97,6 +101,8 @@ export default {
             this.currentTabName = newTab;
         },
         fetchItems: async function(){
+            // this.tabs[this.currentTabName].items = [];
+
             let params = {...this.currentTab.searchParams};
 
             if(this.currentTab.selectedSort){
@@ -110,6 +116,11 @@ export default {
 
             this.tabs[this.currentTabName].items = items.body.data;
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
+            
+            // this.$set(this.tabs[this.currentTabName], 'itemPage', items.body.current_page);
+
+            // console.log(this.currentTab['itemPage']);
+
             this.currentItemPage = items.body.current_page;
             if(items.data.sortOptions){
                 let newSortOptions = items.data.sortOptions.map((option) => option.id);
