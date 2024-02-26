@@ -131,7 +131,7 @@ export default {
                     {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
-                        "onClick" : "emit:showForm"
+                        "onClick" : "emitshowForm"
                     },
                     {
                         "name" : "Show books",

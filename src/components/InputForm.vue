@@ -58,30 +58,24 @@ export default {
 
     methods : {
         loadSources : async function(){
+            if(!this.elements){
+                return;
+            }
             for(let key of Object.keys(this.elements)){
                 let currentElement = this.elements[key];
 
                 let usesSource = Object.hasOwn(currentElement, "source");
-
-                console.log(currentElement);
-
                 if(!usesSource){
                     continue;
                 }
 
                 let sourceLocal = getParam(currentElement['source'], 'sourceLocal');
-
                 if(sourceLocal){
                     continue;
                 }
 
                 let response = await handleParamRequest(currentElement['source']);
-
                 let items = response.body;
-
-                console.log(items);
-
-
                 this.$set(this.formSources, key, items);
             }
         },

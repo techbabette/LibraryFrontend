@@ -12,6 +12,16 @@ axiosInstance.interceptors.request.use(
     }
 )
 
+axiosInstance.interceptors.request.use(
+    function(config){
+        config.params = {...config.params, _method : `${config.method}`};
+        return config;
+    }, function (error){
+        console.log(error);
+    }
+)
+
+
 axiosInstance.interceptors.response.use(
 function (response){
     if(response.data){

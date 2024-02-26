@@ -34,6 +34,9 @@ export default {
         currentTab : function(){
             return this.tabs[this.currentTabName];
         },
+        currentForm: function(){
+            return this.forms[this.currentTabName];
+        },
         baseEndpoint : function(){
             return this.currentTab.endpoint.split("?")[0];
         },
@@ -129,13 +132,14 @@ export default {
             this.currentTab['selectedSort'] = `${field}_desc`;
             return;
         },
+        closeForm : function(){
+            this.showForm = false;
+        },
         openForm : async function(callerId = 0){
             //If called with id, get current information and store to formData before opening
 
-            let method = callerId ? "patch" : "post";
-
-            if(method === "patch"){
-                let currentInformation = (await axiosInstance.get(`${this.baseEndpoint}/${callerId}`)).body;
+            if(callerId){
+                let currentInformation = (await axiosInstance.get(`${this.baseEndpoint}/edit/${callerId}`)).body;
                 this.formData = currentInformation;
             }
 
@@ -164,13 +168,16 @@ export default {
 
         <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
             @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? []" :current_sort="currentTab.selectedSort ?? ''"
-            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)" @openForm="openForm"
+            @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
+            @showForm="openForm"
         />
     </div>
 
-    <div id="modal-background" class="mk-modal" :class="{hidden : !showForm}">
+    <div id="modal-background" class="mk-modal" v-if="currentForm" :class="{hidden : !showForm}">
         <div class="mk-modal-content" >
-            <InputForm :elements="(forms[currentTabName] ?? {elements : {}}).elements" v-model="formData"/>
+            <InputForm :elements="currentForm" v-model="formData"/>
+            <a href="" class="col-12 btn btn-success text-light my-2" @click.prevent="closeForm">Submit</a>
+            <a href="" class="col-12 btn btn-danger text-light my-2" @click.prevent="closeForm">Close form</a>
         </div>
     </div>
 

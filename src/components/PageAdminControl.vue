@@ -13,6 +13,34 @@ export default {
 
     data(){
         return {
+            forms : {
+                "Books" : {
+                    "name" : {
+                        "label" : "Name",
+                        "field_type" : "string"
+                    },
+                    "category_id" : {
+                        "label" : "Category",
+                        "field_type" : "select",
+                        "source" : "get|category?noPage=true",
+                        "options_text_field" : "text"
+                    },
+                    "author_id" : {
+                        "label" : "Author",
+                        "field_type" : "select",
+                        "source" : "get|author?noPage=true",
+                        "options_text_field" : "full_name"
+                    },
+                    "description" : {
+                        "label" : "Description",
+                        "field_type" : "text"
+                    },
+                    "number_owned" : {
+                        "label" : "Number owned",
+                        "field_type" : "number"
+                    }
+                }
+            }
         }
     },
 
@@ -37,6 +65,6 @@ export default {
 </script>
 <template>
 <div>
-    <GenericTableComplete :_tabs="adminTabs" :_default_tab="currentTabName" @newTabState="setTabState" @newTab="setTabName"/>
+    <GenericTableComplete :_tabs="adminTabs" :_forms="forms" :_default_tab="currentTabName" @newTabState="setTabState" @newTab="setTabName"/>
 </div>
 </template>

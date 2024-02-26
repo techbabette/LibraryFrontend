@@ -84,7 +84,11 @@ export default {
             let refresh = getParam(onClick, "refresh") ?? true;
             let caller = 0;
 
-
+            if(getParam(onClick, "emit")){
+                console.log(getParam(onClick, 'emit'));
+                this.$emit(getParam(onClick, 'emit'), item ? getNestedField(item,callerField) : 0);
+                return;
+            }
 
             if(item){
                 caller = getNestedField(item, callerField);
