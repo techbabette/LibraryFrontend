@@ -131,7 +131,7 @@ export default {
                     </td>
                 </tr>
             </tbody>
-            <button v-for="table_option, index in table_options" @click="handleClick(option.onClick)" :class="table_option.class"
+            <button v-for="table_option, index in table_options" @click="handleClick(table_option.onClick)" :class="table_option.class"
                 :key="index">{{ table_option.name }}</button>
         </table>
         <p v-else>No items found</p>

@@ -87,6 +87,13 @@ export default {
                         "onClick" : "delete|book"
                     }
                 ],
+                "table_options" : [
+                    {
+                        "name" : "Create new book",
+                        "class" : "btn btn-success m-1",
+                        "onClick" : "emit:showForm"
+                    },
+                ],
                 items : [],
                 searchInputs : {
                     "categories" : {

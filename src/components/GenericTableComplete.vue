@@ -197,7 +197,7 @@ export default {
             Search options will appear here if available
         </div>
 
-        <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions"
+        <GenericTable :items="currentTab.items" :headers="currentTab.tableHeaders" :options="currentTab.itemOptions" :table_options="currentTab.table_options"
             @refresh="fetchItems" :sort_options="currentTab.sortOptions ?? []" :current_sort="currentTab.selectedSort ?? ''"
             @newSort="newSort" :first_item_positon="(currentTab.page - 1) * (currentTab.perPage ?? 5)"
             @showForm="openForm"
