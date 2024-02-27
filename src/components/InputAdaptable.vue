@@ -14,7 +14,7 @@ export default {
 
     props: {
         value: {
-            type: [String, Number, Array]
+            type: [String, Number, Array, File]
         },
         field_type: {
             type: String,
@@ -82,6 +82,9 @@ export default {
             }
             return string.charAt(0).toUpperCase() + string.slice(1);
         },
+        onChangeFile(event){
+            this.$emit('input', event.target.files[0]);
+        },
         emitName() {
             this.$emit("blur", this.name);
         },
@@ -124,6 +127,8 @@ export default {
         <InputDropdownSelectMultiple v-if="field_type == 'selectMultiple'" :options="options" 
         :text_field="options_text_field" :value_field="options_value_field" :name="label"
         v-model="localValue" :id="id" :hint="hint"/>
+
+        <input v-if="field_type == 'file'" type="file" @change="onChangeFile"/>
 
         <p v-if="error_message" class="alert alert-danger py-2 my-1">{{ error_message }}</p>
         <p v-if="ShowHint">{{ hint }}</p>

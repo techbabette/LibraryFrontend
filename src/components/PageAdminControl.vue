@@ -38,6 +38,10 @@ export default {
                     "number_owned" : {
                         "label" : "Number owned",
                         "field_type" : "number"
+                    },
+                    "img" : {
+                        "label" : "Cover image",
+                        "field_type" : "file"
                     }
                 }
             }
