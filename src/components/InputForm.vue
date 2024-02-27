@@ -82,12 +82,29 @@ export default {
         elementSource : function(key){
             let element = this.elements[key]
             let sourceLocal = getParam(element['source'], 'sourceLocal');
-
+            let sourceData = getParam(element['source'], 'sourceData');
             if(sourceLocal){
-                return sourceLocal;
+                return this.formSources[sourceLocal];
             }
 
-            return key;
+            if(sourceData){
+                return this.formValue[sourceData];
+            }
+
+            return this.formSources[key];
+        },
+        imageSource : function(key){
+            let element = this.elements[key]
+            if(!element['old_source']){
+                return false;
+            }
+
+            let sourceData = getParam(element['old_source'], 'sourceData');
+            if(sourceData){
+                return this.formValue[sourceData];
+            }
+
+            return "";
         }
     }
 }
@@ -96,8 +113,8 @@ export default {
 <template>
     <div :class="_class">
         <InputAdaptable v-for="inputBind, index of Object.keys(elements)" 
-        :key="index + 'a'" v-bind="elements[inputBind]" :options="formSources[elementSource(inputBind)]"
-        :error_message="(errors ?? {})[inputBind]"
+        :key="index + 'a'" v-bind="elements[inputBind]" :options="elementSource(inputBind)"
+        :error_message="(errors ?? {})[inputBind]" :old_source="imageSource(inputBind)"
         v-model="formValue[inputBind]"/>
     </div>
 </template>

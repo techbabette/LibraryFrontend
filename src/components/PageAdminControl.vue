@@ -41,7 +41,8 @@ export default {
                     },
                     "img" : {
                         "label" : "Cover image",
-                        "field_type" : "file"
+                        "field_type" : "image",
+                        "old_source" : "sourceData:img"
                     }
                 }
             }

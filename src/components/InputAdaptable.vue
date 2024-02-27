@@ -1,9 +1,10 @@
 <script>
 import InputDropdownSelectMultiple from './InputDropdownSelectMultiple.vue';
+import InputImage from './InputImage.vue';
 export default {
     name: 'InputAdaptable',
 
-    components : {InputDropdownSelectMultiple},
+    components : {InputDropdownSelectMultiple, InputImage},
 
     data() {
         return {
@@ -53,6 +54,10 @@ export default {
         show_values : {
             Type: Boolean,
             default: false
+        },
+        old_source : {
+            Type: String,
+            default : ""
         }
     },
 
@@ -128,7 +133,7 @@ export default {
         :text_field="options_text_field" :value_field="options_value_field" :name="label"
         v-model="localValue" :id="id" :hint="hint"/>
 
-        <input v-if="field_type == 'file'" type="file" @change="onChangeFile"/>
+        <InputImage v-if="field_type == 'image'" :old_source="old_source"/>
 
         <p v-if="error_message" class="alert alert-danger py-2 my-1">{{ error_message }}</p>
         <p v-if="ShowHint">{{ hint }}</p>

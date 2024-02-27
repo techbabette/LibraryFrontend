@@ -28,7 +28,8 @@ export default {
             formData : {},
             formErrors : {},
             showForm : false,
-            openFormIndex : -1
+            openFormIndex : -1,
+            renderForm : true,
         }
     },
 
@@ -148,6 +149,7 @@ export default {
         },
         closeForm : function(){
             this.showForm = false;
+            this.refreshForm();
         },
         openForm : async function(callerId = 0){
             //If called with id, get current information and store to formData before opening
@@ -176,6 +178,10 @@ export default {
             let limitedDataObject = {};
 
             for(let key of keysToSend){
+                let formElement = this.currentForm[key];
+                if(formElement.field_type === "image" && !(this.formData[key] instanceof File)){
+                    continue;
+                }
                 limitedDataObject[key] = this.formData[key];
             }
 
@@ -184,11 +190,18 @@ export default {
             if(result.success){
                 this.$store.commit("messages/display", {text : result.message, success : result.success});
                 this.fetchItems();
-                this.showForm = false;
+                this.closeForm();
             }
             if(result.errors){
                 this.formErrors = result.errors;
             }
+        },
+        refreshForm: function(){
+            this.renderForm = false;
+
+            this.$nextTick(() => {
+                this.renderForm = true;
+            });
         },
         refresh: async function(){
             await this.fetchItems();
@@ -217,7 +230,7 @@ export default {
         />
     </div>
 
-    <div id="modal-background" class="mk-modal" v-if="currentForm" :class="{hidden : !showForm}">
+    <div id="modal-background" class="mk-modal" v-if="currentForm && renderForm" :class="{hidden : !showForm}">
         <div class="mk-modal-content" >
             <InputForm :elements="currentForm" :errors="formErrors" v-model="formData"/>
             <a href="" class="col-12 btn btn-success text-light my-2" @click.prevent="submitForm">Submit</a>
