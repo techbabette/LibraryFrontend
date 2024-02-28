@@ -133,7 +133,7 @@ export default {
         :text_field="options_text_field" :value_field="options_value_field" :name="label"
         v-model="localValue" :id="id" :hint="hint"/>
 
-        <InputImage v-if="field_type == 'image'" :old_source="old_source"/>
+        <InputImage v-if="field_type == 'image'" :old_source="old_source" v-model="localValue"/>
 
         <p v-if="error_message" class="alert alert-danger py-2 my-1">{{ error_message }}</p>
         <p v-if="ShowHint">{{ hint }}</p>

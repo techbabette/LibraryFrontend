@@ -21,7 +21,12 @@ export default {
             return returnText;
         },
         imgSource: function (img) {
-            return require("@/assets/imgs/" + img);
+            try{
+                return require("@/assets/imgs/" + img);
+            }
+            catch{
+                return "";
+            }
         },
     },
 }
