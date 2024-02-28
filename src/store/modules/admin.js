@@ -5,7 +5,7 @@ export default {
     namespaced : true,
     state : {
         adminTabs : {
-            "Loans" : {
+            "Active loans" : {
                 "title" : "Loans",
                 "weight" : 90,
                 "endpoint" : "loan?panel=true",
@@ -28,18 +28,84 @@ export default {
                         "field" : "end" 
                     },
                     {
-                        "text" : "Returned on",
-                        "field" : "returned_at",
-                        change : function(item){
-                            return item.returned_at ?? "/";
+                        "text" : "Extended",
+                        "field" : "extended",
+                        "change" : function(item){
+                            return item.extended ? 'Yes' : 'No'
                         }
-                    }
+                    },
                 ],
                 "itemOptions" : [
                     {
+                        "name" : "Extend",
+                        "class" : "btn btn-success mx-1",
+                        "onClick" : "patch|loan/extend",
+                        "onlyIf" : function (item) {
+                            return !item.extended;
+                        }
+                    },
+                    {
                         "name" : "Return",
                         "class" : "btn btn-danger mx-1",
-                        "onClick" : "get|user/assume"
+                        "onClick" : "patch|loan/return"
+                    }
+                ],
+                items : [],
+                searchInputs : {
+                    "since" : {
+                        label : "Loaned after",
+                        field_type : "datetime"
+                    }
+                },
+                searchParams : {
+                    "since" : undefined
+                },
+                "selectedSort" : "", "page" : 1,
+                maximumPage : 1,
+            },
+            "Late loans" : {
+                "title" : "Loans",
+                "weight" : 90,
+                "endpoint" : "loan?panel=true&late=true",
+                "idField" : "id",
+                "tableHeaders" : [
+                    {
+                        "text" : "User",
+                        "field" : "user.email"
+                    },
+                    {
+                        "text" : "Book",
+                        "field" : "book.name"
+                    },
+                    {
+                        "text" : "Loaned on",
+                        "field" : "started_at"
+                    },
+                    {
+                        "text" : "Return by",
+                        "field" : "end" 
+                    },
+                    {
+                        "text" : "Extended",
+                        "field" : "extended",
+                        "change" : function(item){
+                            return item.extended ? 'Yes' : 'No'
+                        }
+                    },
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Extend",
+                        "class" : "btn btn-success mx-1",
+                        "onClick" : "patch|loan/extend",
+                        "onlyIf" : function (item) {
+                            return !item.extended;
+                        }
+                    },
+                    {
+                        "name" : "Return",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "patch|loan/return"
                     }
                 ],
                 items : [],
@@ -69,6 +135,10 @@ export default {
                     {
                         "text" : "Category",
                         "field" : "category.text"
+                    },
+                    {
+                        "text" : "Author",
+                        "field" : "author.full_name"
                     },
                     {
                         "text" : "Active loans",
@@ -107,11 +177,20 @@ export default {
                         "hint" : "Click to show options",
                         "source" : "get|category?noPage=true",
                         "options_text_field" : "text"
+                    },
+                    'authors' : {
+                        "label" : "Authors",
+                        "field_type" : "selectMultiple",
+                        "showValues" : true,
+                        "hint" : "Click to show options",
+                        "source" : "get|author?noPage=true",
+                        "options_text_field" : "full_name",
+                        'class' : 'mx-2'
                     }
                 },
                 searchParams : {
                 },
-                page : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Categories" : {
@@ -519,7 +598,7 @@ export default {
                 maximumPage : 1,
             },
         },
-        currentTab : "Loans"
+        currentTab : "Active loans"
     },
 
     actions : {

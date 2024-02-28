@@ -216,8 +216,8 @@ export default {
             :is_currenctly_active="currentTabName === tab" @click.native="changeTab(tab)"/>
         </div>
     <div class="adminBorder rounded-left rounded-bottom rounded-right">
-        <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0" class="col-12 d-flex justify-content-start">
-            <InputForm :elements="currentTab.searchInputs" v-model="currentTab.searchParams"/>
+        <div v-if="Object.keys(currentTab.searchInputs ?? {}).length > 0">
+            <InputForm :elements="currentTab.searchInputs" v-model="currentTab.searchParams" class="col-12 d-flex justify-content-start"/>
         </div>
         <div v-else>
             Search options will appear here if available
