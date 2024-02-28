@@ -64,6 +64,10 @@ export default {
             for(let key of Object.keys(this.elements)){
                 let currentElement = this.elements[key];
 
+                if(!currentElement){
+                    continue;
+                }
+
                 let usesSource = Object.hasOwn(currentElement, "source");
                 if(!usesSource){
                     continue;

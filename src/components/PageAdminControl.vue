@@ -44,6 +44,80 @@ export default {
                         "field_type" : "image",
                         "old_source" : "sourceData:img"
                     }
+                },
+                "Categories" : {
+                    "text" : {
+                        "label" : "Category name",
+                        "field_type" : "string"
+                    },
+                },
+                "Authors" : {
+                    "name" : {
+                        "label" : "First name",
+                        "field_type" : "string"
+                    },
+                    "last_name" : {
+                        "label" : "Last name",
+                        "field_type" : "string"
+                    }
+                },
+                "Links" : {
+                    "text" : {
+                        "label" : "Text",
+                        "field_type" : "string"
+                    },
+                    "to" : {
+                        "label" : "Leads to",
+                        "field_type" : "string"
+                    },
+                    "weight" : {
+                        "label" : "Weight",
+                        "field_type" : "number"
+                    },
+                    "link_position_id" : {
+                        "label" : "Position",
+                        "field_type" : "select",
+                        "source" : "get|linkposition?noPage=true",
+                        "options_text_field" : "position"
+                    },
+                    "access_level_id" : {
+                        "label" : "Show to",
+                        "field_type" : "select",
+                        "source" : "get|accesslevel?noPage=true",
+                        "options_text_field" : "name"
+                    },
+                    "icon" : {
+                        "label" : "Icon",
+                        "field_type" : "string"
+                    },
+                },
+                "Users" : {
+                    "name" : {
+                        "label" : "First name",
+                        "field_type" : "string"
+                    },
+                    "last_name" : {
+                        "label" : "Last name",
+                        "field_type" : "string"
+                    },
+                    "email" : {
+                        "label" : "Email",
+                        "field_type" : "string"
+                    },
+                    "password" : {
+                        "label" : "Password",
+                        "field_type" : "password"
+                    },
+                    "access_level_id" : {
+                        "label" : "Access level",
+                        "field_type" : "select",
+                        "source" : "get|accesslevel?noPage=true",
+                        "options_text_field" : "name"
+                    },
+                    "address" : {
+                        "label" : "Address",
+                        "field_type" : "string"
+                    }
                 }
             }
         }

@@ -24,6 +24,10 @@ export default {
                         "field" : "started_at"
                     },
                     {
+                        "text" : "Return by",
+                        "field" : "end" 
+                    },
+                    {
                         "text" : "Returned on",
                         "field" : "returned_at",
                         change : function(item){
@@ -122,7 +126,7 @@ export default {
                         "field" : "text"
                     },
                     {
-                        "text" : "Books",
+                        "text" : "Active books",
                         "field" : "books_count"
                     },
                     {
@@ -138,7 +142,7 @@ export default {
                     {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
-                        "onClick" : "emitshowForm"
+                        "onClick" : "emit:showForm"
                     },
                     {
                         "name" : "Show books",
@@ -170,7 +174,7 @@ export default {
                         "field" : "last_name"
                     },
                     {
-                        "text" : "Books",
+                        "text" : "Active books",
                         "field" : "books_count"
                     }
                 ],
@@ -214,9 +218,27 @@ export default {
                         "field" : "link_position.position"
                     },
                     {
+                        "text" : "Weight",
+                        "field" : "weight"
+                    },
+                    {
                         "text" : "Icon",
                         "field" : "icon"
                     }
+                ],
+                itemOptions : [
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    },
+                ],
+                "table_options" : [
+                    {
+                        "name" : "Create new link",
+                        "class" : "btn btn-success m-1",
+                        "onClick" : "emit:showForm"
+                    },
                 ],
                 items : [],
                 searchParams : {
@@ -235,6 +257,14 @@ export default {
                         "field" : "email"
                     },
                     {
+                        "text" : "Access level",
+                        "field" : "access_level.name"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "loans_count"
+                    },
+                    {
                         "text" : "Registered on",
                         "field" : "created_at"
                     }
@@ -244,7 +274,12 @@ export default {
                         "name" : "Assume",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "dispatch|admin/assumeUser"
-                    }
+                    },
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    },
                 ],
                 items : [],
                 searchParams : {
@@ -272,7 +307,12 @@ export default {
                         "name" : "View messages",
                         "class" : "btn btn-info mx-1",
                         "onClick" : "dispatch|admin/messagesOfType"
-                    }
+                    },
+                    {
+                        "name" : "Edit",
+                        "class" : "btn btn-warning mx-1",
+                        "onClick" : "emit:showForm"
+                    },
                 ],
                 items : [],
                 searchParams : {
