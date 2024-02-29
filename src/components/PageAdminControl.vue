@@ -45,13 +45,60 @@ export default {
                         "old_source" : "sourceData:img"
                     }
                 },
+                "Inactive books" : {
+                    "name" : {
+                        "label" : "Name",
+                        "field_type" : "string"
+                    },
+                    "category_id" : {
+                        "label" : "Category",
+                        "field_type" : "select",
+                        "source" : "get|category?noPage=true&currentAndPrevious=true",
+                        "options_text_field" : "text"
+                    },
+                    "author_id" : {
+                        "label" : "Author",
+                        "field_type" : "select",
+                        "source" : "get|author?noPage=true&currentAndPrevious=true",
+                        "options_text_field" : "full_name"
+                    },
+                    "description" : {
+                        "label" : "Description",
+                        "field_type" : "text"
+                    },
+                    "number_owned" : {
+                        "label" : "Number owned",
+                        "field_type" : "number"
+                    },
+                    "img" : {
+                        "label" : "Cover image",
+                        "field_type" : "image",
+                        "old_source" : "sourceData:img"
+                    }
+                },
                 "Categories" : {
                     "text" : {
                         "label" : "Category name",
                         "field_type" : "string"
                     },
                 },
+                "Inactive categories" : {
+                    "text" : {
+                        "label" : "Category name",
+                        "field_type" : "string"
+                    },
+                },
                 "Authors" : {
+                    "name" : {
+                        "label" : "First name",
+                        "field_type" : "string"
+                    },
+                    "last_name" : {
+                        "label" : "Last name",
+                        "field_type" : "string"
+                    }
+                },
+                "Inactive authors" : {
                     "name" : {
                         "label" : "First name",
                         "field_type" : "string"

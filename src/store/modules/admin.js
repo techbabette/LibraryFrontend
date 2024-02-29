@@ -209,6 +209,10 @@ export default {
                         "field" : "books_count"
                     },
                     {
+                        "text" : "Associated books",
+                        "field" : "all_books_count"
+                    },
+                    {
                         "text" : "Active loans",
                         "field" : "active_loans_count"
                     },
@@ -234,6 +238,13 @@ export default {
                         "onClick" : "dispatch|admin/booksWithCategory"
                     }
                 ],
+                "table_options" : [
+                    {
+                        "name" : "Create new category",
+                        "class" : "btn btn-success m-1",
+                        "onClick" : "emit:showForm"
+                    },
+                ],
                 items : [],
                 searchInputs : {
                 },
@@ -245,7 +256,7 @@ export default {
             "Authors" : {
                 "title" : "Authors",
                 "weight" : 95,
-                "endpoint" : "author?withBookCount=true",
+                "endpoint" : "author?withBookCount=true&withActiveLoanCount=true&withLoanCount=true",
                 "showParams" : {},
                 "idField" : "id",
                 "tableHeaders" : [
@@ -260,6 +271,18 @@ export default {
                     {
                         "text" : "Active books",
                         "field" : "books_count"
+                    },
+                    {
+                        "text" : "Associated books",
+                        "field" : "all_books_count"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
                     }
                 ],
                 "itemOptions" : [
@@ -267,7 +290,24 @@ export default {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "Inactivate",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|author"
+                    },
+                    {
+                        "name" : "Show books",
+                        "class" : "btn btn-info mx-1",
+                        "onClick" : "dispatch|admin/booksWithAuthor"
                     }
+                ],
+                "table_options" : [
+                    {
+                        "name" : "Create new author",
+                        "class" : "btn btn-success m-1",
+                        "onClick" : "emit:showForm"
+                    },
                 ],
                 items : [],
                 searchInputs : {
@@ -388,14 +428,14 @@ export default {
                 ],
                 "itemOptions" : [
                     {
-                        "name" : "View messages",
-                        "class" : "btn btn-info mx-1",
-                        "onClick" : "dispatch|admin/messagesOfType"
-                    },
-                    {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "View messages",
+                        "class" : "btn btn-info mx-1",
+                        "onClick" : "dispatch|admin/messagesOfType"
                     },
                 ],
                 items : [],
@@ -432,6 +472,16 @@ export default {
                     }
                 ],
                 items : [],
+                searchInputs : {
+                    "message_types" : {
+                        "label" : "Message types",
+                        "field_type" : "selectMultiple",
+                        "showValues" : true,
+                        "hint" : "Click to show options",
+                        "source" : "get|messagetype?noPage=true",
+                        "options_text_field" : "name"
+                    },
+                },
                 searchParams : {
                 },
                 "selectedSort" : "", "page" : 1,
@@ -497,11 +547,11 @@ export default {
                     },
                     {
                         "text" : "Active loans",
-                        "field" : "active_loans_count"
+                        "field" : "loans_count"
                     },
                     {
                         "text" : "Total loans",
-                        "field" : "loans_count"
+                        "field" : "all_loans_count"
                     }
                 ],
                 "itemOptions" : [
@@ -542,7 +592,7 @@ export default {
             "Inactive categories" : {
                 "title" : "Category",
                 "weight" : 95,
-                "endpoint" : "category?previous=true&withLoanCount=true",
+                "endpoint" : "category?previous=true&withLoanCount=true&withActiveLoanCount=true&withLoanCount=true",
                 "showParams" : {},
                 "idField" : "id",
                 "tableHeaders" : [
@@ -561,7 +611,7 @@ export default {
                     {
                         "text" : "Total loans",
                         "field" : "loans_count"
-                    }
+                    },
                 ],
                 "itemOptions" : [
                     {
@@ -591,7 +641,7 @@ export default {
             "Inactive authors" : {
                 "title" : "Authors",
                 "weight" : 95,
-                "endpoint" : "author?withBookCount=true&previous=true",
+                "endpoint" : "author?withBookCount=true&previous=true&withActiveLoanCount=true&withLoanCount=true",
                 "showParams" : {},
                 "idField" : "id",
                 "tableHeaders" : [
@@ -604,8 +654,16 @@ export default {
                         "field" : "last_name"
                     },
                     {
-                        "text" : "Books",
-                        "field" : "books_count"
+                        "text" : "Associated books",
+                        "field" : "all_books_count"
+                    },
+                    {
+                        "text" : "Active loans",
+                        "field" : "active_loans_count"
+                    },
+                    {
+                        "text" : "Total loans",
+                        "field" : "loans_count"
                     }
                 ],
                 "itemOptions" : [
@@ -613,6 +671,16 @@ export default {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
+                    },
+                    {
+                        "name" : "Reactivate",
+                        "class" : "btn btn-success mx-1",
+                        "onClick" : "patch|author/restore"
+                    },
+                    {
+                        "name" : "Show books",
+                        "class" : "btn btn-info mx-1",
+                        "onClick" : "dispatch|admin/inactiveBooksWithAuthor"
                     }
                 ],
                 items : [],
@@ -638,15 +706,27 @@ export default {
 
             return {success : true};
         },
-        inactiveBooksWithCategory(context, categoryId){
+        inactiveBooksWithAuthor(context, authorId){
+            Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'authors', [authorId]);
             Vue.set(context.state, 'currentTab', "Inactive books");
+
+            return {success : true};
+        },
+        booksWithAuthor(context, authorId){
+            Vue.set(context.state.adminTabs.Books.searchParams, 'authors', [authorId]);
+            Vue.set(context.state, 'currentTab', "Books");
+
+            return {success : true};
+        },
+        inactiveBooksWithCategory(context, categoryId){
             Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'categories', [categoryId]);
+            Vue.set(context.state, 'currentTab', "Inactive books");
 
             return {success : true};
         },
         booksWithCategory(context, categoryId){
-            Vue.set(context.state, 'currentTab', "Books");
             Vue.set(context.state.adminTabs.Books.searchParams, 'categories', [categoryId]);
+            Vue.set(context.state, 'currentTab', "Books");
 
             return {success : true};
         }
