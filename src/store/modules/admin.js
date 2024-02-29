@@ -224,6 +224,11 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
+                        "name" : "Inactivate",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|category"
+                    },
+                    {
                         "name" : "Show books",
                         "class" : "btn btn-info mx-1",
                         "onClick" : "dispatch|admin/booksWithCategory"
@@ -487,6 +492,10 @@ export default {
                         "field" : "category.text"
                     },
                     {
+                        "text" : "Author",
+                        "field" : "author.full_name"
+                    },
+                    {
                         "text" : "Active loans",
                         "field" : "active_loans_count"
                     },
@@ -509,12 +518,24 @@ export default {
                         "field_type" : "selectMultiple",
                         "showValues" : true,
                         "name" : "Category",
-                        "source" : "get|category?noPage=true",
-                        "options_text_field" : "text"
+                        "hint" : "Click to show options",
+                        "source" : "get|category?noPage=true&currentAndPrevious=true",
+                        "options_text_field" : "text",
+                        'class' : 'mx-2'
+                    },
+                    'authors' : {
+                        "label" : "Authors",
+                        "field_type" : "selectMultiple",
+                        "showValues" : true,
+                        "hint" : "Click to show options",
+                        "source" : "get|author?noPage=true&currentAndPrevious=true",
+                        "options_text_field" : "full_name",
+                        'class' : 'mx-2'
                     }
                 },
                 searchParams : {
                 },
+                "selectedSort" : "",
                 page : 1,
                 maximumPage : 1,
             },
@@ -530,8 +551,8 @@ export default {
                         "field" : "text"
                     },
                     {
-                        "text" : "Books",
-                        "field" : "books_count"
+                        "text" : "Associated books",
+                        "field" : "all_books_count"
                     },
                     {
                         "text" : "Active loans",
@@ -549,9 +570,14 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
+                        "name" : "Reactivate",
+                        "class" : "btn btn-success mx-1",
+                        "onClick" : "patch|category/restore"
+                    },
+                    {
                         "name" : "Show books",
                         "class" : "btn btn-info mx-1",
-                        "onClick" : "dispatch|admin/booksWithCategory"
+                        "onClick" : "dispatch|admin/inactiveBooksWithCategory"
                     }
                 ],
                 items : [],
@@ -609,6 +635,12 @@ export default {
 
             context.commit("messages/display", {text : "Successfully assumed user", success : true}, {root : true});
             context.commit("user/changeToken", response.body, {root : true});
+
+            return {success : true};
+        },
+        inactiveBooksWithCategory(context, categoryId){
+            Vue.set(context.state, 'currentTab', "Inactive books");
+            Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'categories', [categoryId]);
 
             return {success : true};
         },
