@@ -108,6 +108,12 @@ export default {
                         "field_type" : "string"
                     }
                 },
+                "Message Types" : {
+                    "name" : {
+                        "label" : "Message type name",
+                        "field_type" : "string"
+                    }
+                },
                 "Links" : {
                     "text" : {
                         "label" : "Text",

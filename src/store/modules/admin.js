@@ -356,6 +356,11 @@ export default {
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
                     },
+                    {
+                        "name" : "Delete",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|link"
+                    }
                 ],
                 "table_options" : [
                     {
@@ -433,9 +438,21 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
+                        "name" : "Delete",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|messagetype"
+                    },
+                    {
                         "name" : "View messages",
                         "class" : "btn btn-info mx-1",
                         "onClick" : "dispatch|admin/messagesOfType"
+                    },
+                ],
+                "table_options" : [
+                    {
+                        "name" : "Create new message type",
+                        "class" : "btn btn-success m-1",
+                        "onClick" : "emit:showForm"
                     },
                 ],
                 items : [],
@@ -470,6 +487,13 @@ export default {
                         "text" : "Body (Shortened)",
                         "field" : "body"
                     }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "Delete",
+                        "class" : "btn btn-danger mx-1",
+                        "onClick" : "delete|message"
+                    },
                 ],
                 items : [],
                 searchInputs : {
