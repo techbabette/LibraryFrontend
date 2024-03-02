@@ -1,5 +1,6 @@
 <script>
 import InputAdaptable from "@/components/InputAdaptable.vue";
+import axios from "@/axios/axios";
 export default {
     name : "PageUserLogin",
 
@@ -12,6 +13,20 @@ export default {
             loginData : {
                 email : "email@gmail.com",
                 password : "password"
+            }
+        }
+    },
+
+    async mounted(){
+        let queryOptions = this.$route.query;
+        let user = queryOptions.user;
+        let token = queryOptions.token;
+
+        if(user && token){
+            let result = await axios.get(`/auth/verify/${user}/${token}`);
+
+            if(result.success){
+                this.$store.commit("messages/display", {text : "Successfully activated account", success : true});
             }
         }
     },
