@@ -53,14 +53,14 @@ export default {
                     "category_id" : {
                         "label" : "Category",
                         "field_type" : "select",
-                        "source" : "get|category?noPage=true&currentAndPrevious=true",
+                        "source" : "get|category?noPage=true&currentAndPrevious=true&statusInName=true",
                         "options_text_field" : "text"
                     },
                     "author_id" : {
                         "label" : "Author",
                         "field_type" : "select",
-                        "source" : "get|author?noPage=true&currentAndPrevious=true",
-                        "options_text_field" : "full_name"
+                        "source" : "get|author?noPage=true&currentAndPrevious=true&statusInName=true",
+                        "options_text_field" : "full_name_status"
                     },
                     "description" : {
                         "label" : "Description",

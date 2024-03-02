@@ -583,7 +583,12 @@ export default {
                         "name" : "Edit",
                         "class" : "btn btn-warning mx-1",
                         "onClick" : "emit:showForm"
-                    }
+                    },
+                    {
+                        "name" : "Reactivate",
+                        "class" : "btn btn-success mx-1",
+                        "onClick" : "patch|book/restore"
+                    },
                 ],
                 items : [],
                 searchInputs : {
@@ -593,7 +598,7 @@ export default {
                         "showValues" : true,
                         "name" : "Category",
                         "hint" : "Click to show options",
-                        "source" : "get|category?noPage=true&currentAndPrevious=true",
+                        "source" : "get|category?noPage=true&currentAndPrevious=true&statusInName=true",
                         "options_text_field" : "text",
                         'class' : 'mx-2'
                     },
@@ -602,8 +607,8 @@ export default {
                         "field_type" : "selectMultiple",
                         "showValues" : true,
                         "hint" : "Click to show options",
-                        "source" : "get|author?noPage=true&currentAndPrevious=true",
-                        "options_text_field" : "full_name",
+                        "source" : "get|author?noPage=true&currentAndPrevious=true&statusInName=true",
+                        "options_text_field" : "full_name_status",
                         'class' : 'mx-2'
                     }
                 },
