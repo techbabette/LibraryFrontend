@@ -1,5 +1,6 @@
 <script>
 import BookButtonFollowValue from './BookButtonFollowValue.vue'
+import LimitToFullWords from '@/lib/limitToFullWords';
 export default {
     name: "BookShelfItem",
     components: { BookButtonFollowValue },
@@ -8,17 +9,7 @@ export default {
     },
     methods: {
         LimitToFullWords: function (text, maximumCharacterLength) {
-            let textSplit = text.split(" ");
-            let returnText = "";
-            for (let word of textSplit) {
-                if (word.length + returnText.length <= maximumCharacterLength)
-                    returnText += word + " ";
-                else {
-                    returnText = returnText.trim() + "...";
-                    break;
-                }
-            }
-            return returnText;
+            return LimitToFullWords(text, maximumCharacterLength);
         },
         imgSource: function (img) {
             try{

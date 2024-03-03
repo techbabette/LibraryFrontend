@@ -1,6 +1,7 @@
 import axiosInstance from "@/axios/axios";
 import Vue from "vue";
 import router from '../../router/router';
+import LimitToFullWords from "@/lib/limitToFullWords";
 export default {
     namespaced : true,
     state : {
@@ -403,7 +404,10 @@ export default {
                     },
                     {
                         "text" : "Access level",
-                        "field" : "access_level.name"
+                        "field" : "access_level.access_level",
+                        "change" : function(item){
+                            return item.access_level.name;
+                        }
                     },
                     {
                         "text" : "Active loans",
@@ -412,6 +416,10 @@ export default {
                     {
                         "text" : "Registered on",
                         "field" : "created_at"
+                    },
+                    {
+                        "text" : "Email verified at",
+                        "field" : "email_verified_at"
                     }
                 ],
                 "itemOptions" : [
@@ -505,7 +513,10 @@ export default {
                     },
                     {
                         "text" : "Body (Shortened)",
-                        "field" : "body"
+                        "field" : "body",
+                        "change" : function(item){
+                            return LimitToFullWords(item.body, 30);
+                        }
                     }
                 ],
                 "itemOptions" : [
