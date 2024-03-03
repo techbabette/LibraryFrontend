@@ -465,6 +465,37 @@ export default {
                 "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
+            "Favorites" : {
+                "title": "Favorites",
+                "endpoint": "favorite?panel=true",
+                "idField": "id",
+                "tableHeaders": [
+                    {
+                        "text" : "User",
+                        "field" : "user.email"
+                    },
+                    {
+                        "text": "Book",
+                        "field": "book.name",
+                    },
+                    {
+                        "text": "Added at",
+                        "field": "created_at"
+                    }
+                ],
+                "itemOptions": [
+                    {
+                        "name" : "View book",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                    },
+                ],
+                items : [],
+                searchParams : {
+                },
+                "selectedSort" : "", "page" : 1,
+                maximumPage : 1,
+            },
             "Message Types" : {
                 "title" : "Message types",
                 "weight" : 50,
