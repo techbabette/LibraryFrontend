@@ -776,6 +776,7 @@ export default {
                 },
                 searchParams : {
                 },
+                "selectedSort" : "",
                 page : 1,
                 maximumPage : 1,
             },
