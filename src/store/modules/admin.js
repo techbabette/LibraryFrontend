@@ -141,6 +141,10 @@ export default {
                         "field" : "author.full_name"
                     },
                     {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
+                    {
                         "text" : "Active loans",
                         "field" : "loans_count"
                     },
@@ -205,6 +209,10 @@ export default {
                         "field" : "text"
                     },
                     {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
+                    {
                         "text" : "Active books",
                         "field" : "books_count"
                     },
@@ -267,6 +275,10 @@ export default {
                     {
                         "text" : "Last name",
                         "field" : "last_name"
+                    },
+                    {
+                        "text" : "Created at",
+                        "field" : "created_at"
                     },
                     {
                         "text" : "Active books",
@@ -348,7 +360,11 @@ export default {
                     {
                         "text" : "Icon",
                         "field" : "icon"
-                    }
+                    },
+                    {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
                 ],
                 itemOptions : [
                     {
@@ -429,7 +445,11 @@ export default {
                     {
                         "text" : "Number of messages",
                         "field" : "messages_count"
-                    }
+                    },
+                    {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
                 ],
                 "itemOptions" : [
                     {
@@ -532,9 +552,6 @@ export default {
                     {
                         "text" : "Returned on",
                         "field" : "returned_at",
-                        change : function(item){
-                            return item.returned_at ?? "/";
-                        }
                     }
                 ],
                 items : [],
@@ -568,6 +585,14 @@ export default {
                     {
                         "text" : "Author",
                         "field" : "author.full_name"
+                    },
+                    {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
+                    {
+                        "text" : "Deactivated at",
+                        "field" : "deleted_at"
                     },
                     {
                         "text" : "Active loans",
@@ -630,6 +655,14 @@ export default {
                         "field" : "text"
                     },
                     {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
+                    {
+                        "text" : "Deactivated at",
+                        "field" : "deleted_at"
+                    },
+                    {
                         "text" : "Associated books",
                         "field" : "all_books_count"
                     },
@@ -681,6 +714,14 @@ export default {
                     {
                         "text" : "Last name",
                         "field" : "last_name"
+                    },
+                    {
+                        "text" : "Created at",
+                        "field" : "created_at"
+                    },
+                    {
+                        "text" : "Deactivated at",
+                        "field" : "deleted_at"
                     },
                     {
                         "text" : "Associated books",
