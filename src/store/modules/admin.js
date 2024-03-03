@@ -49,7 +49,12 @@ export default {
                         "name" : "Return",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "patch|loan/return"
-                    }
+                    },
+                    {
+                        "name" : "View book",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                    },
                 ],
                 items : [],
                 searchInputs : {
@@ -87,6 +92,16 @@ export default {
                         "field" : "end" 
                     },
                     {
+                        "text" : "Days late",
+                        "field" : "end",
+                        "change" : function(item){
+                            let currentDate = new Date().getTime();
+                            let returnBy = new Date(item.end);
+                            let daysLate = Math.ceil((currentDate - returnBy) / (1000 * 60 * 60 * 24)); 
+                            return daysLate;
+                        }
+                    },
+                    {
                         "text" : "Extended",
                         "field" : "extended",
                         "change" : function(item){
@@ -107,7 +122,12 @@ export default {
                         "name" : "Return",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "patch|loan/return"
-                    }
+                    },
+                    {
+                        "name" : "View book",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                    },
                 ],
                 items : [],
                 searchInputs : {
@@ -569,6 +589,13 @@ export default {
                         "text" : "Returned on",
                         "field" : "returned_at",
                     }
+                ],
+                "itemOptions" : [
+                    {
+                        "name" : "View book",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage|callerField:book.id"
+                    },
                 ],
                 items : [],
                 searchInputs : {

@@ -101,7 +101,7 @@ export default {
                             "change" : function(item){
                                 let currentDate = new Date().getTime();
                                 let returnBy = new Date(item.end);
-                                let daysLate = Math.floor((currentDate - returnBy) / (1000 * 60 * 60 * 24)); 
+                                let daysLate = Math.ceil((currentDate - returnBy) / (1000 * 60 * 60 * 24)); 
                                 return daysLate;
                             }
                         },
