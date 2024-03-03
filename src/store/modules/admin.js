@@ -164,7 +164,12 @@ export default {
                         "name" : "Delete",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "delete|book"
-                    }
+                    },
+                    {
+                        "name" : "View",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage"
+                    },
                 ],
                 "table_options" : [
                     {
@@ -259,7 +264,7 @@ export default {
                 },
                 searchParams : {
                 },
-                page : 1,
+                "selectedSort" : "", "page" : 1,
                 maximumPage : 1,
             },
             "Authors" : {
@@ -624,6 +629,11 @@ export default {
                         "name" : "Reactivate",
                         "class" : "btn btn-success mx-1",
                         "onClick" : "patch|book/restore"
+                    },
+                    {
+                        "name" : "View",
+                        "class" : "btn btn-primary mx-1",
+                        "onClick" : "dispatch|navigation/openBookPage"
                     },
                 ],
                 items : [],
