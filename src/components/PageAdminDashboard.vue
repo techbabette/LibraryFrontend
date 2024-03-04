@@ -97,7 +97,7 @@ export default {
                 this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, panel : true}}),
                 this.$store.dispatch("fetch", {url : "/loan", params : {onlyCount : true, late  : true, panel : true}}),
                 this.$store.dispatch("fetch", {url : "/category", 
-                params : {onlyLoanCount : true, withActiveLoanCount : true, withLateLoanCount: true, withNewLoanCount: true}}),
+                params : {onlyLoanCount : true, withActiveLoanCount : true, withLateLoanCount: true, withNewLoanCount: true, currentAndPrevious: true}}),
             ])
 
             this.InfoBlocksData.activeLoans = activeLoans.body;
