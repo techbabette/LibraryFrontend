@@ -262,6 +262,7 @@ export default {
 <style scoped>
 .overflow-x-scroll{
     overflow-x: scroll;
+    scrollbar-width: thin;
 }
 .mk-modal-content{
     color: white;
