@@ -49,7 +49,8 @@ export default {
 
     methods: {
       imgSource : function (img){
-        return require('@/assets/imgs/'+img)
+        let res = "./" + process.env.VUE_APP_IMAGE_SOURCE + img;
+        return res;
       },
       loanOut : async function (){
         if(this.bookInformation.currently_available < 1){

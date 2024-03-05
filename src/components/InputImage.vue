@@ -30,7 +30,8 @@ export default {
 
             if(this.old_source){
                 try{
-                    return require(process.env.VUE_APP_IMAGE_SOURCE + this.old_source);
+                    let res = "./" + process.env.VUE_APP_IMAGE_SOURCE + this.old_source;
+                    return res;
                 }
                 catch{
                     return false;

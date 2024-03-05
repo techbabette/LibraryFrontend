@@ -13,7 +13,7 @@ export default {
         },
         imgSource: function (img) {
             try{
-                let res = require(process.env.VUE_APP_IMAGE_SOURCE + img);
+                let res = "./" + process.env.VUE_APP_IMAGE_SOURCE + img;
                 return res;
             }
             catch{
