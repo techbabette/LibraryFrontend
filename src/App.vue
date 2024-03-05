@@ -1,37 +1,37 @@
 <template>
   <div id="app">
-    <NavigationBar :links="navbarLinks"/>
-    <router-view></router-view>
-    <FooterBar :links="footerLinks"/>
-    <BackToTopButton/>
+    <PageLayoutUser v-if="!adminRouteActive"/>
+    <PageLayoutAdmin v-if="adminRouteActive"/>
+    <ButtonBackToTop/>
+    <MessageDisplay/>
   </div>
 </template>
 
 <script>
-import NavigationBar from "./components/NavigationBar.vue";
-import FooterBar from "./components/FooterBar.vue";
-import BackToTopButton from "./components/BackToTopButton.vue";
+import PageLayoutUser from "./components/PageLayoutUser.vue"
+import PageLayoutAdmin from "./components/PageLayoutAdmin.vue";
+import ButtonBackToTop from "./components/ButtonBackToTop.vue";
+import MessageDisplay from "./components/MessageDisplay.vue";
 export default {
   name: 'App',
   components : {
-    NavigationBar,
-    FooterBar,
-    BackToTopButton
+    PageLayoutUser,
+    PageLayoutAdmin,
+    ButtonBackToTop,
+    MessageDisplay
   },
   data(){
     return {
     }
   },
   computed : {
-    navbarLinks : function(){
-      return this.$store.getters.getNavbarLinks;
-    },
-    footerLinks : function(){
-      return this.$store.getters.getFooterLinks;
+    adminRouteActive : function(){
+      return this.$store.getters['navigation/adminRouteActive'];
     }
   }
 }
 </script>
 
 <style>
+    @import '@/assets/styles/main.css'
 </style>

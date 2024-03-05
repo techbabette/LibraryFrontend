@@ -2,21 +2,22 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
+import { Icon } from '@iconify/vue2';
 import showToDirective from './directives/showToDirective'
 Vue.config.productionTip = false
 
 Vue.directive("showto", showToDirective);
 
-require('@/assets/styles/style.css');
+Vue.component("IconifyIcon", Icon);
+
+await store.dispatch("navigation/fetch");
 
 router.beforeEach(async function (to, from, next){
   let requestedPage = to.name;
-  //Get links through store action on every page change
-  await store.dispatch("getNavigationLinks");
-  let userAllowedAccess = store.getters.getLinksUserIsAllowed.some(link => link.to === requestedPage);
+  let userAllowedAccess = store.getters['navigation/links'].some(link => link.to === requestedPage);
   if(userAllowedAccess){
     document.title = to.name;
-    store.commit("changeActiveRouteName", requestedPage);
+    store.commit("navigation/changeActiveRouteName", requestedPage);
     next();
     return;
   }

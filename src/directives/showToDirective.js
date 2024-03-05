@@ -1,10 +1,10 @@
 export default {
     inserted: function(el, binding, vnode) {
-        let userRole = vnode.context.$store.getters.activeUserRole
+        let accessLevel = vnode.context.$store.getters['user/accessLevel'];
 
-        let allowedRoles = binding.value;
+        let accessLevelRequired = binding.value;
 
-        if(!allowedRoles.includes(userRole)) {
+        if(accessLevelRequired > accessLevel) {
             vnode.elm.classList.add("d-none");
         }
         else{
@@ -12,11 +12,11 @@ export default {
         }
     },
     update: function(el, binding, vnode) {
-        let userRole = vnode.context.$store.getters.activeUserRole
+        let accessLevel = vnode.context.$store.getters['user/accessLevel'];
 
-        let allowedRoles = binding.value;
+        let accessLevelRequired = binding.value;
 
-        if(!allowedRoles.includes(userRole)) {
+        if(accessLevelRequired > accessLevel) {
             vnode.elm.classList.add("d-none");
         }
         else{
