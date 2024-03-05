@@ -11,7 +11,7 @@ export default {
     data(){
         return {
             loginData : {
-                email : "email@gmail.com",
+                email : "ilija.krstic.155.21@ict.edu.rs",
                 password : "password"
             }
         }
@@ -26,7 +26,9 @@ export default {
             let result = await axios.get(`/auth/verify/${user}/${token}`);
 
             if(result.success){
+                this.$router.push("/").catch(()=>{});
                 this.$store.commit("messages/display", {text : "Successfully activated account", success : true});
+                this.$store.commit("user/changeToken", result.body);
             }
         }
     },
