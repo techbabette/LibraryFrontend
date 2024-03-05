@@ -1,9 +1,18 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import LandingPage from "../components/pages/LandingPage.vue";
-import BooksPage from "../components/pages/BooksPage.vue";
-import BookPage from "../components/pages/BookPage.vue";
+import LandingPage from "../components/PageLanding.vue";
+import BooksPage from "../components/PageBooksSearch.vue";
+import BookPage from "../components/PageBookSingle.vue";
+import YourBooks from "../components/PageUserBooks.vue";
+import LoginPage from "../components/PageUserLogin.vue";
+import RegistrationPage from "../components/PageUserRegister.vue";
+import PageContact from "@/components/PageContact.vue";
+import PageAuthor from "@/components/PageAuthor.vue";
+
+import PageAdminDashboard from "../components/PageAdminDashboard.vue"
+import PageAdminControl from "../components/PageAdminControl.vue"
+import PageAdminLogs from "../components/PageAdminLogs.vue"
 
 const routes = [
     {
@@ -14,6 +23,30 @@ const routes = [
     },
     {
       path : "/book/:id", component: BookPage, name : "Book preview"
+    },
+    {
+      path : "/yourbooks", component : YourBooks, name : "Your books"
+    },
+    {
+      path : "/login", component : LoginPage, name : "Login"
+    },
+    {
+      path : "/register", component : RegistrationPage, name : "Register"
+    },
+    {
+      path : "/contact", component : PageContact, name : "Contact"
+    },
+    {
+      path : "/author", component : PageAuthor, name : "Author"
+    },
+    {
+      path : "/admin", component : PageAdminDashboard, name : "Admin Dashboard"
+    },
+    {
+      path : "/admin/control", component : PageAdminControl, name : "Admin Control"
+    },
+    {
+      path : "/admin/logs", component : PageAdminLogs, name : "Admin Logs"
     }
   ]
 

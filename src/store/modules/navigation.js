@@ -1,125 +1,59 @@
+import axios from "@/axios/axios";
+import router from '../../router/router';
 export default{
+    namespaced: true,
     state : {
         currentlyActiveRoute : "Home page",
-        navigationLinks : []
+        links : []
+    },
+    actions : {
+        async fetch(context){
+            let links = (await axios.get('/link/me')).data;
+
+            context.commit("changeLinks", links);
+        },
+        async openBookPage(context, bookId){
+            router.push({name : 'Book preview', params : {id : bookId}});
+
+            return {success : true};
+        }
     },
     mutations : {
         changeActiveRouteName(state, newRouteName){
             state.currentlyActiveRoute = newRouteName
         },
-        changeNavigationLinks(state, newNavigationLinks){
-            state.navigationLinks = newNavigationLinks;
-        }
-    },
-    actions : {
-        async getNavigationLinks(context){
-            let navigationLinks = [
-                {
-                    "text" : "City Library",
-                    "to" : "Home",
-                    "position" : "header",
-                    "weight" : 100,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "text" : "Home",
-                    "to" : "Home",
-                    "position" : "navbar",
-                    "weight" : 100,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "text" : "Books",
-                    "to" : "Books",
-                    "position" : "navbar",
-                    "weight" : 90,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "text" : "Favorites",
-                    "to" : "Favorites",
-                    "position" : "navbar",
-                    "weight" : 89,
-                    "showTo" : ["standard", "admin"]
-                },
-                {
-                    "text" : "Login",
-                    "to" : "Login",
-                    "position" : "navbar",
-                    "weight" : 80,
-                    "showTo" : ["logged out"]
-                },
-                {
-                    "text" : "Register",
-                    "to" : "Register",
-                    "position" : "navbar",
-                    "weight" : 79,
-                    "showTo" : ["logged out"]
-                },
-                {
-                    "text" : "Author",
-                    "to" : "Author",
-                    "position" : "navbar",
-                    "weight" : 0,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "to" : "https://www.facebook.com/",
-                    "icon" : "icomoon-free:facebook",
-                    "position" : "footer",
-                    "weight" : 100,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "to" : "https://www.twitter.com/",
-                    "icon" : "la:twitter",
-                    "position" : "footer",
-                    "weight" : 90,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "to" : "./documentation.pdf",
-                    "icon" : "fa-file",
-                    "position" : "footer",
-                    "weight" : 80,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "to" : "./sitemap.xml",
-                    "icon" : "bx:sitemap",
-                    "position" : "footer",
-                    "weight" : 70,
-                    "showTo" : ["logged out", "standard", "admin"]
-                },
-                {
-                    "text" : "Individual book",
-                    "to" : "Book preview",
-                    "position" : "hidden",
-                    "weight" : 0,
-                    "showTo" : ["logged out", "standard", "admin"]
-                }
-            ]
-
-            context.commit("changeNavigationLinks", navigationLinks);
+        changeLinks(state, newNavigationLinks){
+            state.links = newNavigationLinks;
         }
     },
     getters : {
-        getHeaderLink(state){
-            return state.navigationLinks.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
+        links(state, getters, rootState, rootGetters){
+            if((rootGetters['user/claims'].links)){
+                return rootGetters['user/claims'].links;
+            }
+
+            return state.links;
         },
-        getNavbarLinks(state){
-            return state.navigationLinks.filter(link => link.position === "navbar").sort((a,b) => b.weight - a.weight);
-        },
-        getFooterLinks(state){
-            return state.navigationLinks.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
-        },
-        getCurrentlyActiveRoute(state){
+        activeRoute(state){
             return state.currentlyActiveRoute
         },
-        getLinksUserIsAllowed(state, getters, rootState, rootGetters){
-            let userRole = rootGetters.activeUserRole;
-
-            return state.navigationLinks.filter(link => link.showTo.includes(userRole));
+        adminRouteActive(state, getters){
+            return getters.activeRoute.startsWith("Admin");
+        },
+        headerLink(state, getters){
+            return getters.links.filter(link => link.position === "header").sort((a,b) => b.weight - a.weight)[0];
+        },
+        userNavbar(state, getters){
+            return getters.links.filter(link => link.position === "navbar").sort((a,b) => b.weight - a.weight);
+        },
+        userFooter(state, getters){
+            return getters.links.filter(link => link.position === "footer").sort((a,b) => b.weight - a.weight);
+        },
+        adminNavbar(state, getters){
+            return getters.links.filter(link => link.position === "adminNavbar").sort((a,b) => b.weight - a.weight);
+        },
+        adminFooter(state, getters){
+            return getters.links.filter(link => link.position === "adminFooter").sort((a,b) => b.weight - a.weight)[0];
         }
     }
 }
