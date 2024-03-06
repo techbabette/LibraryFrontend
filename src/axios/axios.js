@@ -4,16 +4,11 @@ import store from "../store/store";
 const axiosInstance = axios.create({baseURL : process.env.VUE_APP_API_URL});
 
 axiosInstance.interceptors.request.use(
-    config => {
+    function(config){
+        store.commit("user/checkToken");
         config.headers["Authorization"] = "bearer " + store.getters['user/token'];
         config.headers["Accept"] = "application/json";
         config.headers["Content-Type"] = "multipart/form-data";
-        return config;
-    }
-)
-
-axiosInstance.interceptors.request.use(
-    function(config){
         config.params = {...config.params, _method : `${config.method}`};
         if(config.method != 'get'){
             config.method = 'post';            
@@ -33,10 +28,10 @@ function (response){
 }, 
 function(error){
     let response = {success : false};
-    store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
     if(typeof error.response === undefined){
         return response;
     }
+    store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
     if(!error.response.data.errors){
         return response;
     }

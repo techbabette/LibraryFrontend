@@ -34,6 +34,19 @@ export default {
         }
     },
     mutations : {
+        checkToken(state){
+            if(!state.token){
+                return true;
+            }
+            let expired = (parseJwt(state.token).exp ?? 0) * 1000 <= Date.now();
+            if(expired){
+                state.token = ""
+                this.commit("messages/display", {text : "Session expired", success : false}, {root : true});
+                router.push("/login").catch(()=>{});
+            }
+
+            return expired;
+        },
         changeToken(state, newToken){
             state.token = newToken;
             if(!newToken) return;
