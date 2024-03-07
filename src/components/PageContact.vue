@@ -25,6 +25,9 @@ export default {
                     label: "Message text",
                 }
             },
+            errors : {
+
+            },
             message : {
                 title : "",
                 body : "",
@@ -43,6 +46,8 @@ export default {
 
             if(result.success){
                 this.$store.commit("messages/display", {text : "Successfully sent message!", success : true});
+            }else{
+                this.errors = result.errors;
             }
         }
     }
@@ -53,7 +58,7 @@ export default {
     <div class="mk-solo-page page container-fluid">
         <div class="col-6">
             <h2>Send a message to the administration team</h2>
-                <InputForm :elements="formElements" v-model="message"/>
+                <InputForm :elements="formElements" :errors="errors" v-model="message"/>
             <a href="" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">Send</a>
         </div>
     </div>
