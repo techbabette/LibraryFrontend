@@ -96,6 +96,9 @@ export default {
 
             caller = getParam(onClick, "caller") ?? caller;
 
+            console.log(onClick);
+            console.log(caller);
+
             let result = await paramRequest(onClick, caller);
 
             if(refresh){
