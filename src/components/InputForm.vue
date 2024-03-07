@@ -23,6 +23,11 @@ export default {
             required : false,
             default : () => {}
         },
+        refresh_signal : {
+            Type : Boolean,
+            required: false,
+            default : false
+        },
         _class : {
             Type : String,
             default : ""
@@ -48,6 +53,12 @@ export default {
                 this.loadSources();
             },
             deep : true
+        },
+        refresh_signal: async function(){
+            if(this.refresh_signal){
+                this.$emit("refresh", false);
+                await this.loadSources();
+            }
         }
     },
 
@@ -79,6 +90,9 @@ export default {
                 }
 
                 let response = await handleParamRequest(currentElement['source']);
+                if(!response.success){
+                    continue;
+                }
                 let items = response.body;
                 this.$set(this.formSources, key, items);
             }

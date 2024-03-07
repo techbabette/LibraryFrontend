@@ -30,6 +30,7 @@ export default {
             showForm : false,
             openFormIndex : -1,
             renderForm : true,
+            refreshForm : false,
         }
     },
 
@@ -148,7 +149,7 @@ export default {
         },
         closeForm : function(){
             this.showForm = false;
-            this.refreshForm();
+            this.reRenderForm();
         },
         openForm : async function(callerId = 0){
             //If called with id, get current information and store to formData before opening
@@ -195,10 +196,11 @@ export default {
                 this.closeForm();
             }
             if(result.errors){
+                this.refreshForm = true;
                 this.formErrors = result.errors;
             }
         },
-        refreshForm: function(){
+        reRenderForm: function(){
             this.renderForm = false;
 
             this.$nextTick(() => {
@@ -234,7 +236,7 @@ export default {
 
     <div id="modal-background" class="mk-modal" v-if="currentForm && renderForm" :class="{hidden : !showForm}">
         <div class="mk-modal-content" >
-            <InputForm :elements="currentForm" :errors="formErrors" v-model="formData"/>
+            <InputForm :elements="currentForm" :errors="formErrors" v-model="formData" :refresh_signal="refreshForm" @refresh="refreshForm = false"/>
             <a href="" class="col-12 btn btn-success text-light my-2" @click.prevent="submitForm">Submit</a>
             <a href="" class="col-12 btn btn-danger text-light my-2" @click.prevent="closeForm">Close form</a>
         </div>
