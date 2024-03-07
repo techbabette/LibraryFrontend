@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from "../store/store";
+import router from "../router/router";
 
 const axiosInstance = axios.create({baseURL : process.env.VUE_APP_API_URL});
 
@@ -30,6 +31,10 @@ function(error){
     let response = {success : false};
     if(typeof error.response === undefined){
         return response;
+    }
+    if((error.response.status === 401 || error.response.status === 403) && store.getters['user/token']){
+        store.commit("user/changeToken", "");
+        router.push("/login").catch(()=>{});
     }
     store.commit("messages/display", {text : error.response.data.message ?? error.response.data.error, success : false});
     if(!error.response.data.errors){

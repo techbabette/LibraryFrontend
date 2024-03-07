@@ -114,13 +114,12 @@ export default {
 
             let items = await this.$store.dispatch("fetch", {url : this.currentTab.endpoint, params});
 
+            if(!items.success){
+                return;
+            }
 
             this.tabs[this.currentTabName].items = items.body.data;
             this.tabs[this.currentTabName].maximumPage = items.body.last_page;
-            
-            // this.$set(this.tabs[this.currentTabName], 'itemPage', items.body.current_page);
-
-            // console.log(this.currentTab['itemPage']);
 
             this.currentItemPage = items.body.current_page;
             if(items.data.sortOptions){
@@ -158,8 +157,11 @@ export default {
             this.formErrors = {};
 
             if(callerId){
-                let currentInformation = (await axiosInstance.get(`${this.baseEndpoint}/edit/${callerId}`)).body;
-                this.formData = currentInformation;
+                let currentInformation = await axiosInstance.get(`${this.baseEndpoint}/edit/${callerId}`);
+                if(!currentInformation.success){
+                    return;
+                }
+                this.formData = currentInformation.body;
             }
 
             //After form is ready, set showForm to true

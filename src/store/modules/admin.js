@@ -818,6 +818,10 @@ export default {
         async assumeUser(context, userId){
             let response = await axiosInstance.get(`user/assume/${userId}`);
 
+            if(!response.success){
+                return {success : false};
+            }
+
             router.push("/").catch(() => {});
 
             context.commit("messages/display", {text : "Successfully assumed user", success : true}, {root : true});
