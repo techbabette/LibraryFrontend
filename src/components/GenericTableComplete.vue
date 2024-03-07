@@ -185,6 +185,9 @@ export default {
                 if(formElement.field_type === "image" && !(this.formData[key] instanceof File)){
                     continue;
                 }
+                if(formElement.field_type === 'password' && !this.formData[key]){
+                    continue;
+                }
                 limitedDataObject[key] = this.formData[key];
             }
 
