@@ -848,6 +848,11 @@ export default {
             Vue.set(context.state, 'currentTab', "Books");
 
             return {success : true};
+        },
+        messagesOfType(context, messageTypeId){
+            Vue.set(context.state.adminTabs['Messages'].searchParams, 'message_types', [messageTypeId]);
+            Vue.set(context.state, 'currentTab', "Messages");
+            return {success : true}
         }
     },
 

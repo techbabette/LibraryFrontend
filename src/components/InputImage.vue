@@ -28,7 +28,7 @@ export default {
                 return this.imageSource;
             }
 
-            if(this.old_source){
+            if(this.old_source && typeof this.old_source === 'string'){
                 try{
                     let res = "./" + process.env.VUE_APP_IMAGE_SOURCE + this.old_source;
                     return res;
