@@ -181,7 +181,7 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
-                        "name" : "Delete",
+                        "name" : "Deactivate",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "delete|book"
                     },
@@ -262,7 +262,7 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
-                        "name" : "Inactivate",
+                        "name" : "Deactivate",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "delete|category"
                     },
@@ -330,7 +330,7 @@ export default {
                         "onClick" : "emit:showForm"
                     },
                     {
-                        "name" : "Inactivate",
+                        "name" : "Deactivate",
                         "class" : "btn btn-danger mx-1",
                         "onClick" : "delete|author"
                     },
