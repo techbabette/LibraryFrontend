@@ -830,24 +830,28 @@ export default {
             return {success : true};
         },
         inactiveBooksWithAuthor(context, authorId){
+            Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'categories', []);
             Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'authors', [authorId]);
             Vue.set(context.state, 'currentTab', "Inactive books");
 
             return {success : true};
         },
         booksWithAuthor(context, authorId){
+            Vue.set(context.state.adminTabs.Books.searchParams, 'categories', []);
             Vue.set(context.state.adminTabs.Books.searchParams, 'authors', [authorId]);
             Vue.set(context.state, 'currentTab', "Books");
 
             return {success : true};
         },
         inactiveBooksWithCategory(context, categoryId){
+            Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'authors', []);
             Vue.set(context.state.adminTabs['Inactive books'].searchParams, 'categories', [categoryId]);
             Vue.set(context.state, 'currentTab', "Inactive books");
 
             return {success : true};
         },
         booksWithCategory(context, categoryId){
+            Vue.set(context.state.adminTabs['Books'].searchParams, 'authors', []);
             Vue.set(context.state.adminTabs.Books.searchParams, 'categories', [categoryId]);
             Vue.set(context.state, 'currentTab', "Books");
 
