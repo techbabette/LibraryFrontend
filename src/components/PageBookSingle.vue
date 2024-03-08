@@ -12,7 +12,9 @@ export default {
       return {
         bookInformation : {
 
-        }
+        },
+        loanRequestInFlight : false,
+        favoriteRequestInFlight : false
       };
     },
 
@@ -72,11 +74,16 @@ export default {
         }
       },
       handleLoanButtonClick : async function (){
+        if(this.loanRequestInFlight){
+          return;
+        }
+        this.loanRequestInFlight = true;
         if(this.loanedToUser){
           await this.returnBook();  
         }else{
           await this.loanOut();
         }
+        this.loanRequestInFlight = false;
       },
       addtoFavorites : async function(){
         let result = await (axios.post('/favorite', {book_id : this.bookInformation.id}));  
@@ -94,11 +101,16 @@ export default {
         }
       },
       handleFavoriteButtonClick : async function(){
+        if(this.favoriteRequestInFlight){
+          return;
+        }
+        this.favoriteRequestInFlight = true;
         if(this.favorite){
           await this.removeFromFavorites();
         }else{
           await this.addtoFavorites();
         }
+        this.favoriteRequestInFlight = false;
       },
       updateBookInfo : async function (){
         this.bookInformation = (await this.$store.dispatch("fetch", {url : `/book/${this.$route.params.id}`})).body;
