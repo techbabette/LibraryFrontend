@@ -8,7 +8,13 @@ export default{
     },
     actions : {
         async fetch(context){
-            let links = (await axios.get('/link/me')).data;
+            let result = await axios.get('/link/me');
+            
+            if(!result){
+                return;
+            }
+
+            let links = result.data;
 
             context.commit("changeLinks", links);
         },
