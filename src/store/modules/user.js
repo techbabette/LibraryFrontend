@@ -16,9 +16,10 @@ export default {
             }
 
             let token = response.data.body;
-            router.push("/").catch(()=>{});
-            context.commit("messages/display", {text : "Successfully logged in", success : true}, {root : true});
+            
             context.commit("changeToken", token);
+            context.commit("messages/display", {text : "Successfully logged in", success : true}, {root : true});
+            router.push("/").catch(()=>{});
             return response;
         },
         async attemptLogout(context){
@@ -27,9 +28,9 @@ export default {
                 return response;
             }
 
-            router.push("/").catch(()=>{});
-            context.commit("messages/display", {text : "Successfully logged out", success : true}, {root : true});
             context.commit("changeToken", "");
+            context.commit("messages/display", {text : "Successfully logged out", success : true}, {root : true});
+            router.push("/").catch(()=>{});
             return response;
         }
     },
