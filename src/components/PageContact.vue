@@ -2,51 +2,52 @@
 import InputForm from "./InputForm.vue";
 import axios from "@/axios/axios";
 export default {
-    name : "PageContact",
+    name: "PageContact",
 
-    components : {
+    components: {
         InputForm
     },
 
-    data(){
+    data() {
         return {
-            formElements : {
-                "title" : {
+            formElements: {
+                "title": {
                     field_type: "string",
                     label: "Title"
                 },
-                "message_type_id" : {
+                "message_type_id": {
                     field_type: "select",
                     label: "Message type",
                     source: "get|messagetype?noPage=true"
                 },
-                "body" : {
+                "body": {
                     field_type: "text",
                     label: "Message text",
                 }
             },
-            errors : {
+            errors: {
 
             },
-            message : {
-                title : "",
-                body : "",
-                message_type_id : -1
+            message: {
+                title: "",
+                body: "",
+                message_type_id: -1
             },
-            messageTypes : []
+            messageTypes: []
         }
     },
 
-    mounted(){
+    mounted() {
     },
 
-    methods : {
-        sendMessage : async function(){
+    methods: {
+        sendMessage: async function () {
             let result = await axios.post("message", this.message);
 
-            if(result.success){
-                this.$store.commit("messages/display", {text : "Successfully sent message!", success : true});
-            }else{
+            if (result.success) {
+                this.errors = {};
+                this.$store.commit("messages/display", { text: "Successfully sent message!", success: true });
+            } else {
                 this.errors = result.errors;
             }
         }
@@ -58,7 +59,7 @@ export default {
     <div class="mk-solo-page page container-fluid">
         <div class="col-6">
             <h2>Send a message to the administration team</h2>
-                <InputForm :elements="formElements" :errors="errors" v-model="message"/>
+            <InputForm :elements="formElements" :errors="errors" v-model="message" />
             <a href="" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">Send</a>
         </div>
     </div>

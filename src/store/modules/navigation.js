@@ -9,8 +9,8 @@ export default{
     actions : {
         async fetch(context){
             let result = await axios.get('/link/me');
-            
-            if(!result){
+
+            if(!result.success){
                 return;
             }
 
