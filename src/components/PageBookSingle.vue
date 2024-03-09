@@ -166,7 +166,7 @@ export default {
       </div>
     </div>
     <div v-else>
-      No active book found
+      No book found
     </div>
   </div>
 </template>
