@@ -32,7 +32,7 @@ function(error){
     if(typeof error.response === undefined){
         return response;
     }
-    if((error.response.status === 401 || error.response.status === 403) && store.getters['user/token']){
+    if((error.response.status === 401) && store.getters['user/token']){
         store.commit("user/changeToken", "");
         router.push("/login").catch(()=>{});
     }
