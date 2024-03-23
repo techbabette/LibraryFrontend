@@ -1,4 +1,4 @@
-# [Citz Library](https://dszkzv3o6c2jj.cloudfront.net) Frontend
+# [City Library](https://dszkzv3o6c2jj.cloudfront.net) Frontend
 
 A full description of application features can be found here [here](https://dszkzv3o6c2jj.cloudfront.net/documentation.pdf).
 
