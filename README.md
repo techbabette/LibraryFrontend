@@ -1,4 +1,4 @@
-# City Library website (Frontend)
+# [Citz Library](https://dszkzv3o6c2jj.cloudfront.net) Frontend
 
 A full description of application features can be found here [here](https://dszkzv3o6c2jj.cloudfront.net/documentation.pdf).
 
@@ -94,7 +94,7 @@ The example JSON below results in one of the many admin tabs
             "onClick" : "dispatch|navigation/openBookPage"
         },
     ],
-    "table_options" : [
+    "tableOptions" : [
         {
             "name" : "Create new book",
             "class" : "btn btn-success m-1",
