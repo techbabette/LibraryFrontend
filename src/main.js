@@ -10,19 +10,11 @@ Vue.directive("showto", showToDirective);
 
 Vue.component("IconifyIcon", Icon);
 
-await store.dispatch("navigation/fetch");
-
 router.beforeEach(async function (to, from, next){
   let requestedPage = to.name;
-  let userAllowedAccess = store.getters['navigation/links'].some(link => link.to === requestedPage);
-  if(userAllowedAccess){
-    document.title = to.name;
-    store.commit("navigation/changeActiveRouteName", requestedPage);
-    next();
-    return;
-  }
-  router.push("/").catch(()=>{});
-  console.warn("You're not allowed to see the requested page");
+  document.title = requestedPage;
+  store.commit("navigation/changeActiveRouteName", requestedPage);
+  next();
 })
 
 new Vue({

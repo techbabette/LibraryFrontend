@@ -1,37 +1,47 @@
-<template>
-  <div id="app">
-    <PageLayoutUser v-if="!adminRouteActive"/>
-    <PageLayoutAdmin v-if="adminRouteActive"/>
-    <ButtonBackToTop/>
-    <MessageDisplay/>
-  </div>
-</template>
-
 <script>
 import PageLayoutUser from "./components/PageLayoutUser.vue"
 import PageLayoutAdmin from "./components/PageLayoutAdmin.vue";
 import ButtonBackToTop from "./components/ButtonBackToTop.vue";
 import MessageDisplay from "./components/MessageDisplay.vue";
+import PageLoading from "./components/PageLoading.vue";
 export default {
   name: 'App',
-  components : {
+  components: {
     PageLayoutUser,
     PageLayoutAdmin,
     ButtonBackToTop,
-    MessageDisplay
+    MessageDisplay,
+    PageLoading
   },
-  data(){
+  data() {
     return {
+      loaded: false
     }
   },
-  computed : {
-    adminRouteActive : function(){
+  computed: {
+    adminRouteActive: function () {
       return this.$store.getters['navigation/adminRouteActive'];
     }
+  },
+
+  async mounted() {
+    await this.$store.dispatch("navigation/fetch");
+
+    this.loaded = true;
   }
 }
 </script>
 
+<template>
+  <PageLoading v-if="!loaded" />
+  <div v-else id="app">
+    <PageLayoutUser v-if="!adminRouteActive" />
+    <PageLayoutAdmin v-if="adminRouteActive" />
+    <ButtonBackToTop />
+    <MessageDisplay />
+  </div>
+</template>
+
 <style>
-    @import '@/assets/styles/main.css'
+@import '@/assets/styles/main.css'
 </style>
