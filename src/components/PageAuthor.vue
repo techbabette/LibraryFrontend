@@ -9,7 +9,7 @@ export default {
     methods: {
         loadBackgroundImage: async function (callback) {
             let image = new Image();
-            image.onload = () => callback();
+            image.onload = async () => { await image.decode(); callback() };
             image.src = "/img/author.jpg";
         }
     }
