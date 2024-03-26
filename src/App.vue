@@ -15,19 +15,19 @@ export default {
   },
   data() {
     return {
-      loaded: false
     }
   },
   computed: {
     adminRouteActive: function () {
       return this.$store.getters['navigation/adminRouteActive'];
+    },
+    loaded: function () {
+      return this.$store.getters['navigation/loaded'];
     }
   },
 
   async mounted() {
     await this.$store.dispatch("navigation/fetch");
-
-    this.loaded = true;
   }
 }
 </script>

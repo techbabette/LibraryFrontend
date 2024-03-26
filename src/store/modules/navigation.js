@@ -4,6 +4,7 @@ export default{
     namespaced: true,
     state : {
         currentlyActiveRoute : "Home page",
+        loaded : false,
         links : []
     },
     actions : {
@@ -17,6 +18,7 @@ export default{
             let links = result.data;
 
             context.commit("changeLinks", links);
+            context.commit("changeLoaded", true);
         },
         async openBookPage(context, bookId){
             router.push({name : 'Book preview', params : {id : bookId}});
@@ -30,6 +32,9 @@ export default{
         },
         changeLinks(state, newNavigationLinks){
             state.links = newNavigationLinks;
+        },
+        changeLoaded(state, newLoaded){
+            state.loaded = newLoaded;
         }
     },
     getters : {
@@ -39,6 +44,9 @@ export default{
             }
 
             return state.links;
+        },
+        loaded(state){
+            return state.loaded
         },
         activeRoute(state){
             return state.currentlyActiveRoute

@@ -10,13 +10,6 @@ Vue.directive("showto", showToDirective);
 
 Vue.component("IconifyIcon", Icon);
 
-router.beforeEach(async function (to, from, next){
-  let requestedPage = to.name;
-  document.title = requestedPage;
-  store.commit("navigation/changeActiveRouteName", requestedPage);
-  next();
-})
-
 new Vue({
   router,
   store,

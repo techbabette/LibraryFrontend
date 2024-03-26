@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from '@/store/store';
 
 import LandingPage from "../components/PageLanding.vue";
 import BooksPage from "../components/PageBooksSearch.vue";
@@ -56,6 +57,25 @@ const router = new Router({
     mode: 'history',
     routes
 })
+
+async function routerBeforeEach(to, from, next){
+  if(!store.getters['navigation/loaded']){
+    setTimeout(() => {routerBeforeEach(to, from, next)}, 10);
+    return;
+  }
+  let requestedPage = to.name;
+  let userAllowedAccess = store.getters['navigation/links'].some(link => link.to === requestedPage);
+  if(userAllowedAccess){
+    document.title = to.name;
+    store.commit("navigation/changeActiveRouteName", requestedPage);
+    next();
+    return;
+  }
+  router.push("/").catch(()=>{});
+  console.warn("You're not allowed to see the requested page");
+}
+
+router.beforeEach((to, from, next) => routerBeforeEach(to, from, next));
 
 
 export default router
