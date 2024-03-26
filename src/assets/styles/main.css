@@ -474,8 +474,7 @@ body{
     visibility: none;
   }
   .hidden{
-    position: absolute; 
-    left: -999em;
+    display: none;
   }
   footer .row{
     height: 100%;
