@@ -53,7 +53,7 @@ export default {
         this.$store.commit("books/setSearchParam", { value, name: 'authors' });
       }
     },
-    selectedSort : {
+    selectedSort: {
       get() {
         return this.$store.getters['books/getSearchParam']('sort');
       },
@@ -73,8 +73,10 @@ export default {
       return this.$store.getters['books/getSearchParam']("maximumPage");
     },
     Params: function () {
-      let paramObject = { perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors, 
-        page: this.page ?? 0, sortSelected: this.selectedSort, title : this.searchTitle };
+      let paramObject = {
+        perPage: this.params.perPage, categories: this.selectedCategories, authors: this.selectedAuthors,
+        page: this.page ?? 0, sortSelected: this.selectedSort, title: this.searchTitle
+      };
       return paramObject;
     }
   },
@@ -95,17 +97,18 @@ export default {
     let bookResult = await this.getItems(this.Params);
 
     let [categoryResult, authorResult, sortResult] = await Promise.all([
-      this.$store.dispatch("fetch", { url: 'category', params : {bookCountInName : true, havingBooks : true, noPage : true} }),
-      this.$store.dispatch("fetch", { url: 'author', params: {bookCountInName : true, havingBooks : true, noPage: true} }),
+      this.$store.dispatch("fetch", { url: 'category', params: { bookCountInName: true, havingBooks: true, noPage: true } }),
+      this.$store.dispatch("fetch", { url: 'author', params: { bookCountInName: true, havingBooks: true, noPage: true } }),
       this.$store.dispatch("fetch", { url: 'book', params: { sortOptions: true } }),
     ])
     let sortOptions = [];
-    sortResult.data.body.forEach((el) => { 
-      if(el.text.startsWith("!!")){
+    sortResult.data.body.forEach((el) => {
+      if (el.text.startsWith("!!")) {
         return;
       }
-      sortOptions.push({id : `${el.id}_desc`, text : `${el.text} (Desc)`}),
-      sortOptions.push({id : `${el.id}_asc`, text : `${el.text} (Asc)`})}
+      sortOptions.push({ id: `${el.id}_desc`, text: `${el.text} (Desc)` }),
+        sortOptions.push({ id: `${el.id}_asc`, text: `${el.text} (Asc)` })
+    }
     )
 
     this.paramOptions.categories = categoryResult.data.body;
@@ -113,6 +116,8 @@ export default {
     this.paramOptions.sort = sortOptions;
 
     this.items = bookResult;
+
+    this.$store.commit("navigation/changeFirstPageLoaded", true)
   },
 
   methods: {
@@ -122,7 +127,7 @@ export default {
       let maximumPage = result.data.body.last_page;
       this.$store.commit("books/setSearchParam", { value: maximumPage, name: 'maximumPage' });
     },
-    removeFilters(){
+    removeFilters() {
       this.$store.commit("books/clearSearchParams");
     }
   }
@@ -132,12 +137,13 @@ export default {
   <div class="mk-solo-page page container-fluid">
     <div class="row spec-row d-flex flex-row">
       <div id="filters">
-        <InputAdaptable class="d-flex flex-column text-center" v-model="searchTitle" label="Search by title"/>
-        <DropdownSelect options_text_field="text" label="Sort options" :options="paramOptions.sort" v-model="selectedSort" />
-        <InputDropdownSelectMultiple hint="Category" :hint_only="true" :options="paramOptions.categories" text_field="text"
-          v-model="selectedCategories" />
-        <InputDropdownSelectMultiple hint="Author" :hint_only="true" :options="paramOptions.authors" text_field="full_name_book_count"
-          v-model="selectedAuthors" />
+        <InputAdaptable class="d-flex flex-column text-center" v-model="searchTitle" label="Search by title" />
+        <DropdownSelect options_text_field="text" label="Sort options" :options="paramOptions.sort"
+          v-model="selectedSort" />
+        <InputDropdownSelectMultiple hint="Category" :hint_only="true" :options="paramOptions.categories"
+          text_field="text" v-model="selectedCategories" />
+        <InputDropdownSelectMultiple hint="Author" :hint_only="true" :options="paramOptions.authors"
+          text_field="full_name_book_count" v-model="selectedAuthors" />
         <a class="btn btn-dark w-100" id="resetFilterButton" @click.prevent="removeFilters" href="#">Remove filters</a>
       </div>
       <div class="mk-holder" id="filter-holder">
@@ -152,6 +158,5 @@ export default {
         </div>
         <ButtonsPagination v-model="page" :maximum_page="maximumPage" />
       </div>
-    </div>
   </div>
-</template>
+</div></template>

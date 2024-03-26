@@ -38,6 +38,7 @@ export default {
     },
 
     mounted() {
+        this.$store.commit("navigation/changeFirstPageLoaded", true);
     },
 
     methods: {

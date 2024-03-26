@@ -45,6 +45,10 @@ export default {
         }
     },
 
+    mounted() {
+        this.$store.commit("navigation/changeFirstPageLoaded", true);
+    },
+
     methods: {
         async attemptRegistration() {
             let result = await axios.post("auth/register", this.registrationData);

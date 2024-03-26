@@ -22,7 +22,7 @@ export default {
       return this.$store.getters['navigation/adminRouteActive'];
     },
     loaded: function () {
-      return this.$store.getters['navigation/loaded'];
+      return this.$store.getters['navigation/loaded'] && this.$store.getters['navigation/firstPageLoaded'];
     }
   },
 
@@ -33,12 +33,14 @@ export default {
 </script>
 
 <template>
-  <PageLoading v-if="!loaded" />
-  <div v-else id="app">
-    <PageLayoutUser v-if="!adminRouteActive" />
-    <PageLayoutAdmin v-if="adminRouteActive" />
-    <ButtonBackToTop />
-    <MessageDisplay />
+  <div>
+    <PageLoading :class="{ hidden: loaded }" />
+    <div :class="{ hidden: !loaded }" id="app">
+      <PageLayoutUser v-if="!adminRouteActive" />
+      <PageLayoutAdmin v-if="adminRouteActive" />
+      <ButtonBackToTop />
+      <MessageDisplay />
+    </div>
   </div>
 </template>
 

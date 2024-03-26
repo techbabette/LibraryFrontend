@@ -29,7 +29,11 @@ export default {
                 this.$store.commit("user/changeToken", result.body);
                 this.$store.commit("messages/display", { text: "Successfully activated account", success: true });
                 this.$router.push("/").catch(() => { });
+            } else {
+                this.$store.commit("navigation/changeFirstPageLoaded", true);
             }
+        } else {
+            this.$store.commit("navigation/changeFirstPageLoaded", true);
         }
     },
 
@@ -38,7 +42,7 @@ export default {
             let body = this.loginData;
             await this.$store.dispatch("user/attemptLogin", body);
         }
-    }
+    },
 }
 </script>
 <template>

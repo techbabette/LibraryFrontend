@@ -5,6 +5,7 @@ export default{
     state : {
         currentlyActiveRoute : "Home page",
         loaded : false,
+        firstPageLoaded : false,
         links : []
     },
     actions : {
@@ -33,6 +34,9 @@ export default{
         changeLinks(state, newNavigationLinks){
             state.links = newNavigationLinks;
         },
+        changeFirstPageLoaded(state, newState){
+            state.firstPageLoaded = newState;
+        },
         changeLoaded(state, newLoaded){
             state.loaded = newLoaded;
         }
@@ -45,11 +49,14 @@ export default{
 
             return state.links;
         },
+        firstPageLoaded(state){
+            return state.firstPageLoaded;
+        },
         loaded(state){
-            return state.loaded
+            return state.loaded;
         },
         activeRoute(state){
-            return state.currentlyActiveRoute
+            return state.currentlyActiveRoute;
         },
         adminRouteActive(state, getters){
             return getters.activeRoute.startsWith("Admin");

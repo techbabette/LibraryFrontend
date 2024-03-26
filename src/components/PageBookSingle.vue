@@ -46,7 +46,8 @@ export default {
   },
 
   async mounted() {
-    this.updateBookInfo();
+    await this.updateBookInfo();
+    this.$store.commit("navigation/changeFirstPageLoaded", true);
   },
 
   methods: {
