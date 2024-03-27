@@ -48,11 +48,13 @@ export default {
 </script>
 <template>
     <div class="mk-solo-page page container-fluid">
-        <div class="col-6">
+        <form action="" class="form-dark col-6" @submit.prevent="attemptLogin">
             <h2>Login to your City Library account</h2>
             <InputAdaptable v-model="loginData.email" field_type="string" label="Email" />
             <InputAdaptable v-model="loginData.password" field_type="password" label="Password" />
-            <a href="" @click.prevent="attemptLogin" class="btn btn-light w-100 bigButton my-2">Login</a>
-        </div>
+            <button type="submit" @click.prevent="attemptLogin" class="btn btn-light w-100 bigButton my-2">
+                Login
+            </button>
+        </form>
     </div>
 </template>

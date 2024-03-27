@@ -59,10 +59,12 @@ export default {
 
 <template>
     <div class="mk-solo-page page container-fluid">
-        <div class="col-6">
+        <form action="" class="form-dark col-6" @submit.prevent="sendMessage">
             <h2>Send a message to the administration team</h2>
             <InputForm :elements="formElements" :errors="errors" v-model="message" />
-            <a href="" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">Send</a>
-        </div>
+            <button type="submit" @click.prevent="sendMessage" class="btn btn-light w-100 bigButton my-2">
+                Send
+            </button>
+        </form>
     </div>
 </template>

@@ -348,6 +348,9 @@ body{
     color: #f7bd2f;
     text-align: center;
   }
+  .form-dark{
+    color: #222222 !important;
+  }
   input{
     text-align: center;
   }

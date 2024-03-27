@@ -68,11 +68,13 @@ export default {
     <div class="mk-solo-page page container-fluid">
         <div class="col-6">
             <h2>Become a member of the library</h2>
-            <div>
+            <form action="" class="form-dark" @submit.prevent="attemptRegistration">
                 <InputForm :elements="inputs" v-model="registrationData" :errors="errors"
                     _class="d-flex flex-row flex-wrap" />
-                <a href="" @click.prevent="attemptRegistration" class="btn btn-light w-100 bigButton my-2">Register</a>
-            </div>
+                <button type="submit" @click.prevent="attemptRegistration"
+                    class="btn btn-light w-100 bigButton my-2">Register
+                </button>
+            </form>
         </div>
     </div>
 </template>
