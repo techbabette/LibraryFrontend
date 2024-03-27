@@ -1,21 +1,14 @@
 <script>
+import loadImage from "@/lib/loadImage";
+import pageReady from '@/lib/pageReady';
 export default {
     name: "PageAuthor",
 
-    mounted() {
-        this.loadBackgroundImage(() => this.$store.commit("navigation/changeFirstPageLoaded", true));
+    async mounted() {
+        await loadImage("/img/main.jpg");
+        pageReady();
     },
-
-    methods: {
-        loadBackgroundImage: async function (callback) {
-            let image = new Image();
-            image.onload = async () => { await image.decode(); callback() };
-            image.src = "/img/author.jpg";
-        }
-    }
 }
-
-
 </script>
 
 <template>

@@ -1,9 +1,6 @@
 <script>
-// import GenericTable from "./GenericTable"
-// import TableTab from "./GenericTableTab"
-// import PageButtons from "./ButtonsPagination.vue"
-// import InputAdaptable from "./InputAdaptable.vue"
-import GenericTableComplete from "./GenericTableComplete.vue"
+import GenericTableComplete from "./GenericTableComplete.vue";
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageAdminControl",
 
@@ -186,7 +183,7 @@ export default {
     },
 
     mounted() {
-        this.$store.commit("navigation/changeFirstPageLoaded", true);
+        pageReady();
     },
 
     methods: {

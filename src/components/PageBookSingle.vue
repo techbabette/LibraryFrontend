@@ -1,6 +1,7 @@
 <script>
 import axios from "@/axios/axios";
 import BookButtonFollowValue from './BookButtonFollowValue.vue'
+import pageReady from "@/lib/pageReady";
 export default {
   name: "PageBookSingle",
 
@@ -47,7 +48,7 @@ export default {
 
   async mounted() {
     await this.updateBookInfo();
-    this.$store.commit("navigation/changeFirstPageLoaded", true);
+    pageReady();
   },
 
   methods: {

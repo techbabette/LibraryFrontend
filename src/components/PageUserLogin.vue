@@ -1,6 +1,7 @@
 <script>
 import InputAdaptable from "@/components/InputAdaptable.vue";
 import axios from "@/axios/axios";
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageUserLogin",
 
@@ -30,10 +31,10 @@ export default {
                 this.$store.commit("messages/display", { text: "Successfully activated account", success: true });
                 this.$router.push("/").catch(() => { });
             } else {
-                this.$store.commit("navigation/changeFirstPageLoaded", true);
+                pageReady();
             }
         } else {
-            this.$store.commit("navigation/changeFirstPageLoaded", true);
+            pageReady();
         }
     },
 

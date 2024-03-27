@@ -1,6 +1,8 @@
 <script>
 import InfoBlock from "./InfoBlock.vue";
 import BookShelf from "./BookShelf.vue";
+import loadImage from "@/lib/loadImage";
+import pageReady from "@/lib/pageReady";
 export default {
   name: 'PageLanding',
 
@@ -34,7 +36,8 @@ export default {
 
   async mounted() {
     this.loadLibraryInformation();
-    this.loadBackgroundImage(() => this.$store.commit("navigation/changeFirstPageLoaded", true));
+    await loadImage("/img/main.jpg");
+    pageReady();
   },
 
   methods: {
@@ -51,11 +54,6 @@ export default {
       blockWithTitle("Lent books").maxValue = loanCount.body;
       blockWithTitle("Members").maxValue = memberCount.body;
       blockWithTitle("Years since founding").maxValue = yearsSinceFounding;
-    },
-    loadBackgroundImage: async function (callback) {
-      let image = new Image();
-      image.onload = async () => { await image.decode(); callback() };
-      image.src = "/img/main.jpg";
     }
   }
 }

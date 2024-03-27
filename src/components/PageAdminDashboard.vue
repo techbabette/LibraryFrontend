@@ -1,6 +1,7 @@
 <script>
 import InfoBlock from '@/components/InfoBlock.vue';
 import ChartBar from './ChartBar.vue';
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageAdminDashboard",
 
@@ -85,7 +86,7 @@ export default {
     mounted() {
         this.loadInfoBlocksData();
 
-        this.$store.commit("navigation/changeFirstPageLoaded", true);
+        pageReady();
     },
 
     methods: {
@@ -146,4 +147,5 @@ export default {
     .chartHeight {
         max-height: 55vh !important;
     }
-}</style>
+}
+</style>

@@ -1,6 +1,7 @@
 <script>
 import InputForm from "./InputForm.vue";
 import axios from "@/axios/axios";
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageContact",
 
@@ -38,7 +39,7 @@ export default {
     },
 
     mounted() {
-        this.$store.commit("navigation/changeFirstPageLoaded", true);
+        pageReady();
     },
 
     methods: {

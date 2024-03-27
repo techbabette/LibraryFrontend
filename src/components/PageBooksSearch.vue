@@ -4,6 +4,7 @@ import InputDropdownSelectMultiple from "./InputDropdownSelectMultiple";
 import DropdownSelect from "./InputDropdownSelect.vue";
 import ButtonsPagination from "./ButtonsPagination.vue";
 import InputAdaptable from "./InputAdaptable.vue";
+import pageReady from "@/lib/pageReady";
 export default {
   name: "PageBooksSearch",
 
@@ -117,7 +118,7 @@ export default {
 
     this.items = bookResult;
 
-    this.$store.commit("navigation/changeFirstPageLoaded", true)
+    pageReady();
   },
 
   methods: {
@@ -158,5 +159,6 @@ export default {
         </div>
         <ButtonsPagination v-model="page" :maximum_page="maximumPage" />
       </div>
+    </div>
   </div>
-</div></template>
+</template>

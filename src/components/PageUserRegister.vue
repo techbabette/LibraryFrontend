@@ -1,6 +1,7 @@
 <script>
 import InputForm from "@/components/InputForm.vue";
 import axios from "@/axios/axios";
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageUserRegister",
 
@@ -46,7 +47,7 @@ export default {
     },
 
     mounted() {
-        this.$store.commit("navigation/changeFirstPageLoaded", true);
+        pageReady();
     },
 
     methods: {

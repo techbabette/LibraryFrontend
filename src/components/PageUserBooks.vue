@@ -1,5 +1,6 @@
 <script>
-import GenericTableComplete from "./GenericTableComplete.vue"
+import GenericTableComplete from "./GenericTableComplete.vue";
+import pageReady from "@/lib/pageReady";
 export default {
     name: "PageUserBooks",
 
@@ -244,7 +245,7 @@ export default {
     },
 
     mounted() {
-        this.$store.commit("navigation/changeFirstPageLoaded", true);
+        pageReady();
     },
 }
 </script>
