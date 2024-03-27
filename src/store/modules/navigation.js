@@ -16,7 +16,14 @@ export default{
                 return;
             }
 
-            let links = result.data;
+            let links = result.data.links ?? result.data;
+            let access_level = result.data.access_level;
+
+            if((access_level === -1 || access_level === 0) && context.rootGetters['user/token']){
+                context.commit("user/changeToken", "", {root : true});
+                context.commit("messages/display", {text : "Session expired", success : false}, {root : true});
+                router.push("/login").catch(()=>{});
+            }
 
             context.commit("changeLinks", links);
             context.commit("changeLoaded", true);
