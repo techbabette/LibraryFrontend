@@ -27,6 +27,8 @@ export default {
   },
 
   async mounted() {
+    this.$store.commit("user/changeToken", localStorage.getItem("token") ?? "");
+    this.$store.commit("user/checkToken");
     await this.$store.dispatch("navigation/fetch");
   }
 }

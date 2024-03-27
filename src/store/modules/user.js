@@ -42,6 +42,7 @@ export default {
             let expired = (parseJwt(state.token).exp ?? 0) * 1000 <= Date.now();
             if(expired){
                 state.token = ""
+                localStorage.setItem("token", state.token);
                 this.commit("messages/display", {text : "Session expired", success : false}, {root : true});
                 router.push("/login").catch(()=>{});
             }
@@ -50,6 +51,7 @@ export default {
         },
         changeToken(state, newToken){
             state.token = newToken;
+            localStorage.setItem("token", state.token);
             if(!newToken) return;
 
             let {exp} = parseJwt(newToken);
@@ -60,6 +62,7 @@ export default {
                 let expired = (parseJwt(state.token).exp ?? 0) < 1000 - Date.now();
                 if(expired){
                     state.token = ""
+                    localStorage.setItem("token", state.token);
                     that.commit("messages/display", {text : "Session expired", success : false}, {root : true});
                     router.push("/").catch(()=>{});
                 }
