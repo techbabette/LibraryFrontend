@@ -35,7 +35,7 @@ formElements: {
 }
 ```
 
-![Contact form](https://i.imgur.com/HB4r5tV.png "Contact form")
+![Contact form](https://i.imgur.com/KzosTGE.png "Contact form")
 
 ## JSON tables
 
