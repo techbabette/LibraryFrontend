@@ -48,7 +48,7 @@ export default {
 </script>
 <template>
     <div class="mk-solo-page page container-fluid">
-        <form action="" class="form-dark col-6" @submit.prevent="attemptLogin">
+        <form action="" class="p-4 rounded col-12 col-md-6" @submit.prevent="attemptLogin">
             <h2>Login to your City Library account</h2>
             <InputAdaptable v-model="loginData.email" field_type="string" label="Email" />
             <InputAdaptable v-model="loginData.password" field_type="password" label="Password" />

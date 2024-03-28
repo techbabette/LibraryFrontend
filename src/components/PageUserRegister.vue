@@ -66,15 +66,12 @@ export default {
 </script>
 <template>
     <div class="mk-solo-page page container-fluid">
-        <div class="col-6">
+        <form action="" class="p-4 rounded col-12 col-md-6" @submit.prevent="attemptRegistration">
             <h2>Become a member of the library</h2>
-            <form action="" class="form-dark" @submit.prevent="attemptRegistration">
-                <InputForm :elements="inputs" v-model="registrationData" :errors="errors"
-                    _class="d-flex flex-row flex-wrap" />
-                <button type="submit" @click.prevent="attemptRegistration"
-                    class="btn btn-light w-100 bigButton my-2">Register
-                </button>
-            </form>
-        </div>
+            <InputForm :elements="inputs" v-model="registrationData" :errors="errors" _class="d-flex flex-row flex-wrap" />
+            <button type="submit" @click.prevent="attemptRegistration" class="btn btn-light w-100 bigButton my-2">
+                Register
+            </button>
+        </form>
     </div>
 </template>

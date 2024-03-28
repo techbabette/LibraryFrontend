@@ -13,6 +13,12 @@ body{
   .mk-yellow{
     color: #f5af05;
   }
+  .mk-white{
+    color: #fff;
+  }
+  .mk-dark-bg{
+    background-color: #333333;
+  }
   .page{
     position: relative;
     display: flex;
@@ -346,10 +352,8 @@ body{
   }
   form{
     color: #f7bd2f;
+    background-color: #333333;
     text-align: center;
-  }
-  .form-dark{
-    color: #222222 !important;
   }
   input{
     text-align: center;
