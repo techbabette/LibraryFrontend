@@ -5,7 +5,6 @@ import axios from "@/axios/axios";
 import navigation from "./modules/navigation"
 import user from './modules/user';
 import books from './modules/books'
-import userbooks from './modules/userbooks'
 import messages from './modules/messages'
 import admin from "./modules/admin"
 
@@ -16,7 +15,6 @@ export default new Vuex.Store({
         navigation,
         user,
         books,
-        userbooks,
         messages,
         admin
     },
