@@ -7,7 +7,7 @@ export default {
     state : {
         adminTabs : {
             "Active loans" : {
-                "title" : "Loans",
+                "title" : "Loan",
                 "weight" : 90,
                 "endpoint" : "loan?panel=true",
                 "idField" : "id",
@@ -70,7 +70,7 @@ export default {
                 maximumPage : 1,
             },
             "Late loans" : {
-                "title" : "Loans",
+                "title" : "Loan",
                 "weight" : 90,
                 "endpoint" : "loan?panel=true&late=true",
                 "idField" : "id",
@@ -288,7 +288,7 @@ export default {
                 maximumPage : 1,
             },
             "Authors" : {
-                "title" : "Authors",
+                "title" : "Author",
                 "weight" : 95,
                 "endpoint" : "author?withBookCount=true&withActiveLoanCount=true&withLoanCount=true",
                 "showParams" : {},
@@ -356,7 +356,7 @@ export default {
                 maximumPage : 1,
             },
             "Links" : {
-                "title" : "Links",
+                "title" : "Link",
                 "endpoint" : "link?panel=true",
                 "idField" : "id",
                 "tableHeaders" : [
@@ -418,7 +418,7 @@ export default {
                 maximumPage : 1,
             },
             "Users" : {
-                "title" : "Users",
+                "title" : "User",
                 "weight" : 100,
                 "endpoint" : "user",
                 "idField" : "id",
@@ -466,7 +466,7 @@ export default {
                 maximumPage : 1,
             },
             "Message Types" : {
-                "title" : "Message types",
+                "title" : "Message type",
                 "weight" : 50,
                 "endpoint" : "messagetype?panel=true",
                 "idField" : "id",
@@ -515,7 +515,7 @@ export default {
                 maximumPage : 1,
             },
             "Messages" : {
-                "title" : "Messages",
+                "title" : "Message",
                 "weight" : 45,
                 "endpoint" : "message",
                 "idField" : "id",
@@ -568,7 +568,7 @@ export default {
                 maximumPage : 1,
             },
             "Returned loans" : {
-                "title" : "Loans",
+                "title" : "Loan",
                 "weight" : 90,
                 "endpoint" : "loan?previous=true&panel=true",
                 "idField" : "id",
@@ -750,7 +750,7 @@ export default {
                 maximumPage : 1,
             },
             "Inactive authors" : {
-                "title" : "Authors",
+                "title" : "Author",
                 "weight" : 95,
                 "endpoint" : "author?withBookCount=true&previous=true&withActiveLoanCount=true&withLoanCount=true",
                 "showParams" : {},

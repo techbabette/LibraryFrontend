@@ -52,6 +52,9 @@ export default {
                 selectedSort: (this.currentTab ?? { selectedSort: "" }).selectedSort ?? ""
             }
         },
+        formSubmitText: function () {
+            return `${this.openFormIndex > 0 ? "Edit" : "Create"} ${this.currentTab?.title.toLowerCase()}`
+        }
     },
 
     watch: {
@@ -242,7 +245,7 @@ export default {
                 <InputForm :elements="currentForm" :errors="formErrors" v-model="formData" :refresh_signal="refreshForm"
                     @refresh="refreshForm = false" />
                 <button type="submit" class="col-12 btn btn-success text-light my-2" @click.prevent="submitForm">
-                    Submit
+                    {{ formSubmitText }}
                 </button>
                 <button class="col-12 btn btn-danger text-light my-2" type="button" @click.prevent="closeForm">
                     Close form
