@@ -2,9 +2,11 @@
 
 A full description of application features can be found here [here](https://dszkzv3o6c2jj.cloudfront.net/documentation.pdf).
 
-## Architecture
+## Deployment
 
-The website is stored in a private S3 bucket and distributed by Cloudfront.
+Originally deployed on AWS with the architecture shown below.
+
+![Original three layer deployment](https://i.imgur.com/UPA5tK6.png "Original deployment")
 
 ## CI/CD
 
