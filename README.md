@@ -6,6 +6,8 @@ A full description of application features can be found here [here](https://dszk
 
 Originally deployed on AWS with the architecture shown below.
 
+The terraform for this deployment can be found [here](https://github.com/techbabette/LibraryAWSDeployment)
+
 ![Original three layer deployment](https://i.imgur.com/UPA5tK6.png "Original deployment")
 
 ## CI/CD
