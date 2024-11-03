@@ -6,6 +6,7 @@ export default{
         currentlyActiveRoute : "Home page",
         loaded : false,
         firstPageLoaded : false,
+        error : null,
         links : []
     },
     actions : {
@@ -13,6 +14,7 @@ export default{
             let result = await axios.get('/link/everyone');
 
             if(!result.success){
+                context.commit("changeError", "The City Library is currently offline");
                 return;
             }
 
@@ -46,6 +48,9 @@ export default{
         },
         changeLoaded(state, newLoaded){
             state.loaded = newLoaded;
+        },
+        changeError(state, newError){
+            state.error = newError;
         }
     },
     getters : {
@@ -61,6 +66,9 @@ export default{
         },
         loaded(state){
             return state.loaded;
+        },
+        error(state){
+            return state.error;
         },
         activeRoute(state){
             return state.currentlyActiveRoute;

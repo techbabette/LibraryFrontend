@@ -29,7 +29,8 @@ function (response){
 }, 
 function(error){
     let response = {success : false};
-    if(typeof error.response === undefined){
+    console.log(error.response);
+    if(error.response === undefined){
         return response;
     }
     if((error.response.status === 401) && store.getters['user/token']){

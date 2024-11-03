@@ -1,13 +1,33 @@
 <script>
 export default {
-    name: "PageLoading"
+    name: "PageLoading",
+
+    computed: {
+        online: function () {
+            if (!this.$store.getters['navigation/error']) {
+                return true;
+            }
+
+            else {
+                return false;
+            }
+        },
+        message: function () {
+            if(this.online){
+                return "City Library";
+            }
+            else{
+                return "The City Library is currently offline";
+            }
+        }
+    }
 }
 </script>
 
 <template>
     <div id="loading-holder" class="mk-flex-column-center">
-        <h1 class="mk-yellow">City Library</h1>
-        <div class="spinner my-2">
+        <h1 class="mk-yellow">{{ message }}</h1>
+        <div v-if='online' class="spinner my-2">
             <div class="mask">
                 <div class="maskedCircle"></div>
             </div>
